@@ -13,9 +13,13 @@ MonoBehaviour:
   m_Name: PlayerSettings
   m_EditorClassIdentifier: 
   <DragSpeed>k__BackingField: 4
-  <KeyboardMoveSpeed>k__BackingField: 4
-  <MouseMoveSpeed>k__BackingField: 4
-  <ScreenEdgeOffset>k__BackingField: 0.05
-  <ZoomSpeed>k__BackingField: 10
-  <MinZoom>k__BackingField: 3
-  <MaxZoom>k__BackingField: 25
+  <KeyboardMoveSpeed>k__BackingField: 2
+  <MouseMoveSpeed>k__BackingField: 2
+  <ScreenEdgeOffset>k__BackingField: 0.02
+  <ZoomSpeed>k__BackingField: 1
+  <MinZoom>k__BackingField: -10
+  <MaxZoom>k__BackingField: 10
+  <MinPosX>k__BackingField: -100
+  <MaxPosX>k__BackingField: 100
+  <MinPosZ>k__BackingField: -100
+  <MaxPosZ>k__BackingField: 100
