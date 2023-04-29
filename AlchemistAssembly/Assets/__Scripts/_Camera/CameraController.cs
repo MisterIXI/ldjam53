@@ -13,11 +13,12 @@ public class CameraContDrager : MonoBehaviour
     private Vector2 _moveInput;
     private Vector2 _lookInput;
     private float _dragInput;
-    private Vector2 _zoomInput;
+    private float _zoomInput;
     private Vector2 _mousePosInput;
 
 
     private Vector3 cameraMove = Vector3.zero;
+    private Camera _mainCamera;
 
 
     public Transform CameraFollowTarget;
@@ -56,6 +57,10 @@ public class CameraContDrager : MonoBehaviour
     {
         if (Instance == this) Instance = null;
         UnsubscribeFromInput();
+    }
+
+    private void Start() {
+        _mainCamera = Camera.main;
     }
 
     // update
@@ -145,7 +150,10 @@ public class CameraContDrager : MonoBehaviour
 
     private void ZoomCamera()
     {
-        
+        if(_zoomInput != 0)
+        {
+            CameraFollowTarget.position = CameraFollowTarget.position + (_mainCamera.transform.forward * _zoomInput) * _playerSettings.ZoomSpeed;
+        }
     }
 
 
@@ -202,11 +210,17 @@ public class CameraContDrager : MonoBehaviour
     {
         if (context.performed)
         {
-            _zoomInput = context.ReadValue<Vector2>();
+            float scroll  = context.ReadValue<Vector2>().y;
+
+            if(scroll > 0)
+                _zoomInput = 1;
+            else
+                _zoomInput = -1;
+            
         }
         else if (context.canceled)
         {
-            _zoomInput = Vector2.zero;
+            _zoomInput = 0;
         }
     } 
 }

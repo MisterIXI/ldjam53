@@ -10,4 +10,7 @@ public class PlayerSettings : ScriptableObject
     [field: SerializeField] [field: Range(0f, 30f)] public float KeyboardMoveSpeed { get; set; } = 10;
     [field: SerializeField] [field: Range(0f, 30f)] public float MouseMoveSpeed { get; set; } = 10;
     [field: SerializeField] [field: Range(0f, 1f)] public float ScreenEdgeOffset { get; set; } = 0.05f;
+    [field: SerializeField] [field: Range(0f, 30f)] public float ZoomSpeed { get; set; } = 10f;
+    [field: SerializeField] [field: Range(0f, 30f)] public float MinZoom { get; set; } = 3f;
+    [field: SerializeField] [field: Range(0f, 30f)] public float MaxZoom { get; set; } = 25f;
 }

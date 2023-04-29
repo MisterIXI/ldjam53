@@ -253,17 +253,6 @@
                 },
                 {
                     "name": "",
-                    "id": "a115fb1c-48df-42ec-b8d7-9423a6eae812",
-                    "path": "<Mouse>/scroll",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Zoom",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "548fcfad-0e90-436e-b366-627884f28733",
                     "path": "<Keyboard>/e",
                     "interactions": "",
@@ -336,6 +325,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "MousePos",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "550328f3-d962-4bda-bb32-606ab3bb6c4f",
+                    "path": "<Mouse>/scroll",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Zoom",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
