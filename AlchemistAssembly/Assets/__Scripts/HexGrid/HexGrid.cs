@@ -12,7 +12,7 @@ public class HexGrid : MonoBehaviour
     private Vector3 Dir_DL = new Vector3(-OUTER_HEX_SIZE * 0.25f, 0, -INNER_HEX_SIZE / 2f);
     private Vector3 Dir_L = new Vector3(-OUTER_HEX_SIZE * 0.5f, 0, 0);
     // Hexagonal grid with an flat-top odd-q layout. Every second column is offset by half a hexagon.
-
+    public static Vector2Int GridSize => Instance._gridSettings.GridSize;
     public static HexGrid Instance { get; private set; }
     private GridTile[,] _gridTiles;
     [field: SerializeField] private bool _drawGizmos = false;
