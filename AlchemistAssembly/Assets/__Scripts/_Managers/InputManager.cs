@@ -28,6 +28,7 @@ public class InputManager : MonoBehaviour
     public static event Action<CallbackContext> OnMove;
     public static event Action<CallbackContext> OnDrag;
     public static event Action<CallbackContext> OnZoom;
+    public static event Action<CallbackContext> OnMousePos;
     public static event Action<CallbackContext> OnRotate;
     public static event Action<CallbackContext> OnUi;
     public static event Action<CallbackContext> OnInteract;
@@ -56,6 +57,12 @@ public class InputManager : MonoBehaviour
     private void OnZoomInput(CallbackContext context)
     {
         OnZoom?.Invoke(context);
+    }
+
+
+    private void OnMousePosInput(CallbackContext context)
+    {
+        OnMousePos?.Invoke(context);
     }
 
 
@@ -106,6 +113,10 @@ public class InputManager : MonoBehaviour
         _playerInput.actions["Zoom"].started += OnZoomInput;
         _playerInput.actions["Zoom"].performed += OnZoomInput;
         _playerInput.actions["Zoom"].canceled += OnZoomInput;
+
+        _playerInput.actions["MousePos"].started += OnMousePosInput;
+        _playerInput.actions["MousePos"].performed += OnMousePosInput;
+        _playerInput.actions["MousePos"].canceled += OnMousePosInput;
         
         _playerInput.actions["Rotate"].started += OnRotateInput;
         _playerInput.actions["Rotate"].performed += OnRotateInput;
@@ -146,6 +157,10 @@ public class InputManager : MonoBehaviour
         _playerInput.actions["Zoom"].started -= OnZoomInput;
         _playerInput.actions["Zoom"].performed -= OnZoomInput;
         _playerInput.actions["Zoom"].canceled -= OnZoomInput;
+
+        _playerInput.actions["MousePos"].started -= OnMousePosInput;
+        _playerInput.actions["MousePos"].performed -= OnMousePosInput;
+        _playerInput.actions["MousePos"].canceled -= OnMousePosInput;
         
         _playerInput.actions["Rotate"].started -= OnRotateInput;
         _playerInput.actions["Rotate"].performed -= OnRotateInput;
