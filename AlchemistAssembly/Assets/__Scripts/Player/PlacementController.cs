@@ -11,7 +11,7 @@ public class PlacementController : MonoBehaviour
     public GameObject Cube;
 
     private Vector2 _mousePosInput;
-    private Vector3 mousePos;
+    public Vector3 mousePos;
 
     private Camera _mainCamera;
 
