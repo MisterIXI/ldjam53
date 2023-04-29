@@ -218,11 +218,4 @@ public class CameraController : MonoBehaviour
             ZoomCamera(_zoomInput);
         }
     }
-
-
-    private void OnDrawGizmosSelected() 
-    {
-        Gizmos.color = new Color(138,43,226, 1);
-        Gizmos.DrawCube(new Vector3(_playerSettings.MinPosX, -1, _playerSettings.MinPosZ), new Vector3(_playerSettings.MaxPosX, 1, _playerSettings.MaxPosZ));
-    }
 }
