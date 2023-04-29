@@ -62,7 +62,10 @@ public class PlacementController : MonoBehaviour
         {
             mousePos = ray.GetPoint(distance);
             if(_playerSettings.mouseHighlight)
+            {
+                Cube.SetActive(true);
                 Cube.transform.position = mousePos;
+            }
             else
                 Cube.SetActive(false);
         }
