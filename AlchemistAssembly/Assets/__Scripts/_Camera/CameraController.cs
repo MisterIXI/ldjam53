@@ -4,16 +4,15 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Cinemachine;
 
-public class CameraContDrager : MonoBehaviour
+public class CameraController : MonoBehaviour
 {
-    public static CameraContDrager Instance { get; private set; }
+    public static CameraController Instance { get; private set; }
     private PlayerSettings _playerSettings => SettingsManager.PlayerSettings;
 
 
     private Vector2 _moveInput;
     private Vector2 _lookInput;
     private float _dragInput;
-    private float _zoomInput;
     private Vector2 _mousePosInput;
 
 
@@ -77,9 +76,6 @@ public class CameraContDrager : MonoBehaviour
 
         // updates the movement to the camera
         UpdateCameraMove();
-
-        // allowes the player to zoom
-        ZoomCamera();
     }
 
     private Vector3 DragCameraMove()
@@ -144,15 +140,24 @@ public class CameraContDrager : MonoBehaviour
 
     private void UpdateCameraMove()
     {
-        CameraFollowTarget.position = CameraFollowTarget.position + cameraMove;
+        Vector3 newCamPos = CameraFollowTarget.position + cameraMove;
+        float camPosX = Mathf.Clamp(newCamPos.x, _playerSettings.MinPosX, _playerSettings.MaxPosX);
+        float camPosZ = Mathf.Clamp(newCamPos.z, _playerSettings.MinPosZ, _playerSettings.MaxPosZ);
+
+        CameraFollowTarget.position = new Vector3(camPosX, newCamPos.y, camPosZ);
     }
 
 
-    private void ZoomCamera()
+    private void ZoomCamera(float _zoomInput)
     {
         if(_zoomInput != 0)
         {
-            CameraFollowTarget.position = CameraFollowTarget.position + (_mainCamera.transform.forward * _zoomInput) * _playerSettings.ZoomSpeed;
+            Vector3 newCamZoom = CameraFollowTarget.position + (_mainCamera.transform.forward * _zoomInput) * _playerSettings.ZoomSpeed;
+            float newCamZoomY = newCamZoom.y;
+            newCamZoomY = Mathf.Clamp(newCamZoom.y, _playerSettings.MinZoom, _playerSettings.MaxZoom);
+
+            if(newCamZoom.y == newCamZoomY)
+                CameraFollowTarget.position = newCamZoom;
         }
     }
 
@@ -176,10 +181,6 @@ public class CameraContDrager : MonoBehaviour
         {
             _lookInput = context.ReadValue<Vector2>();
         }
-        else if (context.canceled)
-        {
-            _lookInput = Vector2.zero;
-        }
     } 
 
     private void OnMousePosInput(InputAction.CallbackContext context)
@@ -187,10 +188,6 @@ public class CameraContDrager : MonoBehaviour
         if (context.performed)
         {
             _mousePosInput = context.ReadValue<Vector2>();
-        }
-        else if (context.canceled)
-        {
-            _mousePosInput = Vector2.zero;
         }
     } 
 
@@ -210,17 +207,22 @@ public class CameraContDrager : MonoBehaviour
     {
         if (context.performed)
         {
+            float _zoomInput;
             float scroll  = context.ReadValue<Vector2>().y;
 
             if(scroll > 0)
                 _zoomInput = 1;
             else
                 _zoomInput = -1;
-            
+
+            ZoomCamera(_zoomInput);
         }
-        else if (context.canceled)
-        {
-            _zoomInput = 0;
-        }
-    } 
+    }
+
+
+    private void OnDrawGizmosSelected() 
+    {
+        Gizmos.color = new Color(138,43,226, 1);
+        Gizmos.DrawCube(new Vector3(_playerSettings.MinPosX, -1, _playerSettings.MinPosZ), new Vector3(_playerSettings.MaxPosX, 1, _playerSettings.MaxPosZ));
+    }
 }

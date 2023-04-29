@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e423f6b93bca841b466ff765fbb2a9, type: 3}
   m_Name: PlayerSettings
   m_EditorClassIdentifier: 
-  <DragSpeed>k__BackingField: 4
-  <KeyboardMoveSpeed>k__BackingField: 4
-  <MouseMoveSpeed>k__BackingField: 4
+  <DragSpeed>k__BackingField: 2
+  <KeyboardMoveSpeed>k__BackingField: 2
+  <MouseMoveSpeed>k__BackingField: 2
   <ScreenEdgeOffset>k__BackingField: 0.05
-  <ZoomSpeed>k__BackingField: 10
-  <MinZoom>k__BackingField: 3
-  <MaxZoom>k__BackingField: 25
+  <ZoomSpeed>k__BackingField: 1
+  <MinZoom>k__BackingField: -10
+  <MaxZoom>k__BackingField: 10
+  <MinPosX>k__BackingField: -100
+  <MaxPosX>k__BackingField: 100
+  <MinPosZ>k__BackingField: -100
+  <MaxPosZ>k__BackingField: 100
