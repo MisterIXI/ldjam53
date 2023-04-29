@@ -1,0 +1,105 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35e423f6b93bca841b466ff765fbb2a9, type: 3}
+  m_Name: PlayerSettings
+  m_EditorClassIdentifier: 
+  <DisplayPlayerState>k__BackingField: 1
+  <DisplayMovementStats>k__BackingField: 0
+  <TestBool>k__BackingField: 0
+  <MoveCurve>k__BackingField:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  <MoveCurveMaxTime>k__BackingField: 1
+  <MoveSpeed>k__BackingField: 12
+  <SprintCurve>k__BackingField:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  <SprintCurveMaxTime>k__BackingField: 1
+  <SprintSpeedDelta>k__BackingField: 3
+  <JumpCurve>k__BackingField:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 5.3091493
+      outSlope: 5.3091493
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.02922005
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -2.443198
+      outSlope: -2.443198
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.046363827
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  <JumpCurveMaxTime>k__BackingField: 0.6
+  <JumpPower>k__BackingField: 22
+  <GravityForce>k__BackingField: 12
+  <GroundCheckRange>k__BackingField: 1
+  <RollCurve>k__BackingField:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  <RollCurveMaxTime>k__BackingField: 1
+  <RollPower>k__BackingField: 15
