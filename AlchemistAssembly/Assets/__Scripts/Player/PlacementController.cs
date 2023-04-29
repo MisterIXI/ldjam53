@@ -11,6 +11,7 @@ public class PlacementController : MonoBehaviour
     public GameObject Cube;
 
     private Vector2 _mousePosInput;
+    private Vector3 mousePos;
 
     private Camera _mainCamera;
 
@@ -59,7 +60,11 @@ public class PlacementController : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(_mousePosInput);
         if (plane.Raycast(ray, out distance))
         {
-            Cube.transform.position = ray.GetPoint(distance);
+            mousePos = ray.GetPoint(distance);
+            if(_playerSettings.mouseHighlight)
+                Cube.transform.position = mousePos;
+            else
+                Cube.SetActive(false);
         }
     }
 

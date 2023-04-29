@@ -5,6 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PlayerSettings", menuName = "Settings/PlayerSettings", order = 0)]
 public class PlayerSettings : ScriptableObject
 {
+    [field: Header ("Debug")]
+    [field: SerializeField] public bool mouseHighlight { get; set; } = true;
+
     [field: Header("Camera")]
     [field: SerializeField] [field: Range(0f, 30f)] public float DragSpeed { get; set; } = 10;
     [field: SerializeField] [field: Range(0f, 30f)] public float KeyboardMoveSpeed { get; set; } = 10;
