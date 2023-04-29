@@ -7,7 +7,6 @@ public class InputManager : MonoBehaviour
 {
     public static InputManager Instance { get; private set; }
     private PlayerInput _playerInput;
-    public static bool IsKeyboardAndMouse => Instance._playerInput.currentControlScheme != "Gamepad";
 
 
     private void Awake()
@@ -20,32 +19,20 @@ public class InputManager : MonoBehaviour
         Instance = this;
 
         _playerInput = GetComponent<PlayerInput>();
-        _playerInput.onControlsChanged += OnSchemeChange;
         SubscribeToInput();
         DontDestroyOnLoad(gameObject);
     }
 
 
-    public static event Action OnControlSchemeChanged;
     public static event Action<CallbackContext> OnLook;
     public static event Action<CallbackContext> OnMove;
-    public static event Action<CallbackContext> OnSprint;
-    public static event Action<CallbackContext> OnRoll;
-    public static event Action<CallbackContext> OnJump;
-    public static event Action<CallbackContext> OnAttack;
-    public static event Action<CallbackContext> OnBlock;
-    public static event Action<CallbackContext> OnSpecialAttack;
-    public static event Action<CallbackContext> OnFocus;
+    public static event Action<CallbackContext> OnDrag;
+    public static event Action<CallbackContext> OnZoom;
+    public static event Action<CallbackContext> OnRotate;
+    public static event Action<CallbackContext> OnUi;
     public static event Action<CallbackContext> OnInteract;
-    public static event Action<CallbackContext> OnItem;
-    public static event Action<CallbackContext> OnRadialMenu;
+    public static event Action<CallbackContext> OnHotkeys;
     public static event Action<CallbackContext> OnMenu;
-
-
-    private void OnSchemeChange(PlayerInput playerInput)
-    {
-        OnControlSchemeChanged?.Invoke();
-    }
 
 
     private void OnLookInput(CallbackContext context)
@@ -60,44 +47,27 @@ public class InputManager : MonoBehaviour
     }
 
 
-    private void OnSprintInput(CallbackContext context)
+    private void OnDragInput(CallbackContext context)
     {
-        OnSprint?.Invoke(context);
+        OnDrag?.Invoke(context);
     }
 
 
-    private void OnRollInput(CallbackContext context)
+    private void OnZoomInput(CallbackContext context)
     {
-        OnRoll?.Invoke(context);
+        OnZoom?.Invoke(context);
     }
 
 
-    private void OnJumpInput(CallbackContext context)
+    private void OnRotateInput(CallbackContext context)
     {
-        OnJump?.Invoke(context);
+        OnRotate?.Invoke(context);
     }
 
 
-    private void OnAttackInput(CallbackContext context)
+    private void OnUiInput(CallbackContext context)
     {
-        OnAttack?.Invoke(context);
-    }
-
-    private void OnBlockInput(CallbackContext context)
-    {
-        OnBlock?.Invoke(context);
-    }
-
-
-    private void OnSpecialAttackInput(CallbackContext context)
-    {
-        OnSpecialAttack?.Invoke(context);
-    }
-
-
-    private void OnFocusInput(CallbackContext context)
-    {
-        OnFocus?.Invoke(context);
+        OnUi?.Invoke(context);
     }
 
 
@@ -107,15 +77,9 @@ public class InputManager : MonoBehaviour
     }
 
 
-    private void OnItemInput(CallbackContext context)
+    private void OnHotkeysInput(CallbackContext context)
     {
-        OnItem?.Invoke(context);
-    }
-
-
-    private void OnRadialMenuInput(CallbackContext context)
-    {
-        OnRadialMenu?.Invoke(context);
+        OnHotkeys?.Invoke(context);
     }
 
 
@@ -135,45 +99,29 @@ public class InputManager : MonoBehaviour
         _playerInput.actions["Move"].performed += OnMoveInput;
         _playerInput.actions["Move"].canceled += OnMoveInput;
         
-        _playerInput.actions["Sprint"].started += OnSprintInput;
-        _playerInput.actions["Sprint"].performed += OnSprintInput;
-        _playerInput.actions["Sprint"].canceled += OnSprintInput;
+        _playerInput.actions["Drag"].started += OnDragInput;
+        _playerInput.actions["Drag"].performed += OnDragInput;
+        _playerInput.actions["Drag"].canceled += OnDragInput;
             
-        _playerInput.actions["Roll"].started += OnRollInput;
-        _playerInput.actions["Roll"].performed += OnRollInput;
-        _playerInput.actions["Roll"].canceled += OnRollInput;
+        _playerInput.actions["Zoom"].started += OnZoomInput;
+        _playerInput.actions["Zoom"].performed += OnZoomInput;
+        _playerInput.actions["Zoom"].canceled += OnZoomInput;
         
-        _playerInput.actions["Jump"].started += OnJumpInput;
-        _playerInput.actions["Jump"].performed += OnJumpInput;
-        _playerInput.actions["Jump"].canceled += OnJumpInput;
-
-        _playerInput.actions["Attack"].started += OnAttackInput;
-        _playerInput.actions["Attack"].performed += OnAttackInput;
-        _playerInput.actions["Attack"].canceled += OnAttackInput;
+        _playerInput.actions["Rotate"].started += OnRotateInput;
+        _playerInput.actions["Rotate"].performed += OnRotateInput;
+        _playerInput.actions["Rotate"].canceled += OnRotateInput;
         
-        _playerInput.actions["Block"].started += OnBlockInput;
-        _playerInput.actions["Block"].performed += OnBlockInput;
-        _playerInput.actions["Block"].canceled += OnBlockInput;
-
-        _playerInput.actions["SpecialAttack"].started += OnSpecialAttackInput;
-        _playerInput.actions["SpecialAttack"].performed += OnSpecialAttackInput;
-        _playerInput.actions["SpecialAttack"].canceled += OnSpecialAttackInput;
-        
-        _playerInput.actions["Focus"].started += OnFocusInput;
-        _playerInput.actions["Focus"].performed += OnFocusInput;
-        _playerInput.actions["Focus"].canceled += OnFocusInput;
+        _playerInput.actions["Ui"].started += OnUiInput;
+        _playerInput.actions["Ui"].performed += OnUiInput;
+        _playerInput.actions["Ui"].canceled += OnUiInput;
 
         _playerInput.actions["Interact"].started += OnInteractInput;
         _playerInput.actions["Interact"].performed += OnInteractInput;
         _playerInput.actions["Interact"].canceled += OnInteractInput;
         
-        _playerInput.actions["Item"].started += OnItemInput;
-        _playerInput.actions["Item"].performed += OnItemInput;
-        _playerInput.actions["Item"].canceled += OnItemInput;
-
-        _playerInput.actions["RadialMenu"].started += OnRadialMenuInput;
-        _playerInput.actions["RadialMenu"].performed += OnRadialMenuInput;
-        _playerInput.actions["RadialMenu"].canceled += OnRadialMenuInput;
+        _playerInput.actions["Hotkeys"].started += OnHotkeysInput;
+        _playerInput.actions["Hotkeys"].performed += OnHotkeysInput;
+        _playerInput.actions["Hotkeys"].canceled += OnHotkeysInput;
 
         _playerInput.actions["Menu"].started += OnMenuInput;
         _playerInput.actions["Menu"].performed += OnMenuInput;
@@ -191,45 +139,29 @@ public class InputManager : MonoBehaviour
         _playerInput.actions["Move"].performed -= OnMoveInput;
         _playerInput.actions["Move"].canceled -= OnMoveInput;
         
-        _playerInput.actions["Sprint"].started -= OnSprintInput;
-        _playerInput.actions["Sprint"].performed -= OnSprintInput;
-        _playerInput.actions["Sprint"].canceled -= OnSprintInput;
+        _playerInput.actions["Drag"].started -= OnDragInput;
+        _playerInput.actions["Drag"].performed -= OnDragInput;
+        _playerInput.actions["Drag"].canceled -= OnDragInput;
                 
-        _playerInput.actions["Roll"].started -= OnRollInput;
-        _playerInput.actions["Roll"].performed -= OnRollInput;
-        _playerInput.actions["Roll"].canceled -= OnRollInput;
+        _playerInput.actions["Zoom"].started -= OnZoomInput;
+        _playerInput.actions["Zoom"].performed -= OnZoomInput;
+        _playerInput.actions["Zoom"].canceled -= OnZoomInput;
         
-        _playerInput.actions["Jump"].started -= OnJumpInput;
-        _playerInput.actions["Jump"].performed -= OnJumpInput;
-        _playerInput.actions["Jump"].canceled -= OnJumpInput;
-
-        _playerInput.actions["Attack"].started -= OnAttackInput;
-        _playerInput.actions["Attack"].performed -= OnAttackInput;
-        _playerInput.actions["Attack"].canceled -= OnAttackInput;
+        _playerInput.actions["Rotate"].started -= OnRotateInput;
+        _playerInput.actions["Rotate"].performed -= OnRotateInput;
+        _playerInput.actions["Rotate"].canceled -= OnRotateInput;
         
-        _playerInput.actions["Block"].started -= OnBlockInput;
-        _playerInput.actions["Block"].performed -= OnBlockInput;
-        _playerInput.actions["Block"].canceled -= OnBlockInput;
-
-        _playerInput.actions["SpecialAttack"].started -= OnSpecialAttackInput;
-        _playerInput.actions["SpecialAttack"].performed -= OnSpecialAttackInput;
-        _playerInput.actions["SpecialAttack"].canceled -= OnSpecialAttackInput;
-        
-        _playerInput.actions["Focus"].started -= OnFocusInput;
-        _playerInput.actions["Focus"].performed -= OnFocusInput;
-        _playerInput.actions["Focus"].canceled -= OnFocusInput;
+        _playerInput.actions["Ui"].started -= OnUiInput;
+        _playerInput.actions["Ui"].performed -= OnUiInput;
+        _playerInput.actions["Ui"].canceled -= OnUiInput;
 
         _playerInput.actions["Interact"].started -= OnInteractInput;
         _playerInput.actions["Interact"].performed -= OnInteractInput;
         _playerInput.actions["Interact"].canceled -= OnInteractInput;
         
-        _playerInput.actions["Item"].started -= OnItemInput;
-        _playerInput.actions["Item"].performed -= OnItemInput;
-        _playerInput.actions["Item"].canceled -= OnItemInput;
-
-        _playerInput.actions["RadialMenu"].started -= OnRadialMenuInput;
-        _playerInput.actions["RadialMenu"].performed -= OnRadialMenuInput;
-        _playerInput.actions["RadialMenu"].canceled -= OnRadialMenuInput;
+        _playerInput.actions["Hotkeys"].started -= OnHotkeysInput;
+        _playerInput.actions["Hotkeys"].performed -= OnHotkeysInput;
+        _playerInput.actions["Hotkeys"].canceled -= OnHotkeysInput;
 
         _playerInput.actions["Menu"].started -= OnMenuInput;
         _playerInput.actions["Menu"].performed -= OnMenuInput;
@@ -244,12 +176,5 @@ public class InputManager : MonoBehaviour
             Instance = null;
             UnsubscribeFromInput();
         }
-    }
-
-
-    [ContextMenu("Debug print controlscheme")]
-    private void DebugPrintControlscheme()
-    {
-        Debug.Log("Is keyboard and mouse: " + IsKeyboardAndMouse);
     }
 }
