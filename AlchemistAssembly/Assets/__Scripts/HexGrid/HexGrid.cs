@@ -16,6 +16,7 @@ public class HexGrid : MonoBehaviour
     public static HexGrid Instance { get; private set; }
     private GridTile[,] _gridTiles;
     [field: SerializeField] private bool _drawGizmos = false;
+    [field: SerializeField] private GridSettings _gridSettings = null;
     private void Awake()
     {
         if (Instance != null)
@@ -25,7 +26,28 @@ public class HexGrid : MonoBehaviour
         }
         Instance = this;
     }
+    private void Start()
+    {
+        InitializeGrid();
+    }
 
+    private void InitializeGrid()
+    {
+        _gridTiles = new GridTile[_gridSettings.GridSize.x, _gridSettings.GridSize.y];
+        Vector3 currentPos = Vector3.zero;
+
+        for (int x = 0; x < _gridSettings.GridSize.x; x++)
+        {
+            for (int y = 0; y < _gridSettings.GridSize.y; y++)
+            {
+                currentPos = GetTilePosition(new Vector2Int(x, y));
+                // create a new tile
+                GridTile newTile = Instantiate(_gridSettings.BaseTilePrefab, currentPos, Quaternion.identity, transform);
+                newTile.Initialize(new Vector2Int(x, y));
+                _gridTiles[x, y] = newTile;
+            }
+        }
+    }
     public static GridTile GetTile(Vector3 position)
     {
         return GetTile(GetTileIndex(position));
