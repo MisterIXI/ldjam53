@@ -12,6 +12,11 @@ public class GridTileEditor : Editor
             GridTile gridTile = (GridTile)target;
             gridTile.PaintNeighbours();
         }
+        if (GUILayout.Button("TriggerPath"))
+        {
+            GridTile gridTile = (GridTile)target;
+            gridTile.TriggerPath();
+        }
 
     }
 }

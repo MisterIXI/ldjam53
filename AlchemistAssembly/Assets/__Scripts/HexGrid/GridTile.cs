@@ -23,4 +23,8 @@ public class GridTile : MonoBehaviour
             }
         }
     }
+    public void TriggerPath()
+    {
+        HexTest.FindStreetPath(TileIndex);
+    }
 }

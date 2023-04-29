@@ -88,4 +88,59 @@ public class HexHelper : MonoBehaviour
     }
 
 
+
+    public static Vector2Int StepInDirection(Vector2Int index, HexDirection direction)
+    {
+        switch (direction)
+        {
+            case HexDirection.Up:
+                return new Vector2Int(index.x, index.y + 1);
+            case HexDirection.Down:
+                return new Vector2Int(index.x, index.y - 1);
+            default:
+                if ((index.x & 1) == 0)
+                {
+                    // even column
+                    switch (direction)
+                    {
+                        case HexDirection.RightUp:
+                            return new Vector2Int(index.x + 1, index.y);
+                        case HexDirection.RightDown:
+                            return new Vector2Int(index.x + 1, index.y - 1);
+                        case HexDirection.LeftUp:
+                            return new Vector2Int(index.x - 1, index.y);
+                        case HexDirection.LeftDown:
+                            return new Vector2Int(index.x - 1, index.y - 1);
+                        default:
+                            throw new System.Exception("Invalid direction");
+                    }
+                }
+                else
+                {
+                    // odd column
+                    switch (direction)
+                    {
+                        case HexDirection.RightUp:
+                            return new Vector2Int(index.x + 1, index.y + 1);
+                        case HexDirection.RightDown:
+                            return new Vector2Int(index.x + 1, index.y);
+                        case HexDirection.LeftUp:
+                            return new Vector2Int(index.x - 1, index.y + 1);
+                        case HexDirection.LeftDown:
+                            return new Vector2Int(index.x - 1, index.y);
+                        default:
+                            throw new System.Exception("Invalid direction");
+                    }
+                }
+        }
+    }
+}
+public enum HexDirection
+{
+    Up,
+    Down,
+    RightUp,
+    RightDown,
+    LeftUp,
+    LeftDown
 }

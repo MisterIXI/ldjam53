@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class HexGrid : MonoBehaviour
@@ -79,6 +80,67 @@ public class HexGrid : MonoBehaviour
         if (index.x % 2 == 1)
             position.z += INNER_HEX_SIZE / 2f;
         return position;
+    }
+
+    public static bool IsValidIndex(Vector2Int index)
+    {
+        return index.x >= 0 && index.x < Instance._gridTiles.GetLength(0) && index.y >= 0 && index.y < Instance._gridTiles.GetLength(1);
+    }
+
+    public static List<GridTile> GetPathToPos(Vector2Int start, Vector2Int target)
+    {
+        List<GridTile> path = new List<GridTile>();
+        if (!IsValidIndex(start) || !IsValidIndex(target))
+        {
+            Debug.LogError("Invalid start or target index");
+            return path;
+        }
+        if (start == target)
+        {
+            path.Add(GetTile(start));
+            return path;
+        }
+        Vector2Int current = start;
+        while (current.x != target.x)
+        {
+            if (current.x > target.x)
+            {
+                if (current.y > target.y)
+                {
+                    current = HexHelper.StepInDirection(current, HexDirection.LeftDown);
+                }
+                else
+                {
+                    current = HexHelper.StepInDirection(current, HexDirection.LeftUp);
+                }
+            }
+            else
+            {
+                if (current.y > target.y)
+                {
+                    current = HexHelper.StepInDirection(current, HexDirection.RightDown);
+                }
+                else
+                {
+                    current = HexHelper.StepInDirection(current, HexDirection.RightUp);
+                }
+            }
+            path.Add(GetTile(current));
+        }
+        while (current.y != target.y)
+        {
+            if (current.y > target.y)
+            {
+                current = HexHelper.StepInDirection(current, HexDirection.Down);
+            }
+            else
+            {
+                current = HexHelper.StepInDirection(current, HexDirection.Up);
+            }
+            path.Add(GetTile(current));
+        }
+        path.Add(GetTile(target));
+        return path;
     }
 
     [field: SerializeField] private Vector2Int _gizmosSize;
