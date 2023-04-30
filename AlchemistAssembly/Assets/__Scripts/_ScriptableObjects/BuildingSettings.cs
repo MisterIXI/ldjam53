@@ -66,7 +66,6 @@ public struct CraftingRecipe
 
 public enum ResourceType
 {
-    Empty,
     Shroom,
     Water,
     Crystal,
@@ -78,5 +77,6 @@ public enum ResourceType
     YellowPot,
     CrystalHoney,
     YellowCrystal,
-    PurplePot
+    PurplePot,
+    Empty
 }
