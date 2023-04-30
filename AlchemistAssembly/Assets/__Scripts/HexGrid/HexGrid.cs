@@ -58,7 +58,7 @@ public class HexGrid : MonoBehaviour
     {
         if (position.x < 0 || position.x >= Instance._gridTiles.GetLength(0) || position.y < 0 || position.y >= Instance._gridTiles.GetLength(1))
         {
-            Debug.LogError("Position is out of bounds");
+            Debug.LogWarning("Position is out of bounds");
             return null;
         }
         return Instance._gridTiles[position.x, position.y];
@@ -127,7 +127,13 @@ public class HexGrid : MonoBehaviour
         foreach (Vector2Int step in axisPath)
         {
             currentPoint += step;
-            path.Add(GetTile(HexHelper.CubeToOddQ((currentPoint).ToCubeSystem())));
+            Vector2Int oddQ = HexHelper.CubeToOddQ((currentPoint).ToCubeSystem());
+            if (!IsValidIndex(oddQ))
+            {
+                path.Clear();
+                return path;
+            }
+            path.Add(GetTile(oddQ));
         }
         /*
         description:

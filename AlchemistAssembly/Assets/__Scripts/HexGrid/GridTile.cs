@@ -3,9 +3,18 @@ using UnityEngine;
 [SelectionBase]
 public class GridTile : MonoBehaviour
 {
-
+    public Placeable Placeable;
     public Vector2Int TileIndex { get; private set; }
     public bool IsInitialized => TileIndex != null;
+    private MeshRenderer _meshRenderer;
+    private Color _defaultColor;
+    private PlacementToolSettings _settings;
+    private void Start()
+    {
+        _settings = SettingsManager.PlacementToolSettings;
+        _meshRenderer = GetComponentInChildren<MeshRenderer>();
+        _defaultColor = _meshRenderer.material.color;
+    }
     public void Initialize(Vector2Int tileIndex)
     {
         TileIndex = tileIndex;
@@ -27,4 +36,25 @@ public class GridTile : MonoBehaviour
     {
         HexTest.FindStreetPath(TileIndex);
     }
+
+    public void HighlightTile()
+    {
+        if (_settings != null)
+            _meshRenderer.material.color = _settings.HighlightColor;
+    }
+
+    public void UnhighlightTile()
+    {
+        if (_settings != null)
+            _meshRenderer.material.color = _defaultColor;
+    }
+}
+
+public enum TileType
+{
+    Default,
+    Water,
+    Mushrooms,
+    Crystals,
+    Honey
 }

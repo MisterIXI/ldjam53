@@ -3,8 +3,12 @@ using UnityEngine;
 public class SettingsManager : MonoBehaviour
 {
     [field: SerializeField] private PlayerSettings _playerSettings;
+    [field: SerializeField] private PlacementToolSettings _placementToolSettings;
+    [field: SerializeField] private GridSettings _gridSettings;
 
-    public static PlayerSettings PlayerSettings { get; private set; }
+    public static PlayerSettings PlayerSettings => Instance._playerSettings;
+    public static PlacementToolSettings PlacementToolSettings => Instance._placementToolSettings;
+    public static GridSettings GridSettings => Instance._gridSettings;
     public static SettingsManager Instance { get; private set; }
 
 
@@ -17,7 +21,6 @@ public class SettingsManager : MonoBehaviour
         }
         Instance = this;
 
-        PlayerSettings = _playerSettings;
         DontDestroyOnLoad(gameObject);
     }
 }
