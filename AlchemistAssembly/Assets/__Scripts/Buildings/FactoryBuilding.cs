@@ -33,6 +33,10 @@ public class FactoryBuilding : MonoBehaviour, IInteractable
 
     private float timer = 0;
 
+    void Start() 
+    {
+       _resourceType = ResourceType.Empty;
+    }
 
     void Update() 
     {
@@ -44,7 +48,7 @@ public class FactoryBuilding : MonoBehaviour, IInteractable
 
     private void ProduceOutput()
     {
-        if(routes != null)  // if there are routes availible then start producing
+        if(routes != null && _resourceType != ResourceType.Empty)  // if there are routes availible then start producing
         {
             timer += Time.deltaTime;
 
@@ -130,6 +134,8 @@ public class FactoryBuilding : MonoBehaviour, IInteractable
 
         _buildingSettings.OutputIconPanel.GetComponent<Image>().sprite = _outputSprite;
 
+        UpdateIcons();
+
         // show routes
     }
 
@@ -189,5 +195,19 @@ public class FactoryBuilding : MonoBehaviour, IInteractable
 
         // saves output time
         _outputTime = _buildingSettings.Recipes[recepieInt].Time;
+        OnInteract();
+    }
+
+
+    private void UpdateIcons()
+    {
+        _buildingSettings.OutputIconPanel.GetComponent<Image>().sprite = _outputSprite;
+        _buildingSettings.InputIcon1Panel.GetComponent<Image>().sprite = _input1Sprite;
+        _buildingSettings.InputIcon2Panel.GetComponent<Image>().sprite = _input2Sprite;
+        _buildingSettings.InputIcon3Panel.GetComponent<Image>().sprite = _input3Sprite;
     }
 }
+
+
+// accept input
+// change colors
