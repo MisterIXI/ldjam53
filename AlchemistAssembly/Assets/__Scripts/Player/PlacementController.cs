@@ -76,7 +76,7 @@ public class PlacementController : MonoBehaviour
             if (hoverTile != _lastHoveredTile)
             {
                 OnTileHovered?.Invoke(_lastHoveredTile, hoverTile);
-                _lastHoveredTile.UnhighlightTile();
+                _lastHoveredTile?.UnhighlightTile();
                 hoverTile?.HighlightTile();
                 _lastHoveredTile = hoverTile;
             }
