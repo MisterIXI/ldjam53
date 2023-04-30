@@ -11,7 +11,7 @@ public class PlacementController : MonoBehaviour
     private PlayerSettings _playerSettings => SettingsManager.PlayerSettings;
     public GameObject Cube;
 
-    private Vector2 _mousePosInput;
+    public Vector2 MousePosInput { get; private set; }
     public Vector3 mousePos;
     private Plane _groundPlane;
 
@@ -52,7 +52,7 @@ public class PlacementController : MonoBehaviour
     {
         float distance;
 
-        Ray ray = _mainCamera.ScreenPointToRay(_mousePosInput);
+        Ray ray = _mainCamera.ScreenPointToRay(MousePosInput);
         if (_groundPlane.Raycast(ray, out distance))
         {
             mousePos = ray.GetPoint(distance);
@@ -68,13 +68,15 @@ public class PlacementController : MonoBehaviour
 
     private void UpdateTileHover()
     {
-        Ray ray = _mainCamera.ScreenPointToRay(_mousePosInput);
+        Ray ray = _mainCamera.ScreenPointToRay(MousePosInput);
         if (Physics.Raycast(ray, out RaycastHit hit, 100f, ~LayerMask.GetMask("GridTile")))
         {
             GridTile hoverTile = hit.collider.GetComponentInParent<GridTile>();
             if (hoverTile != _lastHoveredTile)
             {
                 OnTileHovered?.Invoke(_lastHoveredTile, hoverTile);
+                _lastHoveredTile.UnhighlightTile();
+                hoverTile?.HighlightTile();
                 _lastHoveredTile = hoverTile;
             }
         }
@@ -83,6 +85,7 @@ public class PlacementController : MonoBehaviour
             if (_lastHoveredTile != null)
             {
                 OnTileHovered?.Invoke(_lastHoveredTile, null);
+                _lastHoveredTile.UnhighlightTile();
                 _lastHoveredTile = null;
             }
         }
@@ -93,7 +96,7 @@ public class PlacementController : MonoBehaviour
     {
         if (context.performed)
         {
-            _mousePosInput = context.ReadValue<Vector2>();
+            MousePosInput = context.ReadValue<Vector2>();
         }
     }
 

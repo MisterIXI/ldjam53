@@ -19,6 +19,8 @@ public class PlacementToolSettings : ScriptableObject
     [field: SerializeField] public Material InvalidPreviewMaterial { get; private set; }
     [field: Header("Prefabs")]
     [field: SerializeField] public RailEntity RailPrefab { get; private set; }
+    [field: Header("Destruction Tool Settings")]
+    [field: SerializeField] public Color DestructionHighlightColor { get; private set; } = new Color(255, 0, 0);
 }
 
 [Serializable]

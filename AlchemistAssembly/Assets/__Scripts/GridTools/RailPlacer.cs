@@ -14,10 +14,6 @@ public class RailPlacer : GridTool
     }
     private void OnNewHover(GridTile oldTile, GridTile newTile)
     {
-        if (oldTile != null)
-            oldTile.UnhighlightTile();
-        if (newTile != null)
-            newTile.HighlightTile();
         if (_startTile != null && newTile != null)
         {
             // draw a path from start to newTile
