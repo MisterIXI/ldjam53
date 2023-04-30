@@ -174,7 +174,6 @@ public class CameraController : MonoBehaviour
 
     private void RotateCamera()
     {
-        // change cinemaching z rotation with the x rotation of mouse
         if(_cameraRotateInput != 0)
         {
             var camRotation = CinemachineObj.eulerAngles;
