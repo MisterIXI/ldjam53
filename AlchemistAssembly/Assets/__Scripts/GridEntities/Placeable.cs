@@ -79,7 +79,11 @@ public class Placeable : MonoBehaviour
             if (newY > 0)
             {
                 transform.localPosition = newY * Vector3.up;
-                _currentTile.transform.position = new Vector3(_currentTile.transform.position.x, 0, _currentTile.transform.position.z);
+                foreach (var offset in GetOccupiedTiles())
+                {
+                    GridTile gridTile = HexGrid.GetTile(_currentTile.TileIndex + offset);
+                    gridTile.transform.position = new Vector3(gridTile.transform.position.x, 0, gridTile.transform.position.z);
+                }
             }
             else
             {
@@ -90,12 +94,16 @@ public class Placeable : MonoBehaviour
                     hasTouchedGround = true;
                 }
                 transform.localPosition = Vector3.zero;
-                _currentTile.transform.position = new Vector3(_currentTile.transform.position.x, newY, _currentTile.transform.position.z);
+                foreach (var offset in GetOccupiedTiles())
+                {
+                    GridTile gridTile = HexGrid.GetTile(_currentTile.TileIndex + offset);
+                    gridTile.transform.position = new Vector3(gridTile.transform.position.x, newY, gridTile.transform.position.z);
+                }
             }
             yield return null;
         }
     }
-    public virtual void RemoveFromTile()
+    public virtual void RemoveFromTile(bool destroyObject = true)
     {
         foreach (var offset in GetOccupiedTiles())
         {
@@ -109,6 +117,16 @@ public class Placeable : MonoBehaviour
                 Debug.LogError("Tile " + gridTile + " is not occupied by " + this);
             }
         }
-        Destroy(gameObject);
+        _currentTile = null;
+        if (destroyObject)
+            Destroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        if (_currentTile != null)
+        {
+            RemoveFromTile(false);
+        }
     }
 }
