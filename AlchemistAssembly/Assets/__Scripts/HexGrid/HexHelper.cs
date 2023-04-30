@@ -1,5 +1,5 @@
+using System.Collections.Generic;
 using UnityEngine;
-
 public class HexHelper : MonoBehaviour
 {
     public static Vector2Int CubeToOddQ(Vector3Int cube)
@@ -35,7 +35,7 @@ public class HexHelper : MonoBehaviour
         float q_diff = Mathf.Abs(rq - point.x);
         float r_diff = Mathf.Abs(rr - point.y);
         float s_diff = Mathf.Abs(rs - point.z);
-        
+
         if (q_diff > r_diff && q_diff > s_diff)
         {
             rq = -rr - rs;
@@ -50,4 +50,97 @@ public class HexHelper : MonoBehaviour
         }
         return new Vector3Int(Mathf.RoundToInt(rq), Mathf.RoundToInt(rr), Mathf.RoundToInt(rs));
     }
+
+    public static List<Vector2Int> GetNeighboursOddQ(Vector2Int index)
+    {
+        List<Vector2Int> neighbours = new List<Vector2Int>();
+        // add above and below
+        if (index.y + 1 < HexGrid.GridSize.y)
+            neighbours.Add(new Vector2Int(index.x, index.y + 1));
+        if (index.y - 1 >= 0)
+            neighbours.Add(new Vector2Int(index.x, index.y - 1));
+        // check if even
+        if ((index.x & 1) != 0)
+        {
+            // add left and right with positive offset
+            if (index.x - 1 >= 0)
+                neighbours.Add(new Vector2Int(index.x - 1, index.y));
+            if (index.x - 1 >= 0 && index.y + 1 < HexGrid.GridSize.y)
+                neighbours.Add(new Vector2Int(index.x - 1, index.y + 1));
+            if (index.x + 1 < HexGrid.GridSize.x)
+                neighbours.Add(new Vector2Int(index.x + 1, index.y));
+            if (index.x + 1 < HexGrid.GridSize.x && index.y + 1 < HexGrid.GridSize.y)
+                neighbours.Add(new Vector2Int(index.x + 1, index.y + 1));
+        }
+        else
+        {
+            // add left and right with negative offset
+            if (index.x - 1 >= 0)
+                neighbours.Add(new Vector2Int(index.x - 1, index.y));
+            if (index.x - 1 >= 0 && index.y - 1 >= 0)
+                neighbours.Add(new Vector2Int(index.x - 1, index.y - 1));
+            if (index.x + 1 < HexGrid.GridSize.x)
+                neighbours.Add(new Vector2Int(index.x + 1, index.y));
+            if (index.x + 1 < HexGrid.GridSize.x && index.y - 1 >= 0)
+                neighbours.Add(new Vector2Int(index.x + 1, index.y - 1));
+        }
+        return neighbours;
+    }
+
+
+
+    public static Vector2Int StepInDirection(Vector2Int index, HexDirection direction)
+    {
+        switch (direction)
+        {
+            case HexDirection.Up:
+                return new Vector2Int(index.x, index.y + 1);
+            case HexDirection.Down:
+                return new Vector2Int(index.x, index.y - 1);
+            default:
+                if ((index.x & 1) == 0)
+                {
+                    // even column
+                    switch (direction)
+                    {
+                        case HexDirection.RightUp:
+                            return new Vector2Int(index.x + 1, index.y);
+                        case HexDirection.RightDown:
+                            return new Vector2Int(index.x + 1, index.y - 1);
+                        case HexDirection.LeftUp:
+                            return new Vector2Int(index.x - 1, index.y);
+                        case HexDirection.LeftDown:
+                            return new Vector2Int(index.x - 1, index.y - 1);
+                        default:
+                            throw new System.Exception("Invalid direction");
+                    }
+                }
+                else
+                {
+                    // odd column
+                    switch (direction)
+                    {
+                        case HexDirection.RightUp:
+                            return new Vector2Int(index.x + 1, index.y + 1);
+                        case HexDirection.RightDown:
+                            return new Vector2Int(index.x + 1, index.y);
+                        case HexDirection.LeftUp:
+                            return new Vector2Int(index.x - 1, index.y + 1);
+                        case HexDirection.LeftDown:
+                            return new Vector2Int(index.x - 1, index.y);
+                        default:
+                            throw new System.Exception("Invalid direction");
+                    }
+                }
+        }
+    }
+}
+public enum HexDirection
+{
+    Up,
+    Down,
+    RightUp,
+    RightDown,
+    LeftUp,
+    LeftDown
 }

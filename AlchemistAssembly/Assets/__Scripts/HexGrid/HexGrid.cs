@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class HexGrid : MonoBehaviour
@@ -12,7 +13,7 @@ public class HexGrid : MonoBehaviour
     private Vector3 Dir_DL = new Vector3(-OUTER_HEX_SIZE * 0.25f, 0, -INNER_HEX_SIZE / 2f);
     private Vector3 Dir_L = new Vector3(-OUTER_HEX_SIZE * 0.5f, 0, 0);
     // Hexagonal grid with an flat-top odd-q layout. Every second column is offset by half a hexagon.
-
+    public static Vector2Int GridSize => Instance._gridSettings.GridSize;
     public static HexGrid Instance { get; private set; }
     private GridTile[,] _gridTiles;
     [field: SerializeField] private bool _drawGizmos = false;
@@ -79,6 +80,71 @@ public class HexGrid : MonoBehaviour
         if (index.x % 2 == 1)
             position.z += INNER_HEX_SIZE / 2f;
         return position;
+    }
+
+    public static bool IsValidIndex(Vector2Int index)
+    {
+        return index.x >= 0 && index.x < Instance._gridTiles.GetLength(0) && index.y >= 0 && index.y < Instance._gridTiles.GetLength(1);
+    }
+
+    public static List<GridTile> GetPathToPos(Vector2Int start, Vector2Int target)
+    {
+        List<GridTile> path = new List<GridTile>();
+        if (!IsValidIndex(start) || !IsValidIndex(target))
+        {
+            Debug.LogError("Invalid start or target index");
+            return path;
+        }
+        if (start == target)
+        {
+            path.Add(GetTile(start));
+            return path;
+        }
+        Vector2Int current = start;
+        Vector2Int startAxis = HexHelper.OddQToCube(start).ToAxisSystem();
+        Vector2Int targetAxis = HexHelper.OddQToCube(target).ToAxisSystem();
+        int rSteps = targetAxis.x - startAxis.x;
+        int qSteps = targetAxis.y - startAxis.y;
+        List<Vector2Int> axisPath = new List<Vector2Int>();
+        while (rSteps != 0 && qSteps != 0 && Mathf.Sign(rSteps) != Mathf.Sign(qSteps))
+        {
+            axisPath.Add(new Vector2Int((int)Mathf.Sign(rSteps), (int)Mathf.Sign(qSteps)));
+            rSteps -= (int)Mathf.Sign(rSteps);
+            qSteps -= (int)Mathf.Sign(qSteps);
+        }
+        while (rSteps != 0)
+        {
+            axisPath.Add(new Vector2Int((int)Mathf.Sign(rSteps), 0));
+            rSteps -= (int)Mathf.Sign(rSteps);
+        }
+        while (qSteps != 0)
+        {
+            axisPath.Add(new Vector2Int(0, (int)Mathf.Sign(qSteps)));
+            qSteps -= (int)Mathf.Sign(qSteps);
+        }
+        Vector2Int currentPoint = startAxis;
+        path.Add(GetTile(HexHelper.CubeToOddQ(currentPoint.ToCubeSystem())));
+        foreach (Vector2Int step in axisPath)
+        {
+            currentPoint += step;
+            path.Add(GetTile(HexHelper.CubeToOddQ((currentPoint).ToCubeSystem())));
+        }
+        /*
+        description:
+        first convert to axis coordinates
+        first get all points along X axis to until source.x == target.x
+        then get all points along Y axis until source.y == target.y
+        now calculate how many X are in Y (X-Y) and see how much is remaining
+        e.g. (5,3) in steps, then 3 steps in third axis, and then the remaining (2,0)
+        e.g. (2,5) in steps, then 2 steps in third axis, and then the remaining (0,3)
+        e.g. (3,3) in steps, then 3 steps in third axis, and then the remaining (0,0)
+        e.g. (0,3) in steps, then 0 steps in third axis, and then the remaining (0,3)
+        e.g. (-3,4) in steps, then 
+
+        pseudocode to find shortest path:
+
+        */
+        return path;
     }
 
     [field: SerializeField] private Vector2Int _gizmosSize;
