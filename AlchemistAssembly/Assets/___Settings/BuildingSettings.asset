@@ -29,12 +29,12 @@ MonoBehaviour:
   InputGrey3: {fileID: 0}
   InputRed3: {fileID: 0}
   InputGreen3: {fileID: 0}
+  InputIcon1Panel: {fileID: 0}
+  InputIcon2Panel: {fileID: 0}
+  InputIcon3Panel: {fileID: 0}
+  OutputIconPanel: {fileID: 0}
   OutputBar: {fileID: 0}
   CurrentBuilding: {fileID: 0}
-  InputIcon1: {fileID: 0}
-  InputIcon2: {fileID: 0}
-  InputIcon3: {fileID: 0}
-  OutputIcon: {fileID: 0}
   ShroomSprite: {fileID: 0}
   WaterSprite: {fileID: 0}
   CrystalSprite: {fileID: 0}
@@ -45,11 +45,30 @@ MonoBehaviour:
   RedHoneySprite: {fileID: 0}
   YellowPotSprite: {fileID: 0}
   CrystalHoneySprite: {fileID: 0}
+  YellowCrystalSprite: {fileID: 0}
   PurplePotSprite: {fileID: 0}
   Recipes:
   - Input: 0100000000000000
     Output: 4
-    Time: 0
-  - Input: 00000000
-    Output: 4
-    Time: 20
+    Time: 5
+  - Input: 0100000003000000
+    Output: 5
+    Time: 2
+  - Input: 0400000003000000
+    Output: 7
+    Time: 3
+  - Input: 0500000000000000
+    Output: 6
+    Time: 5
+  - Input: 0700000006000000
+    Output: 8
+    Time: 5
+  - Input: 0200000003000000
+    Output: 9
+    Time: 4
+  - Input: 0200000008000000
+    Output: 10
+    Time: 6
+  - Input: 07000000090000000a000000
+    Output: 10
+    Time: 7

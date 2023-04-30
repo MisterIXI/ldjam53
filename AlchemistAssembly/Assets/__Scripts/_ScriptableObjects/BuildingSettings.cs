@@ -23,13 +23,13 @@ public class BuildingSettings : ScriptableObject
     [field: SerializeField] public GameObject InputGrey1, InputRed1, InputGreen1;
     [field: SerializeField] public GameObject InputGrey2, InputRed2, InputGreen2;
     [field: SerializeField] public GameObject InputGrey3, InputRed3, InputGreen3;
+    [field: SerializeField] public GameObject InputIcon1Panel, InputIcon2Panel, InputIcon3Panel;
+    [field: SerializeField] public GameObject OutputIconPanel;
     [field: SerializeField] public Slider OutputBar;
 
 
     [field: Header("Will be overwritten in Script")]
     [field: SerializeField] public GameObject CurrentBuilding;
-    [field: SerializeField] public GameObject InputIcon1, InputIcon2, InputIcon3;
-    [field: SerializeField] public GameObject OutputIcon;
 
 
     [field: Header("Sprites")]
@@ -43,6 +43,7 @@ public class BuildingSettings : ScriptableObject
     [field: SerializeField] public Sprite RedHoneySprite;
     [field: SerializeField] public Sprite YellowPotSprite;
     [field: SerializeField] public Sprite CrystalHoneySprite;
+    [field: SerializeField] public Sprite YellowCrystalSprite;
     [field: SerializeField] public Sprite PurplePotSprite;
 
 
@@ -60,6 +61,7 @@ public struct CraftingRecipe
 
 public enum ResourceType
 {
+    Empty,
     Shroom,
     Water,
     Crystal,
@@ -70,5 +72,6 @@ public enum ResourceType
     RedHoney,
     YellowPot,
     CrystalHoney,
+    YellowCrystal,
     PurplePot
 }

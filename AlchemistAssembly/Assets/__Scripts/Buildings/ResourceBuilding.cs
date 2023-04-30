@@ -8,17 +8,7 @@ public class ResourceBuilding : MonoBehaviour, IInteractable
 {
     private BuildingSettings _buildingSettings => SettingsManager.BuildingSettings;
 
-    public enum ResourceType   // change those later to incorp it with yanniks class
-    {
-        Shroom,
-        Water,
-        Crystal,
-        Honey
-    }
-
-    UnityEvent m_SendMinecart;
-
-    private ResourceType _resourceType;         // change those later to incorp it with yanniks class
+    private ResourceType _resourceType;
     private float _outputTime;
     private Sprite _outputSprite;
     [field: SerializeField] private GameObject[] routes;
@@ -108,7 +98,7 @@ public class ResourceBuilding : MonoBehaviour, IInteractable
         _buildingSettings.InputPanel.SetActive(false);
         _buildingSettings.RecepieButtonPanel.SetActive(false);
 
-        _buildingSettings.OutputIcon.GetComponent<Image>().sprite = _outputSprite;
+        _buildingSettings.OutputIconPanel.GetComponent<Image>().sprite = _outputSprite;
 
         // show routes
     }
@@ -117,6 +107,7 @@ public class ResourceBuilding : MonoBehaviour, IInteractable
     {
         _buildingSettings.BuildingPanel.SetActive(false);
         _buildingSettings.RecepiePanel.SetActive(false);
+        _buildingSettings.CurrentBuilding = null;
 
         // hide routes
     }
