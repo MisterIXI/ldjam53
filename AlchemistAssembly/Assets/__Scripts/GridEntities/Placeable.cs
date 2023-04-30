@@ -11,7 +11,10 @@ public class Placeable : MonoBehaviour
     private void Start()
     {
         _settings = SettingsManager.PlacementToolSettings;
+        Initialize();
     }
+
+    public virtual void Initialize() { }
     public virtual void PlaceOnTile(GridTile tile)
     {
         transform.position = tile.transform.position;
@@ -49,16 +52,6 @@ public class Placeable : MonoBehaviour
             }
         }
         return true;
-    }
-
-    public virtual void RotateRight()
-    {
-        transform.Rotate(Vector3.up, 60f);
-    }
-
-    public virtual void RotateLeft()
-    {
-        transform.Rotate(Vector3.up, -60f);
     }
 
     private IEnumerator PlacementAnimation()

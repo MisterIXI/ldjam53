@@ -6,11 +6,12 @@ using UnityEngine.InputSystem;
 
 public class PlacementController : MonoBehaviour
 {
+    public static event Action<float> OnRotationChanged;
     public static event Action<GridTile, GridTile> OnTileHovered;
     public static PlacementController Instance { get; private set; }
     private PlayerSettings _playerSettings => SettingsManager.PlayerSettings;
     public GameObject Cube;
-
+    public float RotationAngle = 0f;
     public Vector2 MousePosInput { get; private set; }
     public Vector3 mousePos;
     private Plane _groundPlane;
@@ -99,10 +100,19 @@ public class PlacementController : MonoBehaviour
             MousePosInput = context.ReadValue<Vector2>();
         }
     }
-
+    private void OnRotateInput(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            RotationAngle += 60f;
+            RotationAngle %= 360f;
+            OnRotationChanged?.Invoke(RotationAngle);
+        }
+    }
     private void SubscribeToInput()
     {
         InputManager.OnMousePos += OnMousePosInput;
+        InputManager.OnRotate += OnRotateInput;
     }
 
     private void UnsubscribeFromInput()
