@@ -8,6 +8,7 @@ public class DefaultTool : GridTool
         if (context.performed)
         {
             GridTile currentTile = PlacementController.HoveredTile;
+            Debug.Log("Trying to interact with tile" + currentTile);
             if (currentTile != null && currentTile.Placeable != null)
             {
                 if (currentTile.Placeable is IInteractable interactable)

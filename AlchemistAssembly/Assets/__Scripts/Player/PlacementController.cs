@@ -19,6 +19,7 @@ public class PlacementController : MonoBehaviour
     private Camera _mainCamera;
     private GridTile _lastHoveredTile;
     public static GridTile HoveredTile => Instance._lastHoveredTile;
+    [field: SerializeField] public CauldronPlacer CauldronPlacer { get; private set; }
 
     private void Awake()
     {
@@ -34,10 +35,10 @@ public class PlacementController : MonoBehaviour
     {
         _mainCamera = Camera.main;
         _groundPlane = new Plane(Vector3.up, 0);
-        var railTool = new GameObject("RailTool");
-        railTool.AddComponent<LineRenderer>().enabled = false;
-        railTool.AddComponent<RailPlacer>().Activate();
-
+        // var railTool = new GameObject("RailTool");
+        // railTool.AddComponent<LineRenderer>().enabled = false;
+        // railTool.AddComponent<RailPlacer>().Activate();
+        CauldronPlacer.Activate();
     }
 
     void FixedUpdate()

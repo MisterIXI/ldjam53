@@ -72,8 +72,8 @@ public class CameraController : MonoBehaviour
         //Enable CameraControls and gives it a priority list
         cameraMove = DragCameraMove();
 
-        if(cameraMove == Vector3.zero && _dragInput == 0)
-            cameraMove = MouseCameraMove(); 
+        // if(cameraMove == Vector3.zero && _dragInput == 0)
+        //     cameraMove = MouseCameraMove(); 
 
         if(cameraMove == Vector3.zero && _dragInput == 0) 
             cameraMove = KeyboardCameraMove();

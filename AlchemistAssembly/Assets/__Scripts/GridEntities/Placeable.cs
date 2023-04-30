@@ -20,6 +20,7 @@ public class Placeable : MonoBehaviour
         transform.position = tile.transform.position;
         _currentTile = tile;
         transform.parent = tile.transform;
+        FillTiles(tile.TileIndex, GetOccupiedTiles());
         StartCoroutine(PlacementAnimation());
     }
 
