@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c986176f809b02647937aa77bf460b1d, type: 3}
   m_Name: BuildingSettings
   m_EditorClassIdentifier: 
-  <ShroomTime>k__BackingField: 5
-  <WaterTime>k__BackingField: 5
-  <CrystalTime>k__BackingField: 5
-  <HoneyTime>k__BackingField: 5
+  <ShroomTime>k__BackingField: 3
+  <WaterTime>k__BackingField: 2
+  <CrystalTime>k__BackingField: 4
+  <HoneyTime>k__BackingField: 3
   BuildingPanel: {fileID: 0}
   RecepiePanel: {fileID: 0}
   InputPanel: {fileID: 0}

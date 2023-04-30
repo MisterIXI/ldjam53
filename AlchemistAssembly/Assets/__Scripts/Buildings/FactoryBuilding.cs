@@ -14,7 +14,14 @@ public class FactoryBuilding : MonoBehaviour, IInteractable
 
     private ResourceType _resourceType;         // change those later to incorp it with yanniks class
     private float _outputTime;
+
+
     private Sprite _outputSprite;
+    private Sprite _input1Sprite;
+    private Sprite _input2Sprite;
+    private Sprite _input3Sprite;
+
+
     [field: SerializeField] private GameObject[] routes;
     private int routeCoutner = 0;
 
@@ -62,6 +69,37 @@ public class FactoryBuilding : MonoBehaviour, IInteractable
             return i;  
         }
         return -1;
+    }
+
+
+    private Sprite FindSprite(ResourceType resource)
+    {
+        if(resource == ResourceType.Shroom)
+            return _buildingSettings.ShroomSprite;
+        else if(resource == ResourceType.Water)
+            return _buildingSettings.WaterSprite;
+        else if(resource == ResourceType.Crystal)
+            return _buildingSettings.CrystalSprite;
+        else if(resource == ResourceType.Honey)
+            return _buildingSettings.HoneySprite;
+        else if(resource == ResourceType.RedPot)
+            return _buildingSettings.RedPotSprite;
+        else if(resource == ResourceType.HoneyWater)
+            return _buildingSettings.HoneyWaterSprite;
+        else if(resource == ResourceType.BluePot)
+            return _buildingSettings.BluePotSprite;
+        else if(resource == ResourceType.RedHoney)
+            return _buildingSettings.RedHoneySprite;
+        else if(resource == ResourceType.YellowPot)
+            return _buildingSettings.YellowPotSprite;
+        else if(resource == ResourceType.CrystalHoney)
+            return _buildingSettings.CrystalHoneySprite;
+        else if(resource == ResourceType.YellowCrystal)
+            return _buildingSettings.YellowCrystalSprite;
+        else if(resource == ResourceType.PurplePot)
+            return _buildingSettings.PurplePotSprite;
+        else
+            return _buildingSettings.EmptySprite;
     }
 
 
@@ -139,10 +177,17 @@ public class FactoryBuilding : MonoBehaviour, IInteractable
         if(_buildingSettings.Recipes[recepieInt].Input[0] != _input1)
             _input1 = ResourceType.Empty;
         if(_buildingSettings.Recipes[recepieInt].Input[1] != _input2)
-            _input1 = ResourceType.Empty;
+            _input2 = ResourceType.Empty;
         if(_buildingSettings.Recipes[recepieInt].Input[2] != _input3)
-            _input1 = ResourceType.Empty;
+            _input3 = ResourceType.Empty;
 
-        // _buildingSettings.
+        // find sprte for output and inputs
+        _outputSprite = FindSprite(_buildingSettings.Recipes[recepieInt].Output);
+        _input1Sprite = FindSprite(_buildingSettings.Recipes[recepieInt].Input[0]);
+        _input2Sprite = FindSprite(_buildingSettings.Recipes[recepieInt].Input[1]);
+        _input3Sprite = FindSprite(_buildingSettings.Recipes[recepieInt].Input[2]);
+
+        // saves output time
+        _outputTime = _buildingSettings.Recipes[recepieInt].Time;
     }
 }

@@ -20,9 +20,9 @@ public class BuildingSettings : ScriptableObject
     [field: SerializeField] public GameObject RecepiePanel;
     [field: SerializeField] public GameObject InputPanel;
     [field: SerializeField] public GameObject RecepieButtonPanel;
-    [field: SerializeField] public GameObject InputGrey1, InputRed1, InputGreen1;
-    [field: SerializeField] public GameObject InputGrey2, InputRed2, InputGreen2;
-    [field: SerializeField] public GameObject InputGrey3, InputRed3, InputGreen3;
+    [field: SerializeField] public GameObject InputColor1;
+    [field: SerializeField] public GameObject InputColor2;
+    [field: SerializeField] public GameObject InputColor3;
     [field: SerializeField] public GameObject InputIcon1Panel, InputIcon2Panel, InputIcon3Panel;
     [field: SerializeField] public GameObject OutputIconPanel;
     [field: SerializeField] public Slider OutputBar;
@@ -33,6 +33,7 @@ public class BuildingSettings : ScriptableObject
 
 
     [field: Header("Sprites")]
+    [field: SerializeField] public Sprite EmptySprite;
     [field: SerializeField] public Sprite ShroomSprite;
     [field: SerializeField] public Sprite WaterSprite;
     [field: SerializeField] public Sprite CrystalSprite;
