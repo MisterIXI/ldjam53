@@ -47,6 +47,10 @@ public class BuildingSettings : ScriptableObject
     [field: SerializeField] public Sprite YellowCrystalSprite;
     [field: SerializeField] public Sprite PurplePotSprite;
 
+    [field: Header("Colors")]
+    [field: SerializeField] public Color ColorFull;
+    [field: SerializeField] public Color ColorEmpty;
+    [field: SerializeField] public Color ColorUnavailable;
 
     [field: Header("Recipes")]
     [field: SerializeField] public CraftingRecipe[] Recipes;
@@ -62,7 +66,6 @@ public struct CraftingRecipe
 
 public enum ResourceType
 {
-    Empty,
     Shroom,
     Water,
     Crystal,
@@ -74,5 +77,6 @@ public enum ResourceType
     YellowPot,
     CrystalHoney,
     YellowCrystal,
-    PurplePot
+    PurplePot,
+    Empty
 }
