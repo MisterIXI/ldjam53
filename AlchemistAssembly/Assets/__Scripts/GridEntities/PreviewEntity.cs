@@ -65,6 +65,16 @@ public class PreviewEntity : MonoBehaviour
             }
         }
     }
+
+    public void RotateRight()
+    {
+        transform.Rotate(Vector3.up, 60f);
+    }
+
+    public void RotateLeft()
+    {
+        transform.Rotate(Vector3.up, -60f);
+    }
 }
 public enum PreviewStatus
 {
