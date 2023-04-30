@@ -7,16 +7,17 @@ public class GridTileEditor : Editor
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
+        GridTile gridTile = (GridTile)target;
         if (GUILayout.Button("PaintNeighbours"))
         {
-            GridTile gridTile = (GridTile)target;
             gridTile.PaintNeighbours();
         }
         if (GUILayout.Button("TriggerPath"))
         {
-            GridTile gridTile = (GridTile)target;
             gridTile.TriggerPath();
         }
+        // add label that shows the index of the tile
+        EditorGUILayout.LabelField("Index: " + gridTile.TileIndex);
 
     }
 }

@@ -101,45 +101,49 @@ public class HexGrid : MonoBehaviour
             return path;
         }
         Vector2Int current = start;
-        while (current.x != target.x)
+        Vector2Int startAxis = HexHelper.OddQToCube(start).ToAxisSystem();
+        Vector2Int targetAxis = HexHelper.OddQToCube(target).ToAxisSystem();
+        int rSteps = targetAxis.x - startAxis.x;
+        int qSteps = targetAxis.y - startAxis.y;
+        List<Vector2Int> axisPath = new List<Vector2Int>();
+        while (rSteps != 0 && qSteps != 0 && Mathf.Sign(rSteps) != Mathf.Sign(qSteps))
         {
-            if (current.x > target.x)
-            {
-                if (current.y > target.y)
-                {
-                    current = HexHelper.StepInDirection(current, HexDirection.LeftDown);
-                }
-                else
-                {
-                    current = HexHelper.StepInDirection(current, HexDirection.LeftUp);
-                }
-            }
-            else
-            {
-                if (current.y > target.y)
-                {
-                    current = HexHelper.StepInDirection(current, HexDirection.RightDown);
-                }
-                else
-                {
-                    current = HexHelper.StepInDirection(current, HexDirection.RightUp);
-                }
-            }
-            path.Add(GetTile(current));
+            axisPath.Add(new Vector2Int((int)Mathf.Sign(rSteps), (int)Mathf.Sign(qSteps)));
+            rSteps -= (int)Mathf.Sign(rSteps);
+            qSteps -= (int)Mathf.Sign(qSteps);
         }
-        while (current.y != target.y)
+        while (rSteps != 0)
         {
-            if (current.y > target.y)
-            {
-                current = HexHelper.StepInDirection(current, HexDirection.Down);
-            }
-            else
-            {
-                current = HexHelper.StepInDirection(current, HexDirection.Up);
-            }
-            path.Add(GetTile(current));
+            axisPath.Add(new Vector2Int((int)Mathf.Sign(rSteps), 0));
+            rSteps -= (int)Mathf.Sign(rSteps);
         }
-        path.Add(GetTile(target));
+        while (qSteps != 0)
+        {
+            axisPath.Add(new Vector2Int(0, (int)Mathf.Sign(qSteps)));
+            qSteps -= (int)Mathf.Sign(qSteps);
+        }
+        Vector2Int currentPoint = startAxis;
+        path.Add(GetTile(HexHelper.CubeToOddQ(currentPoint.ToCubeSystem())));
+        foreach (Vector2Int step in axisPath)
+        {
+            currentPoint += step;
+            path.Add(GetTile(HexHelper.CubeToOddQ((currentPoint).ToCubeSystem())));
+        }
+        /*
+        description:
+        first convert to axis coordinates
+        first get all points along X axis to until source.x == target.x
+        then get all points along Y axis until source.y == target.y
+        now calculate how many X are in Y (X-Y) and see how much is remaining
+        e.g. (5,3) in steps, then 3 steps in third axis, and then the remaining (2,0)
+        e.g. (2,5) in steps, then 2 steps in third axis, and then the remaining (0,3)
+        e.g. (3,3) in steps, then 3 steps in third axis, and then the remaining (0,0)
+        e.g. (0,3) in steps, then 0 steps in third axis, and then the remaining (0,3)
+        e.g. (-3,4) in steps, then 
+
+        pseudocode to find shortest path:
+
+        */
         return path;
     }
 
