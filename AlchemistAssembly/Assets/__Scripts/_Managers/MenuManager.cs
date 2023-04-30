@@ -2,15 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 public class MenuManager : MonoBehaviour
 {
-    [SerializeField] private GameObject MenuUI, LogoUI, ControlUI, StartUI, ResumeUI;
-    [SerializeField] private TextMeshProUGUI ResumeButton, StartButton, SettingButton, CreditsButton;
+    [SerializeField] private GameObject MenuUI, LogoUI, ControlUI, StartUI, ResumeUI,HUD_UI;
+    [SerializeField] private Button ResumeButton, StartButton, SettingButton, CreditsButton;
     [SerializeField] private GameObject[] ShiftStart, ShiftSettings, ShiftCredits;
     public MenuManager Instance { get; private set; }
     private bool gameisRunning;
-    private float setting_Camera_value, setting_SFX_Volume, setting_Music_Volume;
-    private float setting_Camera_valueMax, setting_SFX_VolumeMax, setting_Music_VolumeMax;
+    private float setting_Camera_value=3f, setting_SFX_Volume=50f, setting_Music_Volume=50f;
+    private float setting_Camera_valueMax=6f, setting_SFX_VolumeMax=100f, setting_Music_VolumeMax=100f;
+    [SerializeField] TextMeshProUGUI setting_Camera_Text,setting_SFX_Text, setting_Music_Text;
     private enum Menu
     {
         Default,
@@ -58,6 +60,9 @@ public class MenuManager : MonoBehaviour
         gameisRunning = false;
         // TIMESCALE = 0 ? 
         activeMenu = Menu.Default;
+        setting_Camera_Text.text = "Camera Sensitivity\n" + setting_Camera_value + "%";
+        setting_Camera_Text.text = "SFX\n" + setting_SFX_Volume + "%";
+        setting_Music_Text.text = "MUSIC\n" + setting_Music_Volume + "%";
     }
     public void OnButtonResumeGame()
     {
@@ -72,6 +77,7 @@ public class MenuManager : MonoBehaviour
     {
         if (activeMenu != Menu.Setting)
         {
+            ControlUI.SetActive(false);
             HideMenus();
             DisableButtons();
             activeMenu = Menu.Setting;
@@ -88,6 +94,7 @@ public class MenuManager : MonoBehaviour
     {
         if (activeMenu != Menu.Credit)
         {
+            ControlUI.SetActive(false);
             HideMenus();
             DisableButtons();
             activeMenu = Menu.Credit;
@@ -131,7 +138,7 @@ public class MenuManager : MonoBehaviour
     }
     IEnumerator ActivateOverSecond(GameObject obj, int time)
     {
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSeconds(time/2);
         obj.SetActive(true);
     }
     IEnumerator ActivateButtons()
@@ -156,6 +163,8 @@ public class MenuManager : MonoBehaviour
             if(setting_Camera_value - 10 >=0)
                 setting_Camera_value -=10;
         }
+        setting_Camera_Text.text = "Camera Sensitivity\n" + setting_Camera_value + "%";
+
     }
     public void OnChangeSoundVolume(bool add)
     {
@@ -167,6 +176,7 @@ public class MenuManager : MonoBehaviour
             if(setting_SFX_Volume - 10 >=0)
                 setting_SFX_Volume -=10;
         }
+        setting_Camera_Text.text = "SFX\n" + setting_SFX_Volume + "%";
     }public void OnChangeMusicVolume(bool add)
     {
         if(add)
@@ -177,6 +187,7 @@ public class MenuManager : MonoBehaviour
             if(setting_Music_Volume - 10 >=0)
                 setting_Music_Volume -=10;
         }
+        setting_Music_Text.text = "MUSIC\n" + setting_Music_Volume + "%";
     }
     #endregion OnChangeSettings
 
