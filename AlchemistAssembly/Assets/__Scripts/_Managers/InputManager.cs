@@ -30,10 +30,10 @@ public class InputManager : MonoBehaviour
     public static event Action<CallbackContext> OnZoom;
     public static event Action<CallbackContext> OnMousePos;
     public static event Action<CallbackContext> OnRotate;
-    public static event Action<CallbackContext> OnUi;
     public static event Action<CallbackContext> OnInteract;
     public static event Action<CallbackContext> OnHotkeys;
     public static event Action<CallbackContext> OnMenu;
+    public static event Action<CallbackContext> OnCameraRotate;
 
 
     private void OnLookInput(CallbackContext context)
@@ -71,13 +71,6 @@ public class InputManager : MonoBehaviour
         OnRotate?.Invoke(context);
     }
 
-
-    private void OnUiInput(CallbackContext context)
-    {
-        OnUi?.Invoke(context);
-    }
-
-
     private void OnInteractInput(CallbackContext context)
     {
         OnInteract?.Invoke(context);
@@ -93,6 +86,11 @@ public class InputManager : MonoBehaviour
     private void OnMenuInput(CallbackContext context)
     {
         OnMenu?.Invoke(context);
+    }
+
+    private void OnCameraRotateInput(CallbackContext context)
+    {
+        OnCameraRotate?.Invoke(context);
     }
 
 
@@ -121,10 +119,6 @@ public class InputManager : MonoBehaviour
         _playerInput.actions["Rotate"].started += OnRotateInput;
         _playerInput.actions["Rotate"].performed += OnRotateInput;
         _playerInput.actions["Rotate"].canceled += OnRotateInput;
-        
-        _playerInput.actions["Ui"].started += OnUiInput;
-        _playerInput.actions["Ui"].performed += OnUiInput;
-        _playerInput.actions["Ui"].canceled += OnUiInput;
 
         _playerInput.actions["Interact"].started += OnInteractInput;
         _playerInput.actions["Interact"].performed += OnInteractInput;
@@ -137,6 +131,10 @@ public class InputManager : MonoBehaviour
         _playerInput.actions["Menu"].started += OnMenuInput;
         _playerInput.actions["Menu"].performed += OnMenuInput;
         _playerInput.actions["Menu"].canceled += OnMenuInput;
+        
+        _playerInput.actions["CameraRotate"].started += OnCameraRotateInput;
+        _playerInput.actions["CameraRotate"].performed += OnCameraRotateInput;
+        _playerInput.actions["CameraRotate"].canceled += OnCameraRotateInput;
     }
 
 
@@ -166,10 +164,6 @@ public class InputManager : MonoBehaviour
         _playerInput.actions["Rotate"].performed -= OnRotateInput;
         _playerInput.actions["Rotate"].canceled -= OnRotateInput;
         
-        _playerInput.actions["Ui"].started -= OnUiInput;
-        _playerInput.actions["Ui"].performed -= OnUiInput;
-        _playerInput.actions["Ui"].canceled -= OnUiInput;
-
         _playerInput.actions["Interact"].started -= OnInteractInput;
         _playerInput.actions["Interact"].performed -= OnInteractInput;
         _playerInput.actions["Interact"].canceled -= OnInteractInput;
@@ -181,6 +175,10 @@ public class InputManager : MonoBehaviour
         _playerInput.actions["Menu"].started -= OnMenuInput;
         _playerInput.actions["Menu"].performed -= OnMenuInput;
         _playerInput.actions["Menu"].canceled -= OnMenuInput;
+
+        _playerInput.actions["CameraRotate"].started -= OnCameraRotateInput;
+        _playerInput.actions["CameraRotate"].performed -= OnCameraRotateInput;
+        _playerInput.actions["CameraRotate"].canceled -= OnCameraRotateInput;
     }
 
 

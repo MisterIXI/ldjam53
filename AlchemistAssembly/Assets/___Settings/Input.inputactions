@@ -69,15 +69,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Ui",
-                    "type": "Button",
-                    "id": "2db25eec-43e7-4b79-9848-db5026af121b",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Hotkeys",
                     "type": "Value",
                     "id": "9818b2b5-e80d-48d5-a964-e70f515478ae",
@@ -94,6 +85,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "CameraRotate",
+                    "type": "Button",
+                    "id": "5a4c3a22-512b-40bd-8167-3b232ec3938b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -210,7 +210,7 @@
                 {
                     "name": "",
                     "id": "e7707c69-0fde-415c-a0c7-8eef867b2d3b",
-                    "path": "<Keyboard>/tab",
+                    "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
@@ -259,17 +259,6 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Rotate",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "9ac730f2-675f-4445-a3f1-bc4ff74c6bd9",
-                    "path": "<Keyboard>/tab",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Ui",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -336,6 +325,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Zoom",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "accc4005-dc50-4419-aa26-16a2941b0a0a",
+                    "path": "<Mouse>/middleButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "CameraRotate",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
