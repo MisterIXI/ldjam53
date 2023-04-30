@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 70155362355448875}
-  m_LocalRotation: {x: 0.6427876, y: -0, z: -0, w: 0.7660445}
+  m_LocalRotation: {x: 0.60876155, y: -0, z: -0, w: 0.7933533}
   m_LocalPosition: {x: 0, y: 13.6602545, z: -3.6602523}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -164,13 +164,13 @@ MonoBehaviour:
   m_BindingMode: 3
   m_FollowOffset: {x: 0, y: 10, z: -10}
   m_XDamping: 1
-  m_YDamping: 4
+  m_YDamping: 1
   m_ZDamping: 1
   m_AngularDampingMode: 1
   m_PitchDamping: 2
   m_YawDamping: 2
   m_RollDamping: 2
-  m_AngularDamping: 2
+  m_AngularDamping: 0
 --- !u!1 &7774065234760446692
 GameObject:
   m_ObjectHideFlags: 0
@@ -198,7 +198,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7774065234760446692}
-  m_LocalRotation: {x: 0.6427876, y: -0, z: -0, w: 0.7660445}
+  m_LocalRotation: {x: 0.60876155, y: -0, z: -0, w: 0.7933533}
   m_LocalPosition: {x: 0, y: 13.6602545, z: -3.6602523}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -390,6 +390,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CameraFollowTarget: {fileID: 781927924094052177}
+  CinemachineObj: {fileID: 8374575580060312252}
 --- !u!1 &8971426748926366847
 GameObject:
   m_ObjectHideFlags: 0
@@ -408,7 +409,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5182117371716916760
 Transform:
   m_ObjectHideFlags: 0

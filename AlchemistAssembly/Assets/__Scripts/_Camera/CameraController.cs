@@ -14,6 +14,7 @@ public class CameraController : MonoBehaviour
     private Vector2 _lookInput;
     private float _dragInput;
     private Vector2 _mousePosInput;
+    private float _cameraRotateInput;
 
 
     private Vector3 cameraMove = Vector3.zero;
@@ -21,6 +22,7 @@ public class CameraController : MonoBehaviour
 
 
     public Transform CameraFollowTarget;
+    public Transform CinemachineObj;
 
     // Initializing Singleton and InputManager
     private void Awake()
@@ -41,6 +43,7 @@ public class CameraController : MonoBehaviour
         InputManager.OnDrag += OnDragInput;
         InputManager.OnZoom += OnZoomInput;
         InputManager.OnMousePos += OnMousePosInput;
+        InputManager.OnCameraRotate += OnCameraRotateInput;
     }
 
     private void UnsubscribeFromInput()
@@ -50,6 +53,7 @@ public class CameraController : MonoBehaviour
         InputManager.OnDrag -= OnDragInput;
         InputManager.OnZoom -= OnZoomInput;
         InputManager.OnMousePos -= OnMousePosInput;
+        InputManager.OnCameraRotate -= OnCameraRotateInput;
     }
 
     private void OnDestroy()
@@ -76,6 +80,10 @@ public class CameraController : MonoBehaviour
 
         // updates the movement to the camera
         UpdateCameraMove();
+
+        // Allow the player to rotate the camera if you are not draggin the cam
+        if(_dragInput == 0)
+            RotateCamera();
     }
 
     private Vector3 DragCameraMove()
@@ -83,7 +91,8 @@ public class CameraController : MonoBehaviour
         if(_dragInput != 0)
         {
             Vector3 cameraMoveDelta = new Vector3(_lookInput.x, 0, _lookInput.y) * (0.01f * _playerSettings.DragSpeed);
-            return Vector3.ProjectOnPlane(cameraMoveDelta, Vector3.Cross(transform.right, transform.forward));
+            cameraMoveDelta = CameraFollowTarget.transform.TransformDirection(cameraMoveDelta);
+            return Vector3.ProjectOnPlane(-cameraMoveDelta, Vector3.Cross(transform.right, transform.forward));
         }
         else
             return Vector3.zero;
@@ -122,7 +131,8 @@ public class CameraController : MonoBehaviour
         if(reset)
             return Vector3.zero;
 
-        return cameraMoveDelta;
+        cameraMoveDelta = CameraFollowTarget.transform.TransformDirection(cameraMoveDelta);
+        return Vector3.ProjectOnPlane(cameraMoveDelta, Vector3.Cross(transform.right, transform.forward));
     }
 
 
@@ -131,6 +141,7 @@ public class CameraController : MonoBehaviour
         if(_moveInput != Vector2.zero)
         {
             Vector3 cameraMoveDelta = new Vector3(_moveInput.x, 0, _moveInput.y) * (0.1f * _playerSettings.KeyboardMoveSpeed);
+            cameraMoveDelta = CameraFollowTarget.transform.TransformDirection(cameraMoveDelta);
             return Vector3.ProjectOnPlane(cameraMoveDelta, Vector3.Cross(transform.right, transform.forward));
         }
         else
@@ -158,6 +169,23 @@ public class CameraController : MonoBehaviour
 
             if(newCamZoom.y == newCamZoomY)
                 CameraFollowTarget.position = newCamZoom;
+        }
+    }
+
+    private void RotateCamera()
+    {
+        // change cinemaching z rotation with the x rotation of mouse
+        if(_cameraRotateInput != 0)
+        {
+            var camRotation = CinemachineObj.eulerAngles;
+            camRotation.y += _lookInput.x;
+
+            CinemachineObj.eulerAngles = camRotation;
+
+            var targetRotation = CameraFollowTarget.eulerAngles;
+            targetRotation.y += _lookInput.x;
+
+            CameraFollowTarget.eulerAngles = targetRotation;
         }
     }
 
@@ -218,4 +246,16 @@ public class CameraController : MonoBehaviour
             ZoomCamera(_zoomInput);
         }
     }
+
+    private void OnCameraRotateInput(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            _cameraRotateInput = context.ReadValue<float>();
+        }
+        else if (context.canceled)
+        {
+            _cameraRotateInput = 0f;
+        }
+    } 
 }
