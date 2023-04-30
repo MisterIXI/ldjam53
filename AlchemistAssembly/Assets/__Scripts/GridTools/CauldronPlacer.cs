@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class CauldronPlacer : GridTool
 {
     [field: SerializeField] public PreviewEntity CauldronPreview { get; private set; }
-    [field: SerializeField] public GameObject CauldronPrefab { get; private set; }
+    [field: SerializeField] public CauldronCrafter CauldronPrefab { get; private set; }
 
     private float _yVelocity;
     public override void Activate()
@@ -22,16 +22,27 @@ public class CauldronPlacer : GridTool
         CauldronPreview.transform.eulerAngles = new Vector3(0, newYAngle, 0);
     }
 
-
+    private void OnInteractInput(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            // if (PlacementController.Instance.HoveredTile != null)
+            // {
+            //     PlaceCauldron();
+            // }
+        }
+    }
 
     protected override void SubscribeToActions()
     {
-
+        InputManager.OnInteract += OnInteractInput;
     }
 
     protected override void UnsubscribeFromActions()
     {
+
     }
+
     private void OnDestroy()
     {
         UnsubscribeFromActions();
