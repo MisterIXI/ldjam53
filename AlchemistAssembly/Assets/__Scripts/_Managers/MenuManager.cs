@@ -35,6 +35,7 @@ public class MenuManager : MonoBehaviour
     #region ButtonVoids
     public void OnButtonStartGame()
     {
+        ControlUI.SetActive(false);
         HideMenus();
         DisableButtons();
         for (int i = 0; i < ShiftStart.Length; i++)
@@ -42,13 +43,8 @@ public class MenuManager : MonoBehaviour
             StartCoroutine(ActivateOverSecond(ShiftStart[i], i));
             // START COROUTINE Wait 1 Sec 
         }
-        StartGame(); //IMPLEMENT!!
-        StartUI.SetActive(false);
-        ResumeUI.SetActive(true);
-        MenuUI.SetActive(false);
-        EnableButtons();
-        gameisRunning = true;
-        activeMenu = Menu.Default;
+        StartCoroutine(StartGame()); //IMPLEMENT!!
+        
     }
     ////////////////////// OPEN MENU //////////////////////
     public void OnTriggerOpenMenu()
@@ -138,7 +134,7 @@ public class MenuManager : MonoBehaviour
     }
     IEnumerator ActivateOverSecond(GameObject obj, int time)
     {
-        yield return new WaitForSeconds(time/2);
+        yield return new WaitForSeconds(time);
         obj.SetActive(true);
     }
     IEnumerator ActivateButtons()
@@ -193,8 +189,14 @@ public class MenuManager : MonoBehaviour
 
 
 
-    private void StartGame()
+    IEnumerator StartGame()
     {
-        //IMPLEMENT!!
+        yield return new WaitForSeconds(4);
+        StartUI.SetActive(false);
+        ResumeUI.SetActive(true);
+        MenuUI.SetActive(false);
+        EnableButtons();
+        gameisRunning = true;
+        activeMenu = Menu.Default;
     }
 }
