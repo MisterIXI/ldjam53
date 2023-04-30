@@ -16,11 +16,40 @@ MonoBehaviour:
   <WaterTime>k__BackingField: 5
   <CrystalTime>k__BackingField: 5
   <HoneyTime>k__BackingField: 5
-  <RedPotTime>k__BackingField: 5
-  <HoneyWaterTime>k__BackingField: 5
-  <BluePotTime>k__BackingField: 5
-  <RedHoneyTime>k__BackingField: 5
-  <YellowPotTime>k__BackingField: 5
-  <YellowCrystalTime>k__BackingField: 5
-  <CrystalHoneyTime>k__BackingField: 5
-  <PurplePotTime>k__BackingField: 5
+  BuildingPanel: {fileID: 0}
+  RecepiePanel: {fileID: 0}
+  InputPanel: {fileID: 0}
+  RecepieButtonPanel: {fileID: 0}
+  InputGrey1: {fileID: 0}
+  InputRed1: {fileID: 0}
+  InputGreen1: {fileID: 0}
+  InputGrey2: {fileID: 0}
+  InputRed2: {fileID: 0}
+  InputGreen2: {fileID: 0}
+  InputGrey3: {fileID: 0}
+  InputRed3: {fileID: 0}
+  InputGreen3: {fileID: 0}
+  OutputBar: {fileID: 0}
+  CurrentBuilding: {fileID: 0}
+  InputIcon1: {fileID: 0}
+  InputIcon2: {fileID: 0}
+  InputIcon3: {fileID: 0}
+  OutputIcon: {fileID: 0}
+  ShroomSprite: {fileID: 0}
+  WaterSprite: {fileID: 0}
+  CrystalSprite: {fileID: 0}
+  HoneySprite: {fileID: 0}
+  RedPotSprite: {fileID: 0}
+  HoneyWaterSprite: {fileID: 0}
+  BluePotSprite: {fileID: 0}
+  RedHoneySprite: {fileID: 0}
+  YellowPotSprite: {fileID: 0}
+  CrystalHoneySprite: {fileID: 0}
+  PurplePotSprite: {fileID: 0}
+  Recipes:
+  - Input: 0100000000000000
+    Output: 4
+    Time: 0
+  - Input: 00000000
+    Output: 4
+    Time: 20
