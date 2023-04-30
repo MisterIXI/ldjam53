@@ -19,8 +19,8 @@ public class ResourceBuilding : MonoBehaviour
     UnityEvent m_SendMinecart;
 
     private ResourceType _resourceType;         // change those later to incorp it with yanniks class
-    private float _resourceTime;
-    private Sprite _resourceSprite;
+    private float _outputTime;
+    private Sprite _outputSprite;
     [field: SerializeField] private GameObject[] routes;
     private int routeCoutner = 0;
 
@@ -34,26 +34,26 @@ public class ResourceBuilding : MonoBehaviour
         if(gameObject.tag == "Shroom")
         {
             _resourceType = ResourceType.Shroom;
-            _resourceTime = _buildingSettings.ShroomTime;
-            _resourceSprite = _buildingSettings.ShroomSprite;
+            _outputTime = _buildingSettings.ShroomTime;
+            _outputSprite = _buildingSettings.ShroomSprite;
         }
         else if(gameObject.tag == "Water")
         {
             _resourceType = ResourceType.Water;
-            _resourceTime = _buildingSettings.WaterTime;
-            _resourceSprite = _buildingSettings.WaterSprite;
+            _outputTime = _buildingSettings.WaterTime;
+            _outputSprite = _buildingSettings.WaterSprite;
         }     
         else if(gameObject.tag == "Crystal")
         {
             _resourceType = ResourceType.Crystal;
-            _resourceTime = _buildingSettings.CrystalTime;
-            _resourceSprite = _buildingSettings.CrystalSprite;
+            _outputTime = _buildingSettings.CrystalTime;
+            _outputSprite = _buildingSettings.CrystalSprite;
         }
         else if(gameObject.tag == "Honey")
         {
             _resourceType = ResourceType.Honey;
-            _resourceTime = _buildingSettings.HoneyTime;
-            _resourceSprite = _buildingSettings.HoneySprite;
+            _outputTime = _buildingSettings.HoneyTime;
+            _outputSprite = _buildingSettings.HoneySprite;
         }
         else
         {
@@ -65,11 +65,11 @@ public class ResourceBuilding : MonoBehaviour
     void Update() 
     {
         // lets the building produce its resource
-        ProduceResource();
+        ProduceOutput();
     }
 
 
-    private void ProduceResource()
+    private void ProduceOutput()
     {
         if(routes != null)  // if there are routes availible then start producing
         {
@@ -77,25 +77,25 @@ public class ResourceBuilding : MonoBehaviour
 
             // if this buildings panel is showing updates the progress slider
             if(_buildingSettings.CurrentBuilding == gameObject)
-                _buildingSettings.OutputBar.value = timer / _resourceTime * 100;
+                _buildingSettings.OutputBar.value = timer / _outputTime * 100;
 
-            if(timer >= _resourceTime)
+            if(timer >= _outputTime)
             {
-                SendResource();
+                SendOutput();
                 timer = 0;
             }
         }
     }
 
 
-    private void SendResource()
+    private void SendOutput()
     {
         // resets route 
         if(routeCoutner >= (routes.Length -1))
             routeCoutner = 0;
 
         // invokes an event for minecarts ????
-        m_SendMinecart.Invoke(_resourceType, routes[routeCoutner]);              // DAS EVENT FÜR Yannik ? (_resourceType, destination of route)
+        // m_SendMinecart.Invoke(_resourceType, routes[routeCoutner]);              // DAS EVENT FÜR Yannik ? (_resourceType, destination of route)
         routeCoutner += 1;
     }
 
@@ -108,7 +108,7 @@ public class ResourceBuilding : MonoBehaviour
         _buildingSettings.InputPanel.SetActive(false);
         _buildingSettings.RecepieButtonPanel.SetActive(false);
 
-        _buildingSettings.OutputIcon.GetComponent<Image>().sprite = _resourceSprite;
+        _buildingSettings.OutputIcon.GetComponent<Image>().sprite = _outputSprite;
 
         // show routes
     }
