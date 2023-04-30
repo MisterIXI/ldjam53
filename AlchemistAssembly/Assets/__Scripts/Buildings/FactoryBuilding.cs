@@ -43,6 +43,10 @@ public class FactoryBuilding : MonoBehaviour, IInteractable
 
         if(_input1 == _buildingSettings.Recipes[recepieInt].Input[1] && _input2 == _buildingSettings.Recipes[recepieInt].Input[2] && _input3 == _buildingSettings.Recipes[recepieInt].Input[3])
             ProduceOutput();
+        
+        UpdateInputColor();
+
+        AcceptInput(); // maybe let cart call this function yannik
     }
 
 
@@ -121,7 +125,52 @@ public class FactoryBuilding : MonoBehaviour, IInteractable
 
     private void AcceptInput()
     {
+        ResourceType inputResource = ResourceType.Water; // Yannik das durch event ersetzen
 
+
+        if(_input1 == ResourceType.Empty && _buildingSettings.Recipes[recepieInt].Input[0] == inputResource)
+        {
+            _input1 = inputResource;
+            // delete minecart Yannik
+        }
+        else if(_input2 == ResourceType.Empty && _buildingSettings.Recipes[recepieInt].Input[1] == inputResource)
+        {
+            _input2 = inputResource;
+            // delete minecart Yannik
+        }
+        else if(_input3 == ResourceType.Empty && _buildingSettings.Recipes[recepieInt].Input[2] == inputResource)
+        {
+            _input3 = inputResource;
+            // delete minecart Yannik
+        }
+        else
+        {
+            // Let minecart wait Yannik
+        }
+    }
+
+    private void UpdateInputColor()
+    {
+        if(_input1 == ResourceType.Empty)
+            _buildingSettings.InputColor1.GetComponent<Image>().color = _buildingSettings.ColorUnavailable;
+        else if(_input1 == _buildingSettings.Recipes[recepieInt].Input[0])
+            _buildingSettings.InputColor1.GetComponent<Image>().color = _buildingSettings.ColorFull;
+        else
+            _buildingSettings.InputColor1.GetComponent<Image>().color = _buildingSettings.ColorEmpty;
+
+        if(_input2 == ResourceType.Empty)
+            _buildingSettings.InputColor2.GetComponent<Image>().color = _buildingSettings.ColorUnavailable;
+        else if(_input2 == _buildingSettings.Recipes[recepieInt].Input[1])
+            _buildingSettings.InputColor2.GetComponent<Image>().color = _buildingSettings.ColorFull;
+        else
+            _buildingSettings.InputColor2.GetComponent<Image>().color = _buildingSettings.ColorEmpty;
+
+        if(_input3 == ResourceType.Empty)
+            _buildingSettings.InputColor3.GetComponent<Image>().color = _buildingSettings.ColorUnavailable;
+        else if(_input3 == _buildingSettings.Recipes[recepieInt].Input[2])
+            _buildingSettings.InputColor3.GetComponent<Image>().color = _buildingSettings.ColorFull;
+        else
+            _buildingSettings.InputColor3.GetComponent<Image>().color = _buildingSettings.ColorEmpty;
     }
 
     public void OnInteract() //if building is clicked
@@ -207,7 +256,3 @@ public class FactoryBuilding : MonoBehaviour, IInteractable
         _buildingSettings.InputIcon3Panel.GetComponent<Image>().sprite = _input3Sprite;
     }
 }
-
-
-// accept input
-// change colors
