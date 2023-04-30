@@ -4,7 +4,7 @@
 // using UnityEngine.UI;
 // using UnityEngine.Events;
 
-// public class FactoryBuilding : MonoBehaviour
+// public class FactoryBuilding : MonoBehaviour, IInteractable
 // {
 //     private BuildingSettings _buildingSettings => SettingsManager.BuildingSettings;
 
@@ -70,7 +70,7 @@
 //     }
 
 
-//     private void OnInteract() //if building is clicked
+//     public void OnInteract() //if building is clicked
 //     {
 //         _buildingSettings.CurrentBuilding = gameObject;
 //         _buildingSettings.BuildingPanel.SetActive(true);

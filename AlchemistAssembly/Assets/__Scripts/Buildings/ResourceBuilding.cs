@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-public class ResourceBuilding : MonoBehaviour
+public class ResourceBuilding : MonoBehaviour, IInteractable
 {
     private BuildingSettings _buildingSettings => SettingsManager.BuildingSettings;
 
@@ -100,7 +100,7 @@ public class ResourceBuilding : MonoBehaviour
     }
 
 
-    private void OnInteract() //if building is clicked
+    public void OnInteract() //if building is clicked
     {
         _buildingSettings.CurrentBuilding = gameObject;
         _buildingSettings.BuildingPanel.SetActive(true);
