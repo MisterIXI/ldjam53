@@ -10,8 +10,8 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject[] ShiftStart, ShiftSettings, ShiftCredits;
     public MenuManager Instance { get; private set; }
     private bool gameisRunning;
-    private float setting_Camera_value=3f, setting_SFX_Volume=50f, setting_Music_Volume=50f;
-    private float setting_Camera_valueMax=6f, setting_SFX_VolumeMax=100f, setting_Music_VolumeMax=100f;
+    private float setting_Camera_value=10f, setting_SFX_Volume=50f, setting_Music_Volume=50f;
+    private float setting_Camera_valueMax=100f, setting_SFX_VolumeMax=100f, setting_Music_VolumeMax=100f;
     [SerializeField] TextMeshProUGUI setting_Camera_Text,setting_SFX_Text, setting_Music_Text;
     private enum Menu
     {
@@ -134,12 +134,12 @@ public class MenuManager : MonoBehaviour
     }
     IEnumerator ActivateOverSecond(GameObject obj, int time)
     {
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSeconds(0.25f * time);
         obj.SetActive(true);
     }
     IEnumerator ActivateButtons()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(1.5f);
         EnableButtons();
     }
     public void OnButtonQuitGame()
@@ -172,7 +172,7 @@ public class MenuManager : MonoBehaviour
             if(setting_SFX_Volume - 10 >=0)
                 setting_SFX_Volume -=10;
         }
-        setting_Camera_Text.text = "SFX\n" + setting_SFX_Volume + "%";
+        setting_SFX_Text.text = "SFX\n" + setting_SFX_Volume + "%";
     }public void OnChangeMusicVolume(bool add)
     {
         if(add)
