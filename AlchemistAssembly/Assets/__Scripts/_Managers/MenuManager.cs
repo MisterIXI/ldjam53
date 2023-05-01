@@ -5,14 +5,15 @@ using TMPro;
 using UnityEngine.UI;
 public class MenuManager : MonoBehaviour
 {
-    [SerializeField] private GameObject MenuUI, LogoUI, ControlUI, StartUI, ResumeUI,HUD_UI;
+    [SerializeField] private GameObject MenuUI, LogoUI, ControlUI, StartUI, ResumeUI, HUD_UI;
     [SerializeField] private Button ResumeButton, StartButton, SettingButton, CreditsButton;
     [SerializeField] private GameObject[] ShiftStart, ShiftSettings, ShiftCredits;
     public MenuManager Instance { get; private set; }
     private bool gameisRunning;
-    private float setting_Camera_value=10f, setting_SFX_Volume=50f, setting_Music_Volume=50f;
-    private float setting_Camera_valueMax=100f, setting_SFX_VolumeMax=100f, setting_Music_VolumeMax=100f;
-    [SerializeField] TextMeshProUGUI setting_Camera_Text,setting_SFX_Text, setting_Music_Text;
+    private float setting_Camera_value = 4f, setting_SFX_Volume = 50f, setting_Music_Volume = 50f;
+    private float setting_Camera_valueMax = 10f, setting_SFX_VolumeMax = 100f, setting_Music_VolumeMax = 100f;
+    [SerializeField] TextMeshProUGUI setting_Camera_Text, setting_SFX_Text, setting_Music_Text;
+    private PlayerSettings _playerSettings => SettingsManager.PlayerSettings;
     private enum Menu
     {
         Default,
@@ -44,7 +45,7 @@ public class MenuManager : MonoBehaviour
             // START COROUTINE Wait 1 Sec 
         }
         StartCoroutine(StartGame()); //IMPLEMENT!!
-        
+
     }
     ////////////////////// OPEN MENU //////////////////////
     public void OnTriggerOpenMenu()
@@ -151,39 +152,52 @@ public class MenuManager : MonoBehaviour
     #region OnChangeSettings
     public void OnChangeCameraSensitivity(bool add)
     {
-        if(add)
-        {   if(setting_Camera_value + 10 <= setting_Camera_valueMax)
-                setting_Camera_value +=10;
+        if (add)
+        {
+            if (setting_Camera_value + 1 <= setting_Camera_valueMax)
+                setting_Camera_value += 1;
             // TEXT UPDATE VALUE
-        }else{
-            if(setting_Camera_value - 10 >=0)
-                setting_Camera_value -=10;
+        }
+        else
+        {
+            if (setting_Camera_value - 1 >= 0)
+                setting_Camera_value -= 1;
         }
         setting_Camera_Text.text = "Camera Sensitivity\n" + setting_Camera_value + "%";
-
+        _playerSettings.DragSpeed = setting_Camera_value;
+        _playerSettings.MouseMoveSpeed = setting_Camera_value;
     }
     public void OnChangeSoundVolume(bool add)
     {
-        if(add)
-        {   if(setting_SFX_Volume + 10 <= setting_SFX_VolumeMax)
-                setting_SFX_Volume +=10;
+        if (add)
+        {
+            if (setting_SFX_Volume + 10 <= setting_SFX_VolumeMax)
+                setting_SFX_Volume += 10;
             // TEXT UPDATE VALUE
-        }else{
-            if(setting_SFX_Volume - 10 >=0)
-                setting_SFX_Volume -=10;
+        }
+        else
+        {
+            if (setting_SFX_Volume - 10 >= 0)
+                setting_SFX_Volume -= 10;
         }
         setting_SFX_Text.text = "SFX\n" + setting_SFX_Volume + "%";
-    }public void OnChangeMusicVolume(bool add)
+        SoundManager.Instance.OnChangeSFXVolume(setting_SFX_Volume);
+    }
+    public void OnChangeMusicVolume(bool add)
     {
-        if(add)
-        {   if(setting_Music_Volume + 10 <= setting_Music_VolumeMax)
-                setting_Music_Volume +=10;
+        if (add)
+        {
+            if (setting_Music_Volume + 10 <= setting_Music_VolumeMax)
+                setting_Music_Volume += 10;
             // TEXT UPDATE VALUE
-        }else{
-            if(setting_Music_Volume - 10 >=0)
-                setting_Music_Volume -=10;
+        }
+        else
+        {
+            if (setting_Music_Volume - 10 >= 0)
+                setting_Music_Volume -= 10;
         }
         setting_Music_Text.text = "MUSIC\n" + setting_Music_Volume + "%";
+        SoundManager.Instance.OnChangeMusicVolume(setting_Music_Volume);
     }
     #endregion OnChangeSettings
 

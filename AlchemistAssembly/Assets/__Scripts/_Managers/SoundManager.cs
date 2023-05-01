@@ -96,7 +96,7 @@ public class SoundManager : MonoBehaviour
     }
     public void PlayMusicNext()
     {
-        MusicObject.PlayOneShot(musicPool[currentMusicIndex], 0.5f); // GAME VARIABLE TODO
+        MusicObject.PlayOneShot(musicPool[currentMusicIndex], setting_SFX_Volume); // GAME VARIABLE TODO
 
         Invoke(nameof(EventOnEnd), musicPool[currentMusicIndex].length);
     }
@@ -108,5 +108,14 @@ public class SoundManager : MonoBehaviour
         if (currentMusicIndex >= musicPool.Length)
             currentMusicIndex = 0;
         PlayMusicNext();
+    }
+    public void OnChangeSFXVolume(float sfxVolumeValue)
+    {
+        setting_SFX_Volume = sfxVolumeValue;
+    }
+    public void OnChangeMusicVolume(float MusicVolumeValue)
+    {
+        setting_Music_Volume = MusicVolumeValue;
+        MusicObject.volume = setting_Music_Volume;
     }
 }
