@@ -112,7 +112,7 @@ MonoBehaviour:
   <IsSevenTiles>k__BackingField: 0
   <OutputStation>k__BackingField: {fileID: 0}
   <ReceiverStation>k__BackingField: {fileID: 0}
-  _acceptedTypes: 0200000001000000
+  _acceptedTypes: 
   TypesStored: 
 --- !u!1 &7601455552612006205
 GameObject:

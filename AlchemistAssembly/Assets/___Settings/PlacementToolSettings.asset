@@ -51,7 +51,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  <HighlightColor>k__BackingField: {r: 0, g: 0, b: 1, a: 1}
+  <HighlightMaterial>k__BackingField: {fileID: 2100000, guid: ca269086ed84ff14daf06d527bc75681,
+    type: 2}
   <PreviewRotationDuration>k__BackingField: 0.1
   <NeutralPreviewMaterial>k__BackingField: {fileID: 2100000, guid: 0342871ad1bdeac42b3e7447aceace3a,
     type: 2}
