@@ -7,7 +7,7 @@ public class Destructable : MonoBehaviour
 
     private void Start()
     {
-        _meshRenderer = GetComponentsInChildren<MeshRenderer>();
+        _meshRenderer = GetComponentsInChildren<MeshRenderer>(true);
         _originalColors = new Color[_meshRenderer.Length][];
         for (int i = 0; i < _meshRenderer.Length; i++)
         {
@@ -21,7 +21,7 @@ public class Destructable : MonoBehaviour
     }
 
 
-    public void HighLight()
+    public void Highlight()
     {
         for (int i = 0; i < _meshRenderer.Length; i++)
         {
@@ -30,6 +30,7 @@ public class Destructable : MonoBehaviour
             {
                 materials[j].color = Color.red;
             }
+            _meshRenderer[i].materials = materials;
         }
     }
 
@@ -42,6 +43,7 @@ public class Destructable : MonoBehaviour
             {
                 materials[j].color = _originalColors[i][j];
             }
+            _meshRenderer[i].materials = materials;
         }
     }
 }

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7376678874102404993}
   - component: {fileID: -5206153037293150606}
+  - component: {fileID: 4661688505304248984}
   m_Layer: 0
   m_Name: CauldronCrafter
   m_TagString: Water
@@ -52,6 +53,18 @@ MonoBehaviour:
   <ReceiverStation>k__BackingField: {fileID: 8403506760863593889}
   _resourceType: 0
   routes: []
+--- !u!114 &4661688505304248984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3269548495227568034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48dc3374cd501a14884504d10ed08d6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3812056827832178357
 GameObject:
   m_ObjectHideFlags: 0
@@ -252,8 +265,40 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: cb5e1a102ffca3a40881242bc12f582b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3757630173865789083}
   m_SourcePrefab: {fileID: 100100000, guid: cb5e1a102ffca3a40881242bc12f582b, type: 3}
+--- !u!1 &5853400019715572209 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: cb5e1a102ffca3a40881242bc12f582b,
+    type: 3}
+  m_PrefabInstance: {fileID: 6771757561720110240}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &3757630173865789083
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5853400019715572209}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 72713781330414003, guid: cb5e1a102ffca3a40881242bc12f582b, type: 3}
 --- !u!4 &6516889954559793995 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: cb5e1a102ffca3a40881242bc12f582b,

@@ -30,7 +30,7 @@ public class MenuManager : MonoBehaviour
             return;
         }
         Instance = this;
-        DontDestroyOnLoad(gameObject);
+        // DontDestroyOnLoad(gameObject);
     }
     #region ButtonVoids
     public void OnButtonStartGame()

@@ -24,7 +24,7 @@ public class DestructionTool : GridTool
     {
         Ray ray = Camera.main.ScreenPointToRay(PlacementController.Instance.MousePosInput);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, 100f, LayerMask.GetMask("GridTile")))
+        if (Physics.Raycast(ray, out hit, 500f))
         {
             return hit.collider.GetComponentInParent<Destructable>();
         }
@@ -40,6 +40,8 @@ public class DestructionTool : GridTool
             if (_currentObject != null)
                 _currentObject.UnHighlight();
             _currentObject = newDestructable;
+            if (_currentObject != null)
+                _currentObject.Highlight();
         }
     }
     protected override void SubscribeToActions()
