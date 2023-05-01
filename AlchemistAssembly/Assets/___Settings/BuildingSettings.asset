@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c986176f809b02647937aa77bf460b1d, type: 3}
   m_Name: BuildingSettings
   m_EditorClassIdentifier: 
-  <ShroomTime>k__BackingField: 3
-  <WaterTime>k__BackingField: 2
-  <CrystalTime>k__BackingField: 4
-  <HoneyTime>k__BackingField: 3
+  <ShroomTime>k__BackingField: 7
+  <WaterTime>k__BackingField: 4
+  <CrystalTime>k__BackingField: 6
+  <HoneyTime>k__BackingField: 6
   EmptySprite: {fileID: 21300000, guid: e73c689f1af459d4894e47a4b33ab9c0, type: 3}
   ShroomSprite: {fileID: 21300000, guid: 5835f07e1f451254eacd509a70662161, type: 3}
   WaterSprite: {fileID: 21300000, guid: addb7cddb1681fc4191d99e70a4ab384, type: 3}
@@ -36,28 +36,28 @@ MonoBehaviour:
   Recipes:
   - Input: 01000000000000000c000000
     Output: 4
-    Time: 5
+    Time: 8
   - Input: 01000000030000000c000000
     Output: 5
-    Time: 2
+    Time: 9
   - Input: 04000000030000000c000000
     Output: 7
-    Time: 3
+    Time: 7
   - Input: 05000000000000000c000000
     Output: 6
-    Time: 5
+    Time: 10
   - Input: 07000000060000000c000000
     Output: 8
-    Time: 5
+    Time: 9
   - Input: 02000000030000000c000000
     Output: 9
-    Time: 4
+    Time: 8
   - Input: 02000000080000000c000000
     Output: 10
-    Time: 6
+    Time: 7
   - Input: 07000000090000000a000000
     Output: 11
-    Time: 7
+    Time: 11
   - Input: 0c0000000c0000000c000000
     Output: 12
-    Time: 7
+    Time: 10
