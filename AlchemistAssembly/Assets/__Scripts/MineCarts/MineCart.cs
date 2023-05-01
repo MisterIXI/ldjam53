@@ -43,6 +43,7 @@ public class MineCart : MonoBehaviour
         railEntity.ConnectTiles(_path[0], _path[2]);
         railEntity.OccupyingMineCart = this;
         transform.LookAt(_path[_currentPathIndex].transform.position, Vector3.up);
+        transform.localScale = Vector3.one * 0.001f;
     }
     private void FixedUpdate()
     {
