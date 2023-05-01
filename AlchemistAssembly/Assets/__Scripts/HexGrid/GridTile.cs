@@ -6,9 +6,11 @@ public class GridTile : MonoBehaviour
     public Placeable Placeable;
     public Vector2Int TileIndex { get; private set; }
     public bool IsInitialized => TileIndex != null;
+
     private MeshRenderer _meshRenderer;
     private Color _defaultColor;
     private PlacementToolSettings _settings;
+    public ResourceType ResourceType { get; private set; } = ResourceType.Empty;
     private void Start()
     {
         _settings = SettingsManager.PlacementToolSettings;
@@ -47,6 +49,13 @@ public class GridTile : MonoBehaviour
     {
         if (_settings != null)
             _meshRenderer.material.color = _defaultColor;
+    }
+
+    public void SetResourceInfo(Color color, ResourceType resourceType)
+    {
+        _defaultColor = color;
+        _meshRenderer.material.color = color;
+        ResourceType = resourceType;
     }
 }
 

@@ -1,47 +1,43 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class ResourceBuilding : Placeable, IInteractable
 {
     private BuildingSettings _buildingSettings => SettingsManager.BuildingSettings;
-
-    private ResourceType _resourceType;
+    private MineCartSettings _mineCartSettings => SettingsManager.MineCartSettings;
+    [field: SerializeField] private ResourceType _resourceType;
     private float _outputTime;
     private Sprite _outputSprite;
     [field: SerializeField] private GameObject[] routes;
-    private int routeCoutner = 0;
+    private int routeCounter = 0;
 
 
     private float timer = 0;
 
 
-    private void Start() 
+    private void Start()
     {
         // Finds out what type of Building it is and what time needs to create resource / sprite
-        if(gameObject.tag == "Shroom")
+        if (_resourceType == ResourceType.Shroom)
         {
-            _resourceType = ResourceType.Shroom;
             _outputTime = _buildingSettings.ShroomTime;
             _outputSprite = _buildingSettings.ShroomSprite;
         }
-        else if(gameObject.tag == "Water")
+        else if (_resourceType == ResourceType.Water)
         {
-            _resourceType = ResourceType.Water;
             _outputTime = _buildingSettings.WaterTime;
             _outputSprite = _buildingSettings.WaterSprite;
-        }     
-        else if(gameObject.tag == "Crystal")
+        }
+        else if (_resourceType == ResourceType.Crystal)
         {
-            _resourceType = ResourceType.Crystal;
             _outputTime = _buildingSettings.CrystalTime;
             _outputSprite = _buildingSettings.CrystalSprite;
         }
-        else if(gameObject.tag == "Honey")
+        else if (_resourceType == ResourceType.Honey)
         {
-            _resourceType = ResourceType.Honey;
             _outputTime = _buildingSettings.HoneyTime;
             _outputSprite = _buildingSettings.HoneySprite;
         }
@@ -52,7 +48,7 @@ public class ResourceBuilding : Placeable, IInteractable
     }
 
 
-    void Update() 
+    void Update()
     {
         // lets the building produce its resource
         ProduceOutput();
@@ -61,19 +57,20 @@ public class ResourceBuilding : Placeable, IInteractable
 
     private void ProduceOutput()
     {
-        if(routes.Length != 0)  // if there are routes availible then start producing
+        if (routes.Length != 0)  // if there are routes availible then start producing
         {
             timer += Time.deltaTime;
 
             try
             {
                 // if this buildings panel is showing updates the progress slider
-                if(HudReferences.Instance.CurrentBuilding == gameObject)
+                if (HudReferences.Instance.CurrentBuilding == gameObject)
                     HudReferences.Instance.OutputBar.value = timer / _outputTime * 100;
-            }catch{}
+            }
+            catch { }
 
 
-            if(timer >= _outputTime)
+            if (timer >= _outputTime)
             {
                 SendOutput();
                 timer = 0;
@@ -84,13 +81,22 @@ public class ResourceBuilding : Placeable, IInteractable
 
     private void SendOutput()
     {
+        Debug.Log("Trying to send Output");
+        // check if output spot is free
+        Placeable placeable = OutputStation.OutputTile.Placeable;
+        if (placeable == null || placeable is not RailEntity || ((RailEntity)placeable).OccupyingMineCart != null)
+            return;
+        if (OutputStation._pathsToOutput.Count == 0)
+            return;
         // resets route 
-        if(routeCoutner >= (routes.Length -1))
-            routeCoutner = 0;
+        if (routeCounter >= (OutputStation._pathsToOutput.Count - 1))
+            routeCounter = 0;
+        Debug.Log("Sending Minecart");
+        // spawns minecart, gives it the route and sets the resource type
+        MineCart minecart = Instantiate(_mineCartSettings.MineCartSubTypesPrefabs[(int)_resourceType], transform.position, Quaternion.identity);
+        minecart.Initialize(OutputStation._pathsToOutput[routeCounter], _resourceType);
 
-        // invokes an event for minecarts ????
-        // m_SendMinecart.Invoke(_resourceType, routes[routeCoutner]);              // DAS EVENT FÜR Yannik ? (_resourceType, destination of route)
-        routeCoutner += 1;
+        routeCounter += 1;
     }
 
 
@@ -124,18 +130,19 @@ public class ResourceBuilding : Placeable, IInteractable
         Debug.Log("Adding Routes");
         HudReferences.Instance.BuildingPanel.SetActive(false);
         HudReferences.Instance.RecepiePanel.SetActive(false);
+        PlacementController.StartPathFrom(OutputStation.CurrentTile);
 
         // show route tool
         // show routes
         // if building is clicked and route tool
         // -> set route
-            // -> OnInteract()
+        // -> OnInteract()
         // if different tool or q -> OnClose()
     }
 
 
     public void OnClearRoutes()    // if clear routes button is pressed
     {
-        routes = null; // im not sure this works yannik
+        OutputStation._pathsToOutput.Clear();
     }
 }

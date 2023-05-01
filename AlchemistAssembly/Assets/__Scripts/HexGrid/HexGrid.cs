@@ -48,6 +48,8 @@ public class HexGrid : MonoBehaviour
                 _gridTiles[x, y] = newTile;
             }
         }
+
+
     }
     public static GridTile GetTile(Vector3 position)
     {

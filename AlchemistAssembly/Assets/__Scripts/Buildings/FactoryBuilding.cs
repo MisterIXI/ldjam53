@@ -210,7 +210,7 @@ public class FactoryBuilding : Placeable, IInteractable
 
     public void OnClearRoutes()    // if clear routes button is pressed
     {
-        routes = null; // im not sure this works yannik
+        OutputStation._pathsToOutput.Clear();
     }
 
 
