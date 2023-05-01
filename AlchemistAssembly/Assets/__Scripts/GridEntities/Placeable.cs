@@ -1,6 +1,6 @@
 using System.Collections;
+using System.Linq;
 using UnityEngine;
-
 
 public class Placeable : MonoBehaviour
 {
@@ -10,7 +10,17 @@ public class Placeable : MonoBehaviour
     [field: SerializeField] public bool IsSevenTiles { get; private set; }
     [field: SerializeField] public OutputStation OutputStation { get; private set; }
     [field: SerializeField] public ReceiverStation ReceiverStation { get; private set; }
-    public virtual Vector2Int[] GetOccupiedTiles() => _occupiedTiles;
+    public virtual Vector2Int[] GetOccupiedTiles()
+    {
+        if (!IsSevenTiles)
+        {
+            return new Vector2Int[] { _currentTile.TileIndex };
+        }
+        else
+        {
+            return HexHelper.GetNeighboursOddQ(_currentTile.TileIndex, true).ToArray();
+        }
+    }
     private PlacementToolSettings _settings;
     private void Start()
     {
@@ -24,11 +34,11 @@ public class Placeable : MonoBehaviour
         transform.position = tile.transform.position;
         _currentTile = tile;
         transform.parent = tile.transform;
-        FillTiles(tile.TileIndex, GetOccupiedTiles());
+        FillTiles(tile.TileIndex);
         StartCoroutine(PlacementAnimation());
     }
 
-    protected void FillTiles(Vector2Int startPoint, Vector2Int[] offsets)
+    protected void FillTiles(Vector2Int startPoint)
     {
         _currentTile.Placeable = this;
         if (IsSevenTiles)
@@ -71,10 +81,11 @@ public class Placeable : MonoBehaviour
     private void CheckToFillTile(Vector2Int index)
     {
         GridTile tile = HexGrid.GetTile(index);
-        if (tile != OutputStation._currentTile && tile != ReceiverStation._currentTile)
-        {
-            tile.Placeable = this;
-        }
+        if (OutputStation != null && OutputStation.CurrentTile == tile)
+            return;
+        if (ReceiverStation != null && ReceiverStation.CurrentTile == tile)
+            return;
+        tile.Placeable = this;
     }
 
 
@@ -155,7 +166,7 @@ public class Placeable : MonoBehaviour
                 transform.localPosition = newY * Vector3.up;
                 foreach (var offset in GetOccupiedTiles())
                 {
-                    GridTile gridTile = HexGrid.GetTile(_currentTile.TileIndex + offset);
+                    GridTile gridTile = HexGrid.GetTile(offset);
                     gridTile.transform.position = new Vector3(gridTile.transform.position.x, 0, gridTile.transform.position.z);
                 }
             }
@@ -170,7 +181,7 @@ public class Placeable : MonoBehaviour
                 transform.localPosition = Vector3.zero;
                 foreach (var offset in GetOccupiedTiles())
                 {
-                    GridTile gridTile = HexGrid.GetTile(_currentTile.TileIndex + offset);
+                    GridTile gridTile = HexGrid.GetTile(offset);
                     gridTile.transform.position = new Vector3(gridTile.transform.position.x, newY, gridTile.transform.position.z);
                 }
             }
