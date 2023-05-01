@@ -125,6 +125,7 @@ public class HUDManager : MonoBehaviour
         }
         if (index - tooltipProgress == 1)
         {
+            tooltipProgress++;
             switch (tooltipProgress)
             {
                 case 1:
@@ -146,7 +147,6 @@ public class HUDManager : MonoBehaviour
                     tooltipText.text = "Use the Resource Tool(3) to build a waterpump.";
                     break;
             }
-            tooltipProgress++;
         }
     }
 }
