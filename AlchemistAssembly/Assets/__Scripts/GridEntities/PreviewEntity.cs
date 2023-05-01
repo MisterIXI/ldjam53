@@ -10,12 +10,13 @@ public class PreviewEntity : MonoBehaviour
     {
         _placementToolSettings = SettingsManager.PlacementToolSettings;
         _meshRenderers = GetComponentsInChildren<MeshRenderer>();
-        SetDefaultMaterial();
-        Status = PreviewStatus.Default;
+        SetPreviewStatus(Status);
     }
     public void SetPreviewStatus(PreviewStatus newStatus)
     {
         Status = newStatus;
+        if (_meshRenderers == null)
+            return;
         switch (Status)
         {
             case PreviewStatus.Default:
@@ -30,15 +31,18 @@ public class PreviewEntity : MonoBehaviour
         }
     }
 
+
     private void SetDefaultMaterial()
     {
         foreach (var meshRenderer in _meshRenderers)
         {
             int materialCount = meshRenderer.materials.Length;
+            Material[] materials = meshRenderer.materials;
             for (int i = 0; i < materialCount; i++)
             {
-                meshRenderer.materials[i] = _placementToolSettings.NeutralPreviewMaterial;
+                materials[i] = _placementToolSettings.NeutralPreviewMaterial;
             }
+            meshRenderer.materials = materials;
         }
     }
 
@@ -47,10 +51,12 @@ public class PreviewEntity : MonoBehaviour
         foreach (var meshRenderer in _meshRenderers)
         {
             int materialCount = meshRenderer.materials.Length;
+            Material[] materials = meshRenderer.materials;
             for (int i = 0; i < materialCount; i++)
             {
-                meshRenderer.materials[i] = _placementToolSettings.ValidPreviewMaterial;
+                materials[i] = _placementToolSettings.ValidPreviewMaterial;
             }
+            meshRenderer.materials = materials;
         }
     }
 
@@ -59,10 +65,12 @@ public class PreviewEntity : MonoBehaviour
         foreach (var meshRenderer in _meshRenderers)
         {
             int materialCount = meshRenderer.materials.Length;
+            Material[] materials = meshRenderer.materials;
             for (int i = 0; i < materialCount; i++)
             {
-                meshRenderer.materials[i] = _placementToolSettings.InvalidPreviewMaterial;
+                materials[i] = _placementToolSettings.InvalidPreviewMaterial;
             }
+            meshRenderer.materials = materials;
         }
     }
 
