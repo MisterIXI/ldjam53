@@ -122,7 +122,11 @@ public class PlacementController : MonoBehaviour
             OnRotationChanged?.Invoke(RotationAngle);
         }
     }
-
+    public static void StartPathFrom(GridTile startPoint)
+    {
+        Instance.PathTool.StartPathFrom(startPoint);
+        Instance.SwitchActiveTool(Instance.PathTool);
+    }
     private void SwitchActiveTool(GridTool newTool)
     {
         ActiveTool.Deactivate();

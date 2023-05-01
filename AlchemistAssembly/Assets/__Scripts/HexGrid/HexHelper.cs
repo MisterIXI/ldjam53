@@ -87,7 +87,39 @@ public class HexHelper : MonoBehaviour
         return neighbours;
     }
 
-
+    public static HexDirection GetDirection(Vector2Int start, Vector2Int end)
+    {
+        Vector2Int diff = end - start;
+        if (diff.x == 0 && diff.y == 1)
+            return HexDirection.Up;
+        if (diff.x == 0 && diff.y == -1)
+            return HexDirection.Down;
+        bool isEven = (start.x & 1) == 0;
+        if (!isEven)
+        {
+            if (diff.x == 1 && diff.y == 0)
+                return HexDirection.RightUp;
+            if (diff.x == 1 && diff.y == -1)
+                return HexDirection.RightDown;
+            if (diff.x == -1 && diff.y == 0)
+                return HexDirection.LeftUp;
+            if (diff.x == -1 && diff.y == -1)
+                return HexDirection.LeftDown;
+        }
+        else
+        {
+            if (diff.x == 1 && diff.y == 1)
+                return HexDirection.RightUp;
+            if (diff.x == 1 && diff.y == 0)
+                return HexDirection.RightDown;
+            if (diff.x == -1 && diff.y == 1)
+                return HexDirection.LeftUp;
+            if (diff.x == -1 && diff.y == 0)
+                return HexDirection.LeftDown;
+        }
+        Debug.LogError("Invalid direction");
+        throw new System.Exception("Invalid direction");
+    }
 
     public static Vector2Int StepInDirection(Vector2Int index, HexDirection direction)
     {
@@ -135,12 +167,14 @@ public class HexHelper : MonoBehaviour
         }
     }
 }
+
+// don't change the order of these
 public enum HexDirection
 {
     Up,
-    Down,
     RightUp,
     RightDown,
+    Down,
     LeftUp,
     LeftDown
 }

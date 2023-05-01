@@ -5,4 +5,5 @@ public class MineCartSettings : ScriptableObject
 {
     [field: Header("Mine Cart Settings")]
     [field: SerializeField][field: Range(0f, 5f)] public float Speed { get; private set; } = 1f;
+    [field: SerializeField] public AnimationCurve ScaleCurve { get; private set; }
 }

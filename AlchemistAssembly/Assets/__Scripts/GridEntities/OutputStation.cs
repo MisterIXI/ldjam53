@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class OutputStation : Placeable, IInteractable
@@ -5,6 +8,7 @@ public class OutputStation : Placeable, IInteractable
     [field: SerializeField] public Transform _outputPoint { get; private set; }
     private IInteractable _parentInteractable;
     public GridTile OutputTile { get; private set; }
+    public List<List<GridTile>> _pathsToOutput { get; private set; } = new List<List<GridTile>>();
     public override void Initialize()
     {
         base.Initialize();
