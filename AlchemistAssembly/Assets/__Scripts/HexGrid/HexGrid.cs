@@ -51,11 +51,7 @@ public class HexGrid : MonoBehaviour
                 newTile.gameObject.SetActive(false);
             }
         }
-        var shrooms = new Vector2Int[] { };
-        for (int i = 0; i < shrooms.Length; i++)
-        {
-            _gridTiles[shrooms[i].x, shrooms[i].y].SetResourceInfo(_gridSettings.TileColors[0], ResourceType.Shroom);
-        }
+        FillResources();
         StartAnimation();
     }
     public void StartAnimation()
@@ -79,6 +75,7 @@ public class HexGrid : MonoBehaviour
             yield return null;
             yield return null;
         }
+        PlaceableManager.PlaceObject(_gridSettings.WitchHousePrefab, _gridTiles[24, 34]);
     }
 
     public static GridTile GetTile(Vector3 position)
@@ -183,6 +180,25 @@ public class HexGrid : MonoBehaviour
 
         */
         return path;
+    }
+    private void FillResources()
+    {
+        var shrooms = new Vector2Int[] { new Vector2Int(24, 13), new Vector2Int(24, 14), new Vector2Int(25, 12), new Vector2Int(25, 13), new Vector2Int(25, 14), new Vector2Int(26, 13), new Vector2Int(26, 14), new Vector2Int(31, 5), new Vector2Int(31, 6), new Vector2Int(32, 5), new Vector2Int(32, 6), new Vector2Int(32, 7), new Vector2Int(33, 5), new Vector2Int(33, 6), new Vector2Int(37, 19), new Vector2Int(37, 20), new Vector2Int(38, 12), new Vector2Int(38, 13), new Vector2Int(38, 19), new Vector2Int(38, 20), new Vector2Int(38, 21), new Vector2Int(39, 11), new Vector2Int(39, 12), new Vector2Int(39, 13), new Vector2Int(39, 19), new Vector2Int(39, 20), new Vector2Int(40, 6), new Vector2Int(40, 7), new Vector2Int(40, 12), new Vector2Int(40, 13), new Vector2Int(41, 5), new Vector2Int(41, 6), new Vector2Int(41, 7), new Vector2Int(42, 6), new Vector2Int(42, 7), new Vector2Int(45, 18), new Vector2Int(45, 19), new Vector2Int(46, 3), new Vector2Int(46, 4), new Vector2Int(46, 18), new Vector2Int(46, 19), new Vector2Int(46, 20), new Vector2Int(46, 24), new Vector2Int(46, 25), new Vector2Int(47, 2), new Vector2Int(47, 3), new Vector2Int(47, 4), new Vector2Int(47, 18), new Vector2Int(47, 19), new Vector2Int(47, 23), new Vector2Int(47, 24), new Vector2Int(47, 25), new Vector2Int(48, 3), new Vector2Int(48, 4), new Vector2Int(48, 24), new Vector2Int(48, 25) };
+        for (int i = 0; i < shrooms.Length; i++)
+        {
+            _gridTiles[shrooms[i].x, shrooms[i].y].SetResourceInfo(_gridSettings.TileColors[0], ResourceType.Shroom);
+        }
+        var water = new Vector2Int[] { new Vector2Int(2, 14), new Vector2Int(2, 15), new Vector2Int(3, 3), new Vector2Int(3, 4), new Vector2Int(3, 13), new Vector2Int(3, 14), new Vector2Int(3, 15), new Vector2Int(4, 3), new Vector2Int(4, 4), new Vector2Int(4, 5), new Vector2Int(4, 14), new Vector2Int(4, 15), new Vector2Int(5, 3), new Vector2Int(5, 4), new Vector2Int(7, 8), new Vector2Int(7, 9), new Vector2Int(8, 8), new Vector2Int(8, 9), new Vector2Int(8, 10), new Vector2Int(9, 8), new Vector2Int(9, 9), new Vector2Int(13, 17), new Vector2Int(13, 18), new Vector2Int(14, 3), new Vector2Int(14, 4), new Vector2Int(14, 17), new Vector2Int(14, 18), new Vector2Int(14, 19), new Vector2Int(15, 2), new Vector2Int(15, 3), new Vector2Int(15, 4), new Vector2Int(15, 17), new Vector2Int(15, 18), new Vector2Int(16, 3), new Vector2Int(16, 4), new Vector2Int(17, 6), new Vector2Int(17, 7), new Vector2Int(18, 6), new Vector2Int(18, 7), new Vector2Int(18, 8), new Vector2Int(18, 20), new Vector2Int(18, 21), new Vector2Int(19, 6), new Vector2Int(19, 7), new Vector2Int(19, 19), new Vector2Int(19, 20), new Vector2Int(19, 21), new Vector2Int(20, 20), new Vector2Int(20, 21), new Vector2Int(23, 26), new Vector2Int(23, 27), new Vector2Int(24, 26), new Vector2Int(24, 27), new Vector2Int(24, 28), new Vector2Int(25, 26), new Vector2Int(25, 27) };
+        for (int i = 0; i < water.Length; i++)
+        {
+            _gridTiles[water[i].x, water[i].y].SetResourceInfo(_gridSettings.TileColors[1], ResourceType.Water);
+        }
+        var crystals = new Vector2Int[] { new Vector2Int(4, 44), new Vector2Int(4, 45), new Vector2Int(5, 43), new Vector2Int(5, 44), new Vector2Int(5, 45), new Vector2Int(6, 44), new Vector2Int(6, 45), new Vector2Int(12, 46), new Vector2Int(12, 47), new Vector2Int(13, 45), new Vector2Int(13, 46), new Vector2Int(13, 47), new Vector2Int(14, 46), new Vector2Int(14, 47), new Vector2Int(35, 37), new Vector2Int(35, 38), new Vector2Int(36, 37), new Vector2Int(36, 38), new Vector2Int(36, 39), new Vector2Int(37, 37), new Vector2Int(37, 38), new Vector2Int(39, 44), new Vector2Int(39, 45), new Vector2Int(40, 44), new Vector2Int(40, 45), new Vector2Int(40, 46), new Vector2Int(41, 44), new Vector2Int(41, 45), new Vector2Int(42, 39), new Vector2Int(42, 40), new Vector2Int(43, 38), new Vector2Int(43, 39), new Vector2Int(43, 40), new Vector2Int(44, 39), new Vector2Int(44, 40), new Vector2Int(44, 44), new Vector2Int(44, 45), new Vector2Int(45, 43), new Vector2Int(45, 44), new Vector2Int(45, 45), new Vector2Int(46, 44), new Vector2Int(46, 45) };
+        for (int i = 0; i < crystals.Length; i++)
+        {
+            _gridTiles[crystals[i].x, crystals[i].y].SetResourceInfo(_gridSettings.TileColors[2], ResourceType.Crystal);
+        }
+        var honey = new Vector2Int[] { new Vector2Int(4, 24), new Vector2Int(4, 25), new Vector2Int(5, 23), new Vector2Int(5, 24), new Vector2Int(5, 25), new Vector2Int(5, 30), new Vector2Int(5, 31), new Vector2Int(6, 24), new Vector2Int(6, 25), new Vector2Int(6, 30), new Vector2Int(6, 31), new Vector2Int(6, 32), new Vector2Int(7, 30), new Vector2Int(7, 31), new Vector2Int(10, 24), new Vector2Int(10, 25), new Vector2Int(11, 23), new Vector2Int(11, 24), new Vector2Int(11, 25), new Vector2Int(12, 24), new Vector2Int(12, 25), new Vector2Int(13, 36), new Vector2Int(13, 37), new Vector2Int(14, 29), new Vector2Int(14, 30), new Vector2Int(14, 36), new Vector2Int(14, 37), new Vector2Int(14, 38), new Vector2Int(15, 28), new Vector2Int(15, 29), new Vector2Int(15, 30), new Vector2Int(15, 36), new Vector2Int(15, 37), new Vector2Int(16, 29), new Vector2Int(16, 30), new Vector2Int(21, 45), new Vector2Int(21, 46), new Vector2Int(22, 45), new Vector2Int(22, 46), new Vector2Int(22, 47), new Vector2Int(23, 45), new Vector2Int(23, 46), new Vector2Int(30, 45), new Vector2Int(30, 46), new Vector2Int(31, 44), new Vector2Int(31, 45), new Vector2Int(31, 46), new Vector2Int(32, 45), new Vector2Int(32, 46) };
     }
     public void PrintResources()
     {

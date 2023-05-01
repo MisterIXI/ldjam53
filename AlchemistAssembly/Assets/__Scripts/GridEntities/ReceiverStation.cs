@@ -8,6 +8,7 @@ public class ReceiverStation : Placeable, IInteractable
     [field: SerializeField] private ResourceType[] _acceptedTypes = new ResourceType[] { ResourceType.Empty };
     private IInteractable _parentInteractable;
     private FactoryBuilding _parentFactory;
+    private BitchHouse _parentBitchHouse;
     public bool[] TypesStored;
 
     public override void Initialize()
@@ -16,6 +17,7 @@ public class ReceiverStation : Placeable, IInteractable
         TypesStored = new bool[_acceptedTypes.Length];
         _parentInteractable = transform.parent.GetComponent<IInteractable>();
         _parentFactory = transform.parent.GetComponent<FactoryBuilding>();
+        _parentBitchHouse = transform.parent.GetComponent<BitchHouse>();
     }
     public void SwitchToRessources(ResourceType[] types)
     {
@@ -38,6 +40,14 @@ public class ReceiverStation : Placeable, IInteractable
         }
         return true;
     }
+
+    public void ResetResources()
+    {
+        for (int i = 0; i < TypesStored.Length; i++)
+        {
+            TypesStored[i] = false;
+        }
+    }
     public bool TryToStoreRessource(ResourceType type)
     {
         for (int i = 0; i < _acceptedTypes.Length; i++)
@@ -45,8 +55,10 @@ public class ReceiverStation : Placeable, IInteractable
             if (_acceptedTypes[i] == type && !TypesStored[i])
             {
                 TypesStored[i] = true;
-                if(_parentFactory != null)
+                if (_parentFactory != null)
                     _parentFactory.UpdateInputColor();
+                if (_parentBitchHouse != null)
+                    _parentBitchHouse.AddPoint(type);
                 return true;
             }
         }
