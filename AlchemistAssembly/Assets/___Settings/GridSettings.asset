@@ -18,8 +18,8 @@ MonoBehaviour:
     type: 3}
   <WitchHousePrefab>k__BackingField: {fileID: 1134943079643954966, guid: 0086607bca41eff408cac422cf4790aa,
     type: 3}
-  <TileColors>k__BackingField:
-  - {r: 0.4245283, g: 0.051204663, b: 0, a: 1}
-  - {r: 1, g: 0, b: 0.7653513, a: 1}
-  - {r: 0.0709877, g: 0, b: 1, a: 1}
-  - {r: 0.8018868, g: 0.78427553, b: 0, a: 1}
+  <TileMaterials>k__BackingField:
+  - {fileID: -1984595602394112004, guid: efc4fcdacca15bf408a685121e4e2736, type: 3}
+  - {fileID: -31763332786163550, guid: a4ba8a473ff96a245abbe010971abb12, type: 3}
+  - {fileID: -5189715152625664583, guid: 2cc8c805bdceffc47823938faac6f852, type: 3}
+  - {fileID: -7075536330696042219, guid: efc4fcdacca15bf408a685121e4e2736, type: 3}

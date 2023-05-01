@@ -10,5 +10,5 @@ public class GridSettings : ScriptableObject
     [field: SerializeField] public GridTile BaseTilePrefab { get; private set; }
     [field: SerializeField] public Placeable WitchHousePrefab { get; private set; }
     [field: Header("Tile Type Settingss")]
-    [field: SerializeField] public Color[] TileColors { get; private set; } = new Color[4];
+    [field: SerializeField] public Material[] TileMaterials { get; private set; } = new Material[4];
 }

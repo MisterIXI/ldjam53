@@ -118,6 +118,10 @@ public class ResourcePlacer : GridTool
         {
             _currentPreview.SetPreviewStatus(PreviewStatus.Invalid);
         }
+        if (_currentPreview == DefaultPreview)
+        {
+            _currentPreview.SetPreviewStatus(PreviewStatus.Invalid);
+        }
     }
 
 
