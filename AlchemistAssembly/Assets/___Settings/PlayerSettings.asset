@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <mouseHighlight>k__BackingField: 1
   <DragSpeed>k__BackingField: 4
-  <KeyboardMoveSpeed>k__BackingField: 2
-  <MouseMoveSpeed>k__BackingField: 2
+  <KeyboardMoveSpeed>k__BackingField: 4
+  <MouseMoveSpeed>k__BackingField: 4
   <ScreenEdgeOffset>k__BackingField: 0.02
   <ZoomSpeed>k__BackingField: 1
   <MinZoom>k__BackingField: -10
