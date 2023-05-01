@@ -37,7 +37,7 @@ public class RailEntity : Placeable
         }
         else
         {
-            Debug.Log($"RailEntity: ConnectTiles: startTile: {startTile}, endTile: {endTile}");
+            // Debug.Log($"RailEntity: ConnectTiles: startTile: {startTile}, endTile: {endTile}");
             HexDirection startDirection = HexHelper.GetDirection(_currentTile.TileIndex, startTile.TileIndex);
             HexDirection endDirection = HexHelper.GetDirection(_currentTile.TileIndex, endTile.TileIndex);
             // get steps in mod 6 to get the difference in direction

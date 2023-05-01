@@ -45,7 +45,6 @@ public class PlaceableManager : MonoBehaviour
     }
     public static void PlaceRail(Placeable placeablePrefab, GridTile tile, GridTile startTile, GridTile endTile)
     {
-        Debug.Log("Placing Rail");
         Instance._placeableQueue.Enqueue(new PlaceableInfo { placeable = placeablePrefab, tile = tile, startTile = startTile, endTile = endTile });
     }
 }

@@ -22,7 +22,7 @@ public class PlacementController : MonoBehaviour
     public Vector2 MousePosInput { get; private set; }
     [HideInInspector] public Vector3 mousePos;
     private Plane _groundPlane;
-
+    [field: SerializeField] public LayerMask GridLayer { get; private set; }
     private Camera _mainCamera;
     private GridTile _lastHoveredTile;
     public static GridTile HoveredTile => Instance._lastHoveredTile;
@@ -83,7 +83,7 @@ public class PlacementController : MonoBehaviour
     private void UpdateTileHover()
     {
         Ray ray = _mainCamera.ScreenPointToRay(MousePosInput);
-        if (Physics.Raycast(ray, out RaycastHit hit, 100f, ~LayerMask.GetMask("GridTile")))
+        if (Physics.Raycast(ray, out RaycastHit hit, 100f, GridLayer))
         {
             GridTile hoverTile = hit.collider.GetComponentInParent<GridTile>();
             if (hoverTile != _lastHoveredTile)
@@ -127,7 +127,7 @@ public class PlacementController : MonoBehaviour
         Instance.PathTool.StartPathFrom(startPoint);
         Instance.SwitchActiveTool(Instance.PathTool);
     }
-    private void SwitchActiveTool(GridTool newTool)
+    public void SwitchActiveTool(GridTool newTool)
     {
         ActiveTool.Deactivate();
         ActiveTool = newTool;

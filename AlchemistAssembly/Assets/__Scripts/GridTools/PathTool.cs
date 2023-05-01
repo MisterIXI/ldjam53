@@ -30,6 +30,20 @@ public class PathTool : GridTool
             }
             _lineRenderer.material.color = CheckIfValidTrackPath(_currentPath) ? Color.green : Color.red;
         }
+        else
+        {
+            _currentPath.Clear();
+            if (_startTile != null && newTile != null)
+            {
+                var path = HexGrid.GetPathToPos(_startTile.TileIndex, newTile.TileIndex);
+                _lineRenderer.positionCount = path.Count;
+                for (int i = 0; i < path.Count; i++)
+                {
+                    _lineRenderer.SetPosition(i, path[i].transform.position + Vector3.up);
+                }
+                _lineRenderer.material.color = Color.red;
+            }
+        }
     }
 
     private bool CheckIfValidTrackPath(List<GridTile> path)
@@ -114,8 +128,9 @@ public class PathTool : GridTool
             if (_currentPath != null && _currentPath.Count > 1)
             {
                 OutputStation outputStation = _startTile.Placeable as OutputStation;
-                outputStation.AddPath(_currentPath);
-                if (((OutputStation)_currentPath.Last().Placeable).ParentInteractable is CauldronCrafter)
+                outputStation.AddPath(new List<GridTile>(_currentPath));
+                PlacementController.Instance.SwitchActiveTool(PlacementController.Instance.DefaultTool);
+                if (((ReceiverStation)_currentPath.Last().Placeable).ParentInteractable is CauldronCrafter)
                     HUDManager.Instance.ChangetooltipText(5);
             }
             else
