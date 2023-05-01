@@ -16,6 +16,8 @@ MonoBehaviour:
   <OuterHexSize>k__BackingField: 2
   <BaseTilePrefab>k__BackingField: {fileID: 6334131378185281171, guid: 2a97d4a309ddf404f9279701827a1dae,
     type: 3}
+  <WitchHousePrefab>k__BackingField: {fileID: 1134943079643954966, guid: 0086607bca41eff408cac422cf4790aa,
+    type: 3}
   <TileColors>k__BackingField:
   - {r: 0.4245283, g: 0.051204663, b: 0, a: 1}
   - {r: 1, g: 0, b: 0.7653513, a: 1}

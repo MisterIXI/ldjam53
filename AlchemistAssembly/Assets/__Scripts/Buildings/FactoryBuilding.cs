@@ -38,7 +38,7 @@ public class FactoryBuilding : Placeable, IInteractable
 
     private void ProduceOutput()
     {
-        if (routes.Length != 0 && _resourceType != ResourceType.Empty)  // if there are routes availible then start producing
+        if (OutputStation._pathsToOutput.Count != 0 && _resourceType != ResourceType.Empty)  // if there are routes availible then start producing
         {
             timer += Time.deltaTime;
 
@@ -115,6 +115,7 @@ public class FactoryBuilding : Placeable, IInteractable
         // resets route 
         if (routeCounter >= (OutputStation._pathsToOutput.Count - 1))
             routeCounter = 0;
+        ReceiverStation.ResetResources();
         Debug.Log("Sending Minecart");
         // spawns minecart, gives it the route and sets the resource type
         MineCart minecart = Instantiate(_mineCartSettings.MineCartSubTypesPrefabs[(int)_resourceType], transform.position, Quaternion.identity);

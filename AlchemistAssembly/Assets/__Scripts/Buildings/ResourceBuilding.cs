@@ -57,7 +57,7 @@ public class ResourceBuilding : Placeable, IInteractable
 
     private void ProduceOutput()
     {
-        if (routes.Length != 0)  // if there are routes availible then start producing
+        if (OutputStation._pathsToOutput.Count != 0)  // if there are routes availible then start producing
         {
             timer += Time.deltaTime;
 
