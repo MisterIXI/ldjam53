@@ -127,17 +127,8 @@ public class ResourceBuilding : Placeable, IInteractable
 
     public void OnAddRoute()   // if add route button is pressed
     {
-        Debug.Log("Adding Routes");
-        HudReferences.Instance.BuildingPanel.SetActive(false);
-        HudReferences.Instance.RecepiePanel.SetActive(false);
+        OnClose();
         PlacementController.StartPathFrom(OutputStation.CurrentTile);
-
-        // show route tool
-        // show routes
-        // if building is clicked and route tool
-        // -> set route
-        // -> OnInteract()
-        // if different tool or q -> OnClose()
     }
 
 
