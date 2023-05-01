@@ -18,8 +18,8 @@ MonoBehaviour:
   <HoneyTime>k__BackingField: 3
   EmptySprite: {fileID: 21300000, guid: e73c689f1af459d4894e47a4b33ab9c0, type: 3}
   ShroomSprite: {fileID: 21300000, guid: 5835f07e1f451254eacd509a70662161, type: 3}
-  WaterSprite: {fileID: 21300000, guid: 279fec707c2e49e4b947f30f787492a6, type: 3}
-  CrystalSprite: {fileID: 21300000, guid: 8f6c497295b868d4cadfbe5fec278cc2, type: 3}
+  WaterSprite: {fileID: 21300000, guid: addb7cddb1681fc4191d99e70a4ab384, type: 3}
+  CrystalSprite: {fileID: 21300000, guid: ebf15ac2a5393c248a63527247e63f85, type: 3}
   HoneySprite: {fileID: 21300000, guid: 387e10ec79bf9b54e9d3bc56ebe2e325, type: 3}
   RedPotSprite: {fileID: 21300000, guid: 6a22ab7466684d24db512a34d54dc474, type: 3}
   HoneyWaterSprite: {fileID: 21300000, guid: 7cf7fdde33dbbf248b2eb4f704997c61, type: 3}
