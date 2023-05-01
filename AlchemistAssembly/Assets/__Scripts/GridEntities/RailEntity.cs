@@ -18,7 +18,16 @@ public class RailEntity : Placeable
         }
         else if (startTile == null && endTile != null)
         {
-
+                Vector2 direction;
+                direction = transform.position - startTile.transform.position;
+                if(direction.x < 0)
+                {
+                    transform.rotation = Quaternion.identity;
+                    transform.RotateAround(endTile.transform.position, Vector3.up, -60);
+                }else{
+                    transform.rotation = Quaternion.identity;
+                    transform.RotateAround(endTile.transform.position, Vector3.up, 60);
+                }
         }
         else if (startTile != null && endTile == null)
         {
