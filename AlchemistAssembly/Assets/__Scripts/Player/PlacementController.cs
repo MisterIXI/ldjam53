@@ -171,6 +171,29 @@ public class PlacementController : MonoBehaviour
             }
         }
     }
+
+    public void OnButtonInput(int i)
+    {
+        switch (i)
+            {
+                case 1:
+                    SwitchActiveTool(DefaultTool);
+                    break;
+                case 2:
+                    SwitchActiveTool(RailPlacer);
+                    break;
+                case 3:
+                    SwitchActiveTool(ResourcePlacer);
+                    break;
+                case 4:
+                    SwitchActiveTool(CauldronPlacer);
+                    break;
+                case 5:
+                    SwitchActiveTool(DestructionTool);
+                    break;
+            }
+    }
+    
     private void SubscribeToInput()
     {
         InputManager.OnMousePos += OnMousePosInput;
