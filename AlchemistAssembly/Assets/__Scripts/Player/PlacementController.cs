@@ -6,20 +6,26 @@ using UnityEngine.InputSystem;
 
 public class PlacementController : MonoBehaviour
 {
+    public GridTool ActiveTool { get; private set; }
+    [field: SerializeField] public DefaultTool DefaultTool { get; private set; }
+    [field: SerializeField] public PathTool PathTool { get; private set; }
+    [field: SerializeField] public RailPlacer RailPlacer { get; private set; }
+    [field: SerializeField] public ResourcePlacer ResourcePlacer { get; private set; }
+    [field: SerializeField] public CauldronPlacer CauldronPlacer { get; private set; }
+    [field: SerializeField] public DestructionTool DestructionTool { get; private set; }
+
     public static event Action<float> OnRotationChanged;
     public static event Action<GridTile, GridTile> OnTileHovered;
     public static PlacementController Instance { get; private set; }
     private PlayerSettings _playerSettings => SettingsManager.PlayerSettings;
-    public GameObject Cube;
-    public float RotationAngle = 0f;
+    [HideInInspector] public float RotationAngle = 0f;
     public Vector2 MousePosInput { get; private set; }
-    public Vector3 mousePos;
+    [HideInInspector] public Vector3 mousePos;
     private Plane _groundPlane;
 
     private Camera _mainCamera;
     private GridTile _lastHoveredTile;
     public static GridTile HoveredTile => Instance._lastHoveredTile;
-    [field: SerializeField] public CauldronPlacer CauldronPlacer { get; private set; }
 
     private void Awake()
     {
@@ -38,7 +44,13 @@ public class PlacementController : MonoBehaviour
         // var railTool = new GameObject("RailTool");
         // railTool.AddComponent<LineRenderer>().enabled = false;
         // railTool.AddComponent<RailPlacer>().Activate();
-        CauldronPlacer.Activate();
+        DefaultTool.Activate();
+        ActiveTool = DefaultTool;
+        PathTool.gameObject.SetActive(false);
+        RailPlacer.gameObject.SetActive(false);
+        ResourcePlacer.gameObject.SetActive(false);
+        CauldronPlacer.gameObject.SetActive(false);
+        DestructionTool.gameObject.SetActive(false);
     }
 
     void FixedUpdate()
@@ -110,15 +122,49 @@ public class PlacementController : MonoBehaviour
             OnRotationChanged?.Invoke(RotationAngle);
         }
     }
+
+    private void SwitchActiveTool(GridTool newTool)
+    {
+        ActiveTool.Deactivate();
+        ActiveTool = newTool;
+        ActiveTool.Activate();
+    }
+    private void OnHotkeysInput(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            switch (context.ReadValue<float>())
+            {
+                case 1:
+                    SwitchActiveTool(DefaultTool);
+                    break;
+                case 2:
+                    SwitchActiveTool(RailPlacer);
+                    break;
+                case 3:
+                    SwitchActiveTool(ResourcePlacer);
+                    break;
+                case 4:
+                    SwitchActiveTool(CauldronPlacer);
+                    break;
+                case 5:
+                    SwitchActiveTool(DestructionTool);
+                    break;
+            }
+        }
+    }
     private void SubscribeToInput()
     {
         InputManager.OnMousePos += OnMousePosInput;
         InputManager.OnRotate += OnRotateInput;
+        InputManager.OnHotkeys += OnHotkeysInput;
     }
 
     private void UnsubscribeFromInput()
     {
         InputManager.OnMousePos -= OnMousePosInput;
+        InputManager.OnRotate -= OnRotateInput;
+        InputManager.OnHotkeys -= OnHotkeysInput;
     }
 
     private void OnDestroy()

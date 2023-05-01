@@ -13,9 +13,9 @@ public abstract class GridTool : MonoBehaviour
         Initialize();
     }
     protected virtual void Initialize() { }
-    public virtual void Activate() => SubscribeToActions();
+    public virtual void Activate() { SubscribeToActions(); gameObject.SetActive(true); }
     protected abstract void SubscribeToActions();
 
-    public virtual void Deactivate() => UnsubscribeFromActions();
+    public virtual void Deactivate() { UnsubscribeFromActions(); gameObject.SetActive(false); }
     protected abstract void UnsubscribeFromActions();
 }

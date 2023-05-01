@@ -4,8 +4,8 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     [SerializeField] private AudioClip[] SoundPool;
-    [SerializeField]private AudioClip[] musicPool;
-    [SerializeField]private GameObject AudioSpawnObject;
+    [SerializeField] private AudioClip[] musicPool;
+    [SerializeField] private GameObject AudioSpawnObject;
     [SerializeField] private AudioSource MusicObject;
     private int currentMusicIndex = 0;
     private int lastCheckFrame = -1;
@@ -22,27 +22,27 @@ public class SoundManager : MonoBehaviour
             return;
         }
         Instance = this;
-        
+
     }
     public enum Sound
     {
         Ambients = 0,
         Ambient2 = 1,
         Ambients3 = 2,
-        Menu_Click_Bass =3,
+        Menu_Click_Bass = 3,
         BeeAproach = 4,
-        Bee_Landing =5,
-        Brewing =6,
+        Bee_Landing = 5,
+        Brewing = 6,
         Buiding_Complete = 7,
         Menu_Click = 8,
         Mining = 9,
         Minecart_Moving = 10,
-        Object_placing =11,
+        Object_placing = 11,
         Potion_complete = 12,
-        Track_Click =13,
-        Track_Friction =14,
-        Waterpump =15
-        
+        Track_Click = 13,
+        Track_Friction = 14,
+        Waterpump = 15
+
     }
     public static void PlayInvalidActionSound()
     {
@@ -93,18 +93,18 @@ public class SoundManager : MonoBehaviour
         source.volume = volume;
         source.Play();
     }
-     public void PlayMusicNext()
+    public void PlayMusicNext()
     {
         MusicObject.PlayOneShot(musicPool[currentMusicIndex], 0.5f); // GAME VARIABLE TODO
-        
-        Invoke(nameof(EventOnEnd),musicPool[currentMusicIndex].length);
+
+        Invoke(nameof(EventOnEnd), musicPool[currentMusicIndex].length);
     }
-    
+
     void EventOnEnd()
     {
-        if(Application.isEditor) Debug.LogWarning("audio finished!");
-        currentMusicIndex ++;
-        if(currentMusicIndex >= musicPool.Length)
+        if (Application.isEditor) Debug.LogWarning("audio finished!");
+        currentMusicIndex++;
+        if (currentMusicIndex >= musicPool.Length)
             currentMusicIndex = 0;
         PlayMusicNext();
     }

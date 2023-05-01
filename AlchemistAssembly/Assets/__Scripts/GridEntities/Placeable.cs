@@ -76,6 +76,8 @@ public class Placeable : MonoBehaviour
         }
     }
 
+
+
     public virtual void HoverOnTile(GridTile tile)
     {
         transform.position = tile.transform.position;
@@ -139,16 +141,31 @@ public class Placeable : MonoBehaviour
     }
     public virtual void RemoveFromTile(bool destroyObject = true)
     {
-        foreach (var offset in GetOccupiedTiles())
+        _currentTile.Placeable = null;
+
+        if (IsSevenTiles)
         {
-            GridTile gridTile = HexGrid.GetTile(_currentTile.TileIndex + offset);
-            if (gridTile != null && gridTile.Placeable == this)
+            // up and down
+            HexGrid.GetTile(_currentTile.TileIndex + new Vector2Int(0, 1)).Placeable = null;
+            HexGrid.GetTile(_currentTile.TileIndex + new Vector2Int(0, -1)).Placeable = null;
+            bool isEven = _currentTile.TileIndex.x % 2 == 0;
+            if (isEven)
             {
-                gridTile.Placeable = null;
+                // up left and down left
+                HexGrid.GetTile(_currentTile.TileIndex + new Vector2Int(-1, -1)).Placeable = null;
+                HexGrid.GetTile(_currentTile.TileIndex + new Vector2Int(-1, 0)).Placeable = null;
+                // up right and down right
+                HexGrid.GetTile(_currentTile.TileIndex + new Vector2Int(1, -1)).Placeable = null;
+                HexGrid.GetTile(_currentTile.TileIndex + new Vector2Int(1, 0)).Placeable = null;
             }
             else
             {
-                Debug.LogError("Tile " + gridTile + " is not occupied by " + this);
+                // up left and down left
+                HexGrid.GetTile(_currentTile.TileIndex + new Vector2Int(-1, 0)).Placeable = null;
+                HexGrid.GetTile(_currentTile.TileIndex + new Vector2Int(-1, 1)).Placeable = null;
+                // up right and down right
+                HexGrid.GetTile(_currentTile.TileIndex + new Vector2Int(1, 0)).Placeable = null;
+                HexGrid.GetTile(_currentTile.TileIndex + new Vector2Int(1, 1)).Placeable = null;
             }
         }
         _currentTile = null;

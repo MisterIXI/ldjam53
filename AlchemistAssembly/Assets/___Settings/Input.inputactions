@@ -308,6 +308,17 @@
                 },
                 {
                     "name": "",
+                    "id": "e0dda27a-c6ff-45e4-a7fe-1ec9034cf030",
+                    "path": "<Keyboard>/5",
+                    "interactions": "Press",
+                    "processors": "Scale(factor=5)",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Hotkeys",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "ce53a0be-3f42-43f4-a996-bb472f9ef05d",
                     "path": "<Mouse>/position",
                     "interactions": "",
