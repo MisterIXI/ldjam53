@@ -10,8 +10,6 @@ public class FactoryBuilding : Placeable, IInteractable
     private MineCartSettings _mineCartSettings => SettingsManager.MineCartSettings;
 
 
-    UnityEvent m_SendMinecart;
-
     [field: SerializeField] private ResourceType _resourceType;         // change those later to incorp it with yanniks class
     private float _outputTime;
 
@@ -26,18 +24,10 @@ public class FactoryBuilding : Placeable, IInteractable
     private int routeCounter = 0;
 
 
-    private ResourceType _input1 = ResourceType.Empty;
-    private ResourceType _input2 = ResourceType.Empty;
-    private ResourceType _input3 = ResourceType.Empty;
-
     private int recepieInt = 8;
 
     private float timer = 0;
 
-    void Start()
-    {
-        _resourceType = ResourceType.Empty;
-    }
 
     void Update()
     {
@@ -200,13 +190,6 @@ public class FactoryBuilding : Placeable, IInteractable
         HudReferences.Instance.BuildingPanel.SetActive(false);
         HudReferences.Instance.RecepiePanel.SetActive(false);
         PlacementController.StartPathFrom(OutputStation.CurrentTile);
-
-        // show route tool
-        // show routes
-        // if building is clicked and route tool
-        // -> set route
-        // -> OnInteract()
-        // if different tool or q -> OnClose()
     }
 
 
