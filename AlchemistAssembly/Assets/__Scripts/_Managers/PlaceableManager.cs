@@ -25,8 +25,8 @@ public class PlaceableManager : MonoBehaviour
             var newEntity = Instantiate(currentPair.placeable, currentPair.tile.transform.position, Quaternion.identity);
             if (newEntity is RailEntity railEntity)
             {
-                railEntity.ConnectTiles(currentPair.startTile, currentPair.endTile);
                 railEntity.PlaceOnTile(currentPair.tile);
+                railEntity.ConnectTiles(currentPair.startTile, currentPair.endTile);
             }
             else
             {

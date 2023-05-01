@@ -95,7 +95,7 @@ public class HexHelper : MonoBehaviour
         if (diff.x == 0 && diff.y == -1)
             return HexDirection.Down;
         bool isEven = (start.x & 1) == 0;
-        if (!isEven)
+        if (isEven)
         {
             if (diff.x == 1 && diff.y == 0)
                 return HexDirection.RightUp;
@@ -117,7 +117,7 @@ public class HexHelper : MonoBehaviour
             if (diff.x == -1 && diff.y == 0)
                 return HexDirection.LeftDown;
         }
-        Debug.LogError("Invalid direction");
+        Debug.LogError($"Invalid direction from {start} to {end} with diff {diff}");
         throw new System.Exception("Invalid direction");
     }
 
@@ -175,6 +175,6 @@ public enum HexDirection
     RightUp,
     RightDown,
     Down,
-    LeftUp,
-    LeftDown
+    LeftDown,
+    LeftUp
 }

@@ -22,6 +22,16 @@ public class OutputStation : Placeable, IInteractable
         tile.Placeable = this;
     }
 
+    public void AddPath(List<GridTile> path)
+    {
+        _pathsToOutput.Add(path);
+    }
+
+    public void ClearPaths()
+    {
+        _pathsToOutput.Clear();
+    }
+
     public void OnInteract()
     {
         _parentInteractable.OnInteract();
