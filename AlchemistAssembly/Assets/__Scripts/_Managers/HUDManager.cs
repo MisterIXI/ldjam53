@@ -104,11 +104,11 @@ public class HUDManager : MonoBehaviour
     {
         DisableAllPathtools();
         HotkeyImages[value].color = highlightColor;
-        Cursor.SetCursor(cursorImages[value], Vector2.zero, CursorMode.Auto);
+        // Cursor.SetCursor(cursorImages[value], Vector2.zero, CursorMode.Auto);
     }
     public void DisableAllPathtools()
     {
-        Cursor.SetCursor(cursorImages[0], Vector2.zero, CursorMode.Auto);
+        // Cursor.SetCursor(cursorImages[0], Vector2.zero, CursorMode.Auto);
         foreach (Image x in HotkeyImages)
         {
             x.color = normalColor;

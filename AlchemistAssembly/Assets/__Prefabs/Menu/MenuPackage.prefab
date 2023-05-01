@@ -10312,7 +10312,7 @@ Transform:
   - {fileID: 3188498519597169140}
   - {fileID: 7942105198673936366}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4073312694409101357
 GameObject:
@@ -22910,7 +22910,12 @@ MonoBehaviour:
   yellowPotion: {fileID: 6360419075512395299}
   bluePotion: {fileID: 1587483051568153088}
   yinyangPotion: {fileID: 3048650205509960458}
-  HotkeyImages: []
+  HotkeyImages:
+  - {fileID: 4397800205114240460}
+  - {fileID: 8996941367558860074}
+  - {fileID: 7639603785040050070}
+  - {fileID: 8322502009070064296}
+  - {fileID: 5583809336549789490}
   infoImage: {fileID: 287684489940900573}
   InfoImagePool:
   - {fileID: 21300000, guid: 6a22ab7466684d24db512a34d54dc474, type: 3}
