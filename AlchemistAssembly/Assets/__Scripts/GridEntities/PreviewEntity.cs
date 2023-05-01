@@ -9,7 +9,7 @@ public class PreviewEntity : MonoBehaviour
     private void Start()
     {
         _placementToolSettings = SettingsManager.PlacementToolSettings;
-        _meshRenderers = GetComponentsInChildren<MeshRenderer>();
+        _meshRenderers = GetComponentsInChildren<MeshRenderer>(true);
         SetPreviewStatus(Status);
     }
     public void SetPreviewStatus(PreviewStatus newStatus)

@@ -12,7 +12,7 @@ public class PlacementToolSettings : ScriptableObject
     [field: SerializeField] public float AnimationUpperLimit { get; private set; } = 1f;
     [field: SerializeField] public float AnimationLowerLimit { get; private set; } = 1f;
     [field: SerializeField] public AnimationCurve AnimationCurve { get; private set; }
-    [field: SerializeField] public Color HighlightColor { get; private set; } = new Color(121, 37, 199);
+    [field: SerializeField] public Material HighlightMaterial { get; private set; }
     [field: Header("Preview Settings")]
     [field: SerializeField][field: Range(0f, 1f)] public float PreviewRotationDuration { get; private set; } = 0.25f;
     [field: Header("Materials")]

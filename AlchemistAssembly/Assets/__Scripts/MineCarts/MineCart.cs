@@ -15,11 +15,20 @@ public class MineCart : MonoBehaviour
     public ResourceType CurrentRessource { get; private set; }
     public void Initialize(List<GridTile> path, ResourceType ressource)
     {
+        // Debug.Log($"Initializing minecart on {path[0].TileIndex} to {path[1].TileIndex}");
         if (path.Count < 2)
         {
             Debug.LogError("Path must have at least 2 tiles");
             Destroy(gameObject);
             return;
+        }
+        if (path[1].Placeable is RailEntity entity)
+        {
+            if (entity.OccupyingMineCart != null)
+            {
+                Destroy(gameObject);
+                return;
+            }
         }
         _settings = SettingsManager.MineCartSettings;
         _path = path;
@@ -30,8 +39,10 @@ public class MineCart : MonoBehaviour
         _prevTile = _path[0];
         _reachedHalfWay = false;
         CurrentRessource = ressource;
-        ((RailEntity)_path[1].Placeable).ConnectTiles(_path[0], _path[2]);
-        transform.LookAt(_path[_currentPathIndex + 1].transform.position, Vector3.up);
+        RailEntity railEntity = _path[1].Placeable as RailEntity;
+        railEntity.ConnectTiles(_path[0], _path[2]);
+        railEntity.OccupyingMineCart = this;
+        transform.LookAt(_path[_currentPathIndex].transform.position, Vector3.up);
     }
     private void FixedUpdate()
     {

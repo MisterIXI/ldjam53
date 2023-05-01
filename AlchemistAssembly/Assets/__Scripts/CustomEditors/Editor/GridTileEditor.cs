@@ -18,38 +18,38 @@ public class GridTileEditor : Editor
         }
         if (GUILayout.Button("SetTileTypeShroom"))
         {
-            gridTile.SetResourceInfo(SettingsManager.GridSettings.TileColors[0], ResourceType.Shroom);
+            gridTile.SetResourceInfo(SettingsManager.GridSettings.TileMaterials[0], ResourceType.Shroom);
             var neighbours = HexHelper.GetNeighboursOddQ(gridTile.TileIndex);
             foreach (var neighbour in neighbours)
             {
-                HexGrid.GetTile(neighbour).SetResourceInfo(SettingsManager.GridSettings.TileColors[0], ResourceType.Shroom);
+                HexGrid.GetTile(neighbour).SetResourceInfo(SettingsManager.GridSettings.TileMaterials[0], ResourceType.Shroom);
             }
         }
         if (GUILayout.Button("SetTileTypeWater"))
         {
-            gridTile.SetResourceInfo(SettingsManager.GridSettings.TileColors[1], ResourceType.Water);
+            gridTile.SetResourceInfo(SettingsManager.GridSettings.TileMaterials[1], ResourceType.Water);
             var neighbours = HexHelper.GetNeighboursOddQ(gridTile.TileIndex);
             foreach (var neighbour in neighbours)
             {
-                HexGrid.GetTile(neighbour).SetResourceInfo(SettingsManager.GridSettings.TileColors[1], ResourceType.Water);
+                HexGrid.GetTile(neighbour).SetResourceInfo(SettingsManager.GridSettings.TileMaterials[1], ResourceType.Water);
             }
         }
         if (GUILayout.Button("SetTileTypeCrystal"))
         {
-            gridTile.SetResourceInfo(SettingsManager.GridSettings.TileColors[2], ResourceType.Crystal);
+            gridTile.SetResourceInfo(SettingsManager.GridSettings.TileMaterials[2], ResourceType.Crystal);
             var neighbours = HexHelper.GetNeighboursOddQ(gridTile.TileIndex);
             foreach (var neighbour in neighbours)
             {
-                HexGrid.GetTile(neighbour).SetResourceInfo(SettingsManager.GridSettings.TileColors[2], ResourceType.Crystal);
+                HexGrid.GetTile(neighbour).SetResourceInfo(SettingsManager.GridSettings.TileMaterials[2], ResourceType.Crystal);
             }
         }
         if (GUILayout.Button("SetTileTypeHoney"))
         {
-            gridTile.SetResourceInfo(SettingsManager.GridSettings.TileColors[3], ResourceType.Honey);
+            gridTile.SetResourceInfo(SettingsManager.GridSettings.TileMaterials[3], ResourceType.Honey);
             var neighbours = HexHelper.GetNeighboursOddQ(gridTile.TileIndex);
             foreach (var neighbour in neighbours)
             {
-                HexGrid.GetTile(neighbour).SetResourceInfo(SettingsManager.GridSettings.TileColors[3], ResourceType.Honey);
+                HexGrid.GetTile(neighbour).SetResourceInfo(SettingsManager.GridSettings.TileMaterials[3], ResourceType.Honey);
             }
         }
         // add label that shows the index of the tile

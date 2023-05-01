@@ -10,7 +10,7 @@ public class GridTile : MonoBehaviour
     public bool IsInitialized => TileIndex != null;
 
     private MeshRenderer _meshRenderer;
-    private Color _defaultColor;
+    private Material _defaultMaterial;
     private PlacementToolSettings _settings;
     public ResourceType ResourceType { get; private set; } = ResourceType.Empty;
 
@@ -18,7 +18,7 @@ public class GridTile : MonoBehaviour
     {
         _settings = SettingsManager.PlacementToolSettings;
         _meshRenderer = GetComponentInChildren<MeshRenderer>();
-        _defaultColor = _meshRenderer.material.color;
+        _defaultMaterial = _meshRenderer.material;
         TileIndex = tileIndex;
     }
 
@@ -42,19 +42,19 @@ public class GridTile : MonoBehaviour
     public void HighlightTile()
     {
         if (_settings != null)
-            _meshRenderer.material.color = _settings.HighlightColor;
+            _meshRenderer.material = _settings.HighlightMaterial;
     }
 
     public void UnhighlightTile()
     {
         if (_settings != null)
-            _meshRenderer.material.color = _defaultColor;
+            _meshRenderer.material = _defaultMaterial;
     }
 
-    public void SetResourceInfo(Color color, ResourceType resourceType)
+    public void SetResourceInfo(Material material, ResourceType resourceType)
     {
-        _defaultColor = color;
-        _meshRenderer.material.color = color;
+        _defaultMaterial = material;
+        _meshRenderer.material = material;
         ResourceType = resourceType;
     }
 
