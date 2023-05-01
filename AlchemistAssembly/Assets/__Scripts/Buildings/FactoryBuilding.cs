@@ -188,8 +188,7 @@ public class FactoryBuilding : Placeable, IInteractable
 
     public void OnAddRoute()   // if add route button is pressed
     {
-        HudReferences.Instance.BuildingPanel.SetActive(false);
-        HudReferences.Instance.RecepiePanel.SetActive(false);
+        OnClose();
         PlacementController.StartPathFrom(OutputStation.CurrentTile);
     }
 
