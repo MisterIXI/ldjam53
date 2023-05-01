@@ -112,24 +112,24 @@ public class CameraController : MonoBehaviour
 
         if(_mousePosInput.x >= screenSize.x * (1 - _playerSettings.ScreenEdgeOffset))
         {
-            cameraMoveDelta.x = 0.1f * _playerSettings.MouseMoveSpeed;
+            cameraMoveDelta.x = 0.2f * _playerSettings.MouseMoveSpeed;
             reset = false;
         }
         else if (_mousePosInput.x <= screenSize.x * _playerSettings.ScreenEdgeOffset)
         {
-            cameraMoveDelta.x = -1 * (0.1f * _playerSettings.MouseMoveSpeed);
+            cameraMoveDelta.x = -1 * (0.2f * _playerSettings.MouseMoveSpeed);
             reset = false;
         }
         
 
         if(_mousePosInput.y >= screenSize.y * (1 - _playerSettings.ScreenEdgeOffset))
         {
-            cameraMoveDelta.z = 0.1f * _playerSettings.MouseMoveSpeed;
+            cameraMoveDelta.z = 0.2f * _playerSettings.MouseMoveSpeed;
             reset = false;
         }
         else if (_mousePosInput.y <= screenSize.y * _playerSettings.ScreenEdgeOffset)
         {
-            cameraMoveDelta.z = -1 * (0.1f * _playerSettings.MouseMoveSpeed);
+            cameraMoveDelta.z = -1 * (0.2f * _playerSettings.MouseMoveSpeed);
             reset = false;
         }
 
@@ -145,7 +145,7 @@ public class CameraController : MonoBehaviour
     {
         if(_moveInput != Vector2.zero)
         {
-            Vector3 cameraMoveDelta = new Vector3(_moveInput.x, 0, _moveInput.y) * (0.1f * _playerSettings.KeyboardMoveSpeed);
+            Vector3 cameraMoveDelta = new Vector3(_moveInput.x, 0, _moveInput.y) * (0.2f * _playerSettings.KeyboardMoveSpeed);
             cameraMoveDelta = CameraFollowTarget.transform.TransformDirection(cameraMoveDelta);
             return Vector3.ProjectOnPlane(cameraMoveDelta, Vector3.Cross(transform.right, transform.forward));
         }
