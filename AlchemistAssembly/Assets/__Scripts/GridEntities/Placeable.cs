@@ -187,6 +187,12 @@ public class Placeable : MonoBehaviour
             }
             yield return null;
         }
+        transform.localPosition = Vector3.zero;
+        foreach (var offset in GetOccupiedTiles())
+        {
+            GridTile gridTile = HexGrid.GetTile(offset);
+            gridTile.transform.position = new Vector3(gridTile.transform.position.x, 0, gridTile.transform.position.z);
+        }
     }
     public virtual void RemoveFromTile(bool destroyObject = true)
     {

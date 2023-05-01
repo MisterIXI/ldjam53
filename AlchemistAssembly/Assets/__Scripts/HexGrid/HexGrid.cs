@@ -1,4 +1,7 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class HexGrid : MonoBehaviour
@@ -36,7 +39,6 @@ public class HexGrid : MonoBehaviour
     {
         _gridTiles = new GridTile[_gridSettings.GridSize.x, _gridSettings.GridSize.y];
         Vector3 currentPos = Vector3.zero;
-
         for (int x = 0; x < _gridSettings.GridSize.x; x++)
         {
             for (int y = 0; y < _gridSettings.GridSize.y; y++)
@@ -46,11 +48,39 @@ public class HexGrid : MonoBehaviour
                 GridTile newTile = Instantiate(_gridSettings.BaseTilePrefab, currentPos, Quaternion.identity, transform);
                 newTile.Initialize(new Vector2Int(x, y));
                 _gridTiles[x, y] = newTile;
+                newTile.gameObject.SetActive(false);
             }
         }
-
-
+        var shrooms = new Vector2Int[] { };
+        for (int i = 0; i < shrooms.Length; i++)
+        {
+            _gridTiles[shrooms[i].x, shrooms[i].y].SetResourceInfo(_gridSettings.TileColors[0], ResourceType.Shroom);
+        }
+        StartAnimation();
     }
+    public void StartAnimation()
+    {
+        StartCoroutine(AnimateGrid());
+    }
+
+    private IEnumerator AnimateGrid()
+    {
+
+        for (int y = 0; y < _gridSettings.GridSize.y; y++)
+        {
+            for (int x = 0; x < _gridSettings.GridSize.x; x++)
+            {
+                GridTile tile = _gridTiles[x, y];
+                tile.gameObject.SetActive(true);
+                tile.StartAnimation();
+                // yield return new WaitForSeconds(0.01f);
+            }
+            yield return null;
+            yield return null;
+            yield return null;
+        }
+    }
+
     public static GridTile GetTile(Vector3 position)
     {
         return GetTile(GetTileIndex(position));
@@ -154,7 +184,45 @@ public class HexGrid : MonoBehaviour
         */
         return path;
     }
-
+    public void PrintResources()
+    {
+        string shrooms = "";
+        string water = "";
+        string crystals = "";
+        string honey = "";
+        // loop through all tiles
+        for (int x = 0; x < _gridTiles.GetLength(0); x++)
+        {
+            for (int y = 0; y < _gridTiles.GetLength(1); y++)
+            {
+                // get the tile at the current index
+                GridTile tile = _gridTiles[x, y];
+                // if the tile is not null
+                if (tile.ResourceType != ResourceType.Empty)
+                {
+                    switch (tile.ResourceType)
+                    {
+                        case ResourceType.Shroom:
+                            shrooms += $"new Vector2Int({x}, {y}),";
+                            break;
+                        case ResourceType.Water:
+                            water += $"new Vector2Int({x}, {y}),";
+                            break;
+                        case ResourceType.Crystal:
+                            crystals += $"new Vector2Int({x}, {y}),";
+                            break;
+                        case ResourceType.Honey:
+                            honey += $"new Vector2Int({x}, {y}),";
+                            break;
+                    }
+                }
+            }
+        }
+        Debug.Log("shrooms: " + shrooms);
+        Debug.Log("water: " + water);
+        Debug.Log("crystals: " + crystals);
+        Debug.Log("honey: " + honey);
+    }
     [field: SerializeField] private Vector2Int _gizmosSize;
     private void OnDrawGizmos()
     {

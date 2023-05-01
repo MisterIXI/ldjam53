@@ -35,7 +35,10 @@ public class PlaceableManager : MonoBehaviour
             }
         }
     }
+    public static void PlaceGridTile(GridTile tile)
+    {
 
+    }
     public static void PlaceObject(Placeable placeablePrefab, GridTile tile, float angle = 0f)
     {
         Instance._placeableQueue.Enqueue(new PlaceableInfo { placeable = placeablePrefab, tile = tile, Angle = angle });

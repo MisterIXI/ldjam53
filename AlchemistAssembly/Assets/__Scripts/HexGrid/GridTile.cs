@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 [SelectionBase]
@@ -11,14 +13,12 @@ public class GridTile : MonoBehaviour
     private Color _defaultColor;
     private PlacementToolSettings _settings;
     public ResourceType ResourceType { get; private set; } = ResourceType.Empty;
-    private void Start()
+
+    public void Initialize(Vector2Int tileIndex)
     {
         _settings = SettingsManager.PlacementToolSettings;
         _meshRenderer = GetComponentInChildren<MeshRenderer>();
         _defaultColor = _meshRenderer.material.color;
-    }
-    public void Initialize(Vector2Int tileIndex)
-    {
         TileIndex = tileIndex;
     }
 
@@ -56,6 +56,32 @@ public class GridTile : MonoBehaviour
         _defaultColor = color;
         _meshRenderer.material.color = color;
         ResourceType = resourceType;
+    }
+
+    public void StartAnimation()
+    {
+        StartCoroutine(FallingAnimation());
+    }
+
+    public IEnumerator FallingAnimation()
+    {
+        Vector3 startPosition = transform.position;
+        if (_settings == null)
+            _settings = SettingsManager.PlacementToolSettings;
+        float startTime = Time.time;
+        float endTime = startTime + _settings.AnimationDuration;
+        while (Time.time < endTime)
+        {
+            float t = (Time.time - startTime) / _settings.AnimationDuration;
+            float newY = _settings.AnimationCurve.Evaluate(t);
+            if (newY >= 0)
+                newY *= _settings.AnimationUpperLimit;
+            else
+                newY *= _settings.AnimationLowerLimit;
+            transform.position = startPosition + newY * Vector3.up;
+            yield return null;
+        }
+        transform.position = startPosition;
     }
 }
 
