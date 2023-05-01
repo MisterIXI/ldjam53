@@ -15,6 +15,12 @@ public class MineCart : MonoBehaviour
     public ResourceType CurrentRessource { get; private set; }
     public void Initialize(List<GridTile> path, ResourceType ressource)
     {
+        if (path.Count < 2)
+        {
+            Debug.LogError("Path must have at least 2 tiles");
+            Destroy(gameObject);
+            return;
+        }
         _settings = SettingsManager.MineCartSettings;
         _path = path;
         transform.position = _path.First().transform.position;
@@ -24,6 +30,8 @@ public class MineCart : MonoBehaviour
         _prevTile = _path[0];
         _reachedHalfWay = false;
         CurrentRessource = ressource;
+        ((RailEntity)_path[1].Placeable).ConnectTiles(_path[0], _path[2]);
+        transform.LookAt(_path[_currentPathIndex + 1].transform.position, Vector3.up);
     }
     private void FixedUpdate()
     {
@@ -33,6 +41,7 @@ public class MineCart : MonoBehaviour
             if (_currentPathIndex == _path.Count - 1)
             {
                 Destroy(gameObject);
+                return;
             }
             transform.LookAt(_path[_currentPathIndex + 1].transform.position, Vector3.up);
             if (_currentPathIndex < _path.Count - 2)
@@ -48,6 +57,7 @@ public class MineCart : MonoBehaviour
                     _currentPathIndex++;
                     _currentTile = _path[_currentPathIndex];
                     _t = 0;
+                    _reachedHalfWay = false;
                     RailEntity railEntity = _currentTile.Placeable as RailEntity;
                     railEntity.OccupyingMineCart = this;
                     railEntity.ConnectTiles(_path[_currentPathIndex - 1], _path[_currentPathIndex + 1]);
@@ -70,8 +80,8 @@ public class MineCart : MonoBehaviour
             if (!_reachedHalfWay && _t > 0.5f)
             {
                 _reachedHalfWay = true;
-                if (_prevTile != null && _prevTile.Placeable is RailEntity)
-                    (_prevTile.Placeable as RailEntity).OccupyingMineCart = null;
+                if (_prevTile != null && _prevTile.Placeable is RailEntity entity && entity.OccupyingMineCart == this)
+                    entity.OccupyingMineCart = null;
             }
             if (_currentPathIndex == 1)
             {
@@ -94,9 +104,9 @@ public class MineCart : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (_currentTile != null)
+        if (_currentTile != null && _currentTile.Placeable is RailEntity)
             (_currentTile.Placeable as RailEntity).OccupyingMineCart = null;
-        if (_prevTile != null)
+        if (_prevTile != null && _prevTile.Placeable is RailEntity)
             (_prevTile.Placeable as RailEntity).OccupyingMineCart = null;
     }
 }

@@ -927,6 +927,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3553403176651960576, guid: eadd70279c4020a45bfb8280a4371955,
+        type: 3}
+      propertyPath: <GridLayer>k__BackingField.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 7303737756770850770, guid: eadd70279c4020a45bfb8280a4371955,
         type: 3}
       propertyPath: m_Name

@@ -6,7 +6,7 @@ public class ReceiverStation : Placeable, IInteractable
     public event Action OnRessourcesConsumed;
     public event Action AllRessources;
     [field: SerializeField] private ResourceType[] _acceptedTypes = new ResourceType[] { ResourceType.Empty };
-    private IInteractable _parentInteractable;
+    public IInteractable ParentInteractable { get; private set; }
     private FactoryBuilding _parentFactory;
     private BitchHouse _parentBitchHouse;
     public bool[] TypesStored;
@@ -15,7 +15,7 @@ public class ReceiverStation : Placeable, IInteractable
     {
         base.Initialize();
         TypesStored = new bool[_acceptedTypes.Length];
-        _parentInteractable = transform.parent.GetComponent<IInteractable>();
+        ParentInteractable = transform.parent.GetComponent<IInteractable>();
         _parentFactory = transform.parent.GetComponent<FactoryBuilding>();
         _parentBitchHouse = transform.parent.GetComponent<BitchHouse>();
     }
@@ -66,7 +66,7 @@ public class ReceiverStation : Placeable, IInteractable
     }
     public void OnInteract()
     {
-        _parentInteractable.OnInteract();
+        ParentInteractable.OnInteract();
     }
     public override void PlaceOnTile(GridTile tile)
     {
