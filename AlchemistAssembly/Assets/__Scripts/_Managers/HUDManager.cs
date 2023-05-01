@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class HUDManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI InfoObject, redPotion, yellowPotion, bluePotion, yinyangPotion;
-    private int redPotionAmount, yellowPotionAmount, bluePotionAmount, yinyangPotionAmount;
+    public int redPotionAmount, yellowPotionAmount, bluePotionAmount, yinyangPotionAmount;
     [SerializeField] private Image[] HotkeyImages;
     private Color highlightColor = new Color(0, 0.990566f, 0.02175521f, 0.5254902f);
     private Color normalColor = new Color(0, 0, 0, 0.5254902f);
