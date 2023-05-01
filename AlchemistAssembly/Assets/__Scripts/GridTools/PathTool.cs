@@ -9,6 +9,7 @@ public class PathTool : GridTool
 {
     private GridTile _startTile;
     private LineRenderer _lineRenderer;
+    private List<GridTile> _currentPath = new List<GridTile>();
     protected override void Initialize()
     {
         base.Initialize();
@@ -18,8 +19,9 @@ public class PathTool : GridTool
 
     private void OnTileHovered(GridTile oldTile, GridTile newTile)
     {
-        if (newTile.Placeable != null && newTile.Placeable is ReceiverStation receiverStation)
+        if (newTile?.Placeable != null && newTile.Placeable is ReceiverStation receiverStation)
         {
+            Debug.Log($"Hovered over receiver station {receiverStation.name}");
             var path = GetTrackPath(_startTile, newTile);
             _lineRenderer.positionCount = path.Count;
             for (int i = 0; i < path.Count; i++)
@@ -62,11 +64,10 @@ public class PathTool : GridTool
         queue.Enqueue(currentTile);
         while (queue.Count > 0)
         {
-            prevTile = cameFrom[currentTile];
             currentTile = queue.Dequeue();
+            prevTile = cameFrom[currentTile];
             if (currentTile == endTile)
             {
-                cameFrom.Add(endTile, prevTile);
                 break;
             }
             currentDirection = HexHelper.GetDirection(prevTile.TileIndex, currentTile.TileIndex);
@@ -110,7 +111,8 @@ public class PathTool : GridTool
     {
         if (context.performed)
         {
-            AddPathToSender();
+            if (_currentPath != null && _currentPath.Count > 1)
+                AddPathToSender();
         }
     }
     private void AddPathToSender()

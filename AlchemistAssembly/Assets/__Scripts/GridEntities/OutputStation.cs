@@ -13,7 +13,7 @@ public class OutputStation : Placeable, IInteractable
     {
         base.Initialize();
         OutputTile = HexGrid.GetTile(_outputPoint.position);
-        _parentInteractable = GetComponentInParent<IInteractable>();
+        _parentInteractable = transform.parent.GetComponentInParent<IInteractable>();
     }
 
     public override void PlaceOnTile(GridTile tile)

@@ -6,6 +6,7 @@ public class Placeable : MonoBehaviour
 {
     protected GridTile _currentTile;
     private Vector2Int[] _occupiedTiles = new Vector2Int[] { new(0, 0) };
+    public GridTile CurrentTile => _currentTile;
     [field: SerializeField] public bool IsSevenTiles { get; private set; }
     [field: SerializeField] public OutputStation OutputStation { get; private set; }
     [field: SerializeField] public ReceiverStation ReceiverStation { get; private set; }
@@ -83,15 +84,52 @@ public class Placeable : MonoBehaviour
         transform.position = tile.transform.position;
 
     }
-
-    public bool CanPlaceOnTile(GridTile tile)
+    private static bool CheckTileValidity(Vector2Int index)
     {
-        foreach (var offset in GetOccupiedTiles())
+        if (!HexGrid.IsValidIndex(index))
+            return false;
+        GridTile tile = HexGrid.GetTile(index);
+        if (tile.Placeable != null)
+            return false;
+        return true;
+    }
+    public static bool CanPlaceOnTile(GridTile tile, bool IsSevenTiles)
+    {
+        if (tile.Placeable != null)
+            return false;
+        if (IsSevenTiles)
         {
-            GridTile gridTile = HexGrid.GetTile(tile.TileIndex + offset);
-            if (gridTile == null || gridTile.Placeable != null)
-            {
+            bool isEven = tile.TileIndex.x % 2 == 0;
+            // up and down
+            if (!CheckTileValidity(tile.TileIndex + new Vector2Int(0, 1)))
                 return false;
+            if (!CheckTileValidity(tile.TileIndex + new Vector2Int(0, -1)))
+                return false;
+            if (isEven)
+            {
+                // up left and down left
+                if (!CheckTileValidity(tile.TileIndex + new Vector2Int(-1, -1)))
+                    return false;
+                if (!CheckTileValidity(tile.TileIndex + new Vector2Int(-1, 0)))
+                    return false;
+                // up right and down right
+                if (!CheckTileValidity(tile.TileIndex + new Vector2Int(1, -1)))
+                    return false;
+                if (!CheckTileValidity(tile.TileIndex + new Vector2Int(1, 0)))
+                    return false;
+            }
+            else
+            {
+                // up left and down left
+                if (!CheckTileValidity(tile.TileIndex + new Vector2Int(-1, 0)))
+                    return false;
+                if (!CheckTileValidity(tile.TileIndex + new Vector2Int(-1, 1)))
+                    return false;
+                // up right and down right
+                if (!CheckTileValidity(tile.TileIndex + new Vector2Int(1, 0)))
+                    return false;
+                if (!CheckTileValidity(tile.TileIndex + new Vector2Int(1, 1)))
+                    return false;
             }
         }
         return true;

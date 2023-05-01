@@ -30,14 +30,15 @@ public class PlaceableManager : MonoBehaviour
             }
             else
             {
+                newEntity.transform.rotation = Quaternion.Euler(0f, currentPair.Angle, 0f);
                 newEntity.PlaceOnTile(currentPair.tile);
             }
         }
     }
 
-    public static void PlaceObject(Placeable placeablePrefab, GridTile tile)
+    public static void PlaceObject(Placeable placeablePrefab, GridTile tile, float angle = 0f)
     {
-        Instance._placeableQueue.Enqueue(new PlaceableInfo { placeable = placeablePrefab, tile = tile });
+        Instance._placeableQueue.Enqueue(new PlaceableInfo { placeable = placeablePrefab, tile = tile, Angle = angle });
     }
     public static void PlaceRail(Placeable placeablePrefab, GridTile tile, GridTile startTile, GridTile endTile)
     {
@@ -49,6 +50,7 @@ public class PlaceableManager : MonoBehaviour
 public struct PlaceableInfo
 {
     public Placeable placeable;
+    public float Angle;
     public GridTile tile;
     public GridTile startTile;
     public GridTile endTile;
