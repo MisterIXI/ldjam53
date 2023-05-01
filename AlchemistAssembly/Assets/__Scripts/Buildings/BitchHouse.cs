@@ -8,7 +8,10 @@ public class BitchHouse : Placeable
     [field: SerializeField] private Transform _blocker2;
     private MineCartSettings _mineCartSettings => SettingsManager.MineCartSettings;
 
-    private int redPotCounter = 0, bluePotCounter = 0, yellowPotCounter = 0, purplePotCounter = 0;
+    public int redPotCounter { get; private set; } = 0;
+    public int bluePotCounter { get; private set; } = 0;
+    public int yellowPotCounter { get; private set; } = 0;
+    public int purplePotCounter { get; private set; } = 0;
 
 
     void Start()
@@ -33,22 +36,22 @@ public class BitchHouse : Placeable
             case ResourceType.RedPot:
                 redPotCounter += 1;
                 HUDManager.Instance.ChangetooltipText(6);
+                HUDManager.Instance.AddPotionRed();
                 break;
             case ResourceType.BluePot:
                 bluePotCounter += 1;
+                HUDManager.Instance.AddPotionBlue();
                 break;
             case ResourceType.YellowPot:
                 yellowPotCounter += 1;
+                HUDManager.Instance.AddPotionYellow();
                 break;
             case ResourceType.PurplePot:
                 purplePotCounter += 1;
+                HUDManager.Instance.AddPotionYinYang();
                 break;
         }
         ReceiverStation.ResetResources();
-        HUDManager.Instance.redPotionAmount = redPotCounter;
-        HUDManager.Instance.bluePotionAmount = bluePotCounter;
-        HUDManager.Instance.yellowPotionAmount = yellowPotCounter;
-        HUDManager.Instance.yinyangPotionAmount = purplePotCounter;
     }
 
 }
