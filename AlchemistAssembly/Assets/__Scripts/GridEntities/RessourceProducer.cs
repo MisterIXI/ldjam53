@@ -3,15 +3,16 @@ using UnityEngine;
 
 
 
-public class RessourceProducer : Placeable
+public class RessourceProducer : Placeable, IInteractable
 {
-    [field: SerializeField] public OutputStation OutputStation { get; private set; }
     public override void Initialize()
     {
         base.Initialize();
-        OutputStation.Initialize();
     }
-
+    public void OnInteract()
+    {
+        Debug.Log("Interacted with ressource producer");
+    }
     public override void PlaceOnTile(GridTile tile)
     {
         base.PlaceOnTile(tile);

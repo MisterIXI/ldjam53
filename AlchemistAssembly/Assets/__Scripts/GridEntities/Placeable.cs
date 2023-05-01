@@ -6,6 +6,9 @@ public class Placeable : MonoBehaviour
 {
     protected GridTile _currentTile;
     private Vector2Int[] _occupiedTiles = new Vector2Int[] { new(0, 0) };
+    [field: SerializeField] public bool IsSevenTiles { get; private set; }
+    [field: SerializeField] public OutputStation OutputStation { get; private set; }
+    [field: SerializeField] public ReceiverStation ReceiverStation { get; private set; }
     public virtual Vector2Int[] GetOccupiedTiles() => _occupiedTiles;
     private PlacementToolSettings _settings;
     private void Start()
@@ -26,13 +29,50 @@ public class Placeable : MonoBehaviour
 
     protected void FillTiles(Vector2Int startPoint, Vector2Int[] offsets)
     {
-        foreach (var tile in offsets)
+        _currentTile.Placeable = this;
+        if (IsSevenTiles)
         {
-            GridTile gridTile = HexGrid.GetTile(startPoint + tile);
-            if (gridTile != null)
+            bool isEven = _currentTile.TileIndex.x % 2 == 0;
+            if (OutputStation != null)
             {
-                gridTile.Placeable = this;
+                GridTile outputTile = HexGrid.GetTile(OutputStation.transform.position);
+                OutputStation.PlaceOnTile(outputTile);
             }
+            if (ReceiverStation != null)
+            {
+                GridTile receiverTile = HexGrid.GetTile(ReceiverStation.transform.position);
+                ReceiverStation.PlaceOnTile(receiverTile);
+            }
+            // up and down
+            CheckToFillTile(startPoint + new Vector2Int(0, 1));
+            CheckToFillTile(startPoint + new Vector2Int(0, -1));
+            if (isEven)
+            {
+                // up left and down left
+                CheckToFillTile(startPoint + new Vector2Int(-1, -1));
+                CheckToFillTile(startPoint + new Vector2Int(-1, 0));
+                // up right and down right
+                CheckToFillTile(startPoint + new Vector2Int(1, -1));
+                CheckToFillTile(startPoint + new Vector2Int(1, 0));
+            }
+            else
+            {
+                // up left and down left
+                CheckToFillTile(startPoint + new Vector2Int(-1, 0));
+                CheckToFillTile(startPoint + new Vector2Int(-1, 1));
+                // up right and down right
+                CheckToFillTile(startPoint + new Vector2Int(1, 0));
+                CheckToFillTile(startPoint + new Vector2Int(1, 1));
+            }
+        }
+    }
+
+    private void CheckToFillTile(Vector2Int index)
+    {
+        GridTile tile = HexGrid.GetTile(index);
+        if (tile != OutputStation._currentTile && tile != ReceiverStation._currentTile)
+        {
+            tile.Placeable = this;
         }
     }
 
