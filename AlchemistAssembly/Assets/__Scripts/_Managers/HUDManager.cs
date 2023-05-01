@@ -8,8 +8,8 @@ public class HUDManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI InfoObject, redPotion, yellowPotion, bluePotion, yinyangPotion;
     public int redPotionAmount, yellowPotionAmount, bluePotionAmount, yinyangPotionAmount;
     [SerializeField] private Image[] HotkeyImages;
-    private Color highlightColor = new Color(0, 0.990566f, 0.02175521f, 0.5254902f);
-    private Color normalColor = new Color(0, 0, 0, 0.5254902f);
+    private Color highlightColor = new Color(204, 204, 204);
+    private Color normalColor = new Color(68, 68, 68);
     private int currentMission = 0;
     // INFOPANEL 
     [SerializeField] private Image infoImage;
