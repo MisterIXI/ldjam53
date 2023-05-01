@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-public class ResourceBuilding : MonoBehaviour, IInteractable
+public class ResourceBuilding : Placeable, IInteractable
 {
     private BuildingSettings _buildingSettings => SettingsManager.BuildingSettings;
 
@@ -18,7 +18,7 @@ public class ResourceBuilding : MonoBehaviour, IInteractable
     private float timer = 0;
 
 
-    void Start() 
+    private void Start() 
     {
         // Finds out what type of Building it is and what time needs to create resource / sprite
         if(gameObject.tag == "Shroom")
@@ -61,13 +61,17 @@ public class ResourceBuilding : MonoBehaviour, IInteractable
 
     private void ProduceOutput()
     {
-        if(routes != null)  // if there are routes availible then start producing
+        if(routes.Length != 0)  // if there are routes availible then start producing
         {
             timer += Time.deltaTime;
 
-            // if this buildings panel is showing updates the progress slider
-            if(_buildingSettings.CurrentBuilding == gameObject)
-                _buildingSettings.OutputBar.value = timer / _outputTime * 100;
+            try
+            {
+                // if this buildings panel is showing updates the progress slider
+                if(HudReferences.Instance.CurrentBuilding == gameObject)
+                    HudReferences.Instance.OutputBar.value = timer / _outputTime * 100;
+            }catch{}
+
 
             if(timer >= _outputTime)
             {
@@ -92,31 +96,34 @@ public class ResourceBuilding : MonoBehaviour, IInteractable
 
     public void OnInteract() //if building is clicked
     {
-        _buildingSettings.CurrentBuilding = gameObject;
-        _buildingSettings.BuildingPanel.SetActive(true);
-        _buildingSettings.RecepiePanel.SetActive(false);
-        _buildingSettings.InputPanel.SetActive(false);
-        _buildingSettings.RecepieButtonPanel.SetActive(false);
+        Debug.Log("Interacting");
+        HudReferences.Instance.CurrentBuilding = gameObject;
+        HudReferences.Instance.BuildingPanel.SetActive(true);
+        HudReferences.Instance.RecepiePanel.SetActive(false);
+        HudReferences.Instance.InputPanel.SetActive(false);
+        HudReferences.Instance.RecepieButtonPanel.SetActive(false);
 
-        _buildingSettings.OutputIconPanel.GetComponent<Image>().sprite = _outputSprite;
+        HudReferences.Instance.OutputIconPanel.GetComponent<Image>().sprite = _outputSprite;
+        HudReferences.Instance.OutputBar.value = timer / _outputTime * 100;
 
         // show routes
     }
 
-    private void OnClose()  // if close button is pressed
+    public void OnClose()  // if close button is pressed
     {
-        _buildingSettings.BuildingPanel.SetActive(false);
-        _buildingSettings.RecepiePanel.SetActive(false);
-        _buildingSettings.CurrentBuilding = null;
+        HudReferences.Instance.BuildingPanel.SetActive(false);
+        HudReferences.Instance.RecepiePanel.SetActive(false);
+        HudReferences.Instance.CurrentBuilding = null;
 
         // hide routes
     }
 
 
-    private void OnAddRoute()   // if add route button is pressed
+    public void OnAddRoute()   // if add route button is pressed
     {
-        _buildingSettings.BuildingPanel.SetActive(false);
-        _buildingSettings.RecepiePanel.SetActive(false);
+        Debug.Log("Adding Routes");
+        HudReferences.Instance.BuildingPanel.SetActive(false);
+        HudReferences.Instance.RecepiePanel.SetActive(false);
 
         // show route tool
         // show routes
@@ -127,7 +134,7 @@ public class ResourceBuilding : MonoBehaviour, IInteractable
     }
 
 
-    private void OnClearRoutes()    // if clear routes button is pressed
+    public void OnClearRoutes()    // if clear routes button is pressed
     {
         routes = null; // im not sure this works yannik
     }
