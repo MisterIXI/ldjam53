@@ -20,7 +20,7 @@ MonoBehaviour:
   <ZoomSpeed>k__BackingField: 1
   <MinZoom>k__BackingField: -10
   <MaxZoom>k__BackingField: 10
-  <MinPosX>k__BackingField: -100
-  <MaxPosX>k__BackingField: 100
-  <MinPosZ>k__BackingField: -100
-  <MaxPosZ>k__BackingField: 100
+  <MinPosX>k__BackingField: -5
+  <MaxPosX>k__BackingField: 85
+  <MinPosZ>k__BackingField: -5
+  <MaxPosZ>k__BackingField: 85
