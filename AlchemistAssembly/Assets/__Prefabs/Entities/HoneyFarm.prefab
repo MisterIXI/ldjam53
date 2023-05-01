@@ -90,6 +90,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7925332579541684281}
   - component: {fileID: -4359339629677434344}
+  - component: {fileID: 6002364798233529320}
   m_Layer: 0
   m_Name: HoneyFarm
   m_TagString: Untagged
@@ -131,6 +132,18 @@ MonoBehaviour:
   <ReceiverStation>k__BackingField: {fileID: 0}
   _resourceType: 3
   routes: []
+--- !u!114 &6002364798233529320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4614511324588127983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48dc3374cd501a14884504d10ed08d6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3988141638709078395
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -202,7 +215,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 42c23486bf9439b4cb16667af39ff1dc,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6069994282427233451}
   m_SourcePrefab: {fileID: 100100000, guid: 42c23486bf9439b4cb16667af39ff1dc, type: 3}
 --- !u!4 &3517875142746148496 stripped
 Transform:
@@ -210,3 +227,31 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3988141638709078395}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4294692836269347882 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 42c23486bf9439b4cb16667af39ff1dc,
+    type: 3}
+  m_PrefabInstance: {fileID: 3988141638709078395}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &6069994282427233451
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4294692836269347882}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 1359727766283849111, guid: 42c23486bf9439b4cb16667af39ff1dc, type: 3}

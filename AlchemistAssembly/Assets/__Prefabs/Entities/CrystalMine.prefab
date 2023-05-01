@@ -90,6 +90,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7381518942599984402}
   - component: {fileID: -2593899193181756888}
+  - component: {fileID: 5657133436082073165}
   m_Layer: 0
   m_Name: CrystalMine
   m_TagString: Untagged
@@ -131,6 +132,18 @@ MonoBehaviour:
   <ReceiverStation>k__BackingField: {fileID: 0}
   _resourceType: 2
   routes: []
+--- !u!114 &5657133436082073165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2694660804870390150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48dc3374cd501a14884504d10ed08d6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7026391870205545456
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -202,7 +215,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9bdd3a3142cb34c4da720dc52a1b54ec,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 728101083780518843}
   m_SourcePrefab: {fileID: 100100000, guid: 9bdd3a3142cb34c4da720dc52a1b54ec, type: 3}
 --- !u!4 &7352261978615065627 stripped
 Transform:
@@ -210,3 +227,31 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7026391870205545456}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7873325673740662433 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9bdd3a3142cb34c4da720dc52a1b54ec,
+    type: 3}
+  m_PrefabInstance: {fileID: 7026391870205545456}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &728101083780518843
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7873325673740662433}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5148854418254268828, guid: 9bdd3a3142cb34c4da720dc52a1b54ec, type: 3}

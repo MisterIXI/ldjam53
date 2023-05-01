@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7229189254854299278}
   - component: {fileID: -6543362279520719386}
+  - component: {fileID: 7975763498962915438}
   m_Layer: 0
   m_Name: WaterWell
   m_TagString: Untagged
@@ -51,6 +52,18 @@ MonoBehaviour:
   <ReceiverStation>k__BackingField: {fileID: 0}
   _resourceType: 1
   routes: []
+--- !u!114 &7975763498962915438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273242119555909049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48dc3374cd501a14884504d10ed08d6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2122341030827457363
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,8 +215,40 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: cec8b13e6b20bf8469699875dcf5f6c5,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1691787586107590017}
   m_SourcePrefab: {fileID: 100100000, guid: cec8b13e6b20bf8469699875dcf5f6c5, type: 3}
+--- !u!1 &8342917714741801837 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: cec8b13e6b20bf8469699875dcf5f6c5,
+    type: 3}
+  m_PrefabInstance: {fileID: 9153168926437445180}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &1691787586107590017
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8342917714741801837}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 7167308050266672844, guid: cec8b13e6b20bf8469699875dcf5f6c5, type: 3}
 --- !u!4 &8686370394167306711 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: cec8b13e6b20bf8469699875dcf5f6c5,
