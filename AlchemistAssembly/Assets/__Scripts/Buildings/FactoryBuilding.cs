@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-public class FactoryBuilding : MonoBehaviour, IInteractable
+public class FactoryBuilding : Placeable, IInteractable
 {
     private BuildingSettings _buildingSettings => SettingsManager.BuildingSettings;
 
@@ -25,11 +25,11 @@ public class FactoryBuilding : MonoBehaviour, IInteractable
     [field: SerializeField] private GameObject[] routes;
     private int routeCoutner = 0;
 
-    private ResourceType _input1;
-    private ResourceType _input2;
-    private ResourceType _input3;
+    private ResourceType _input1 = ResourceType.Empty;
+    private ResourceType _input2 = ResourceType.Empty;
+    private ResourceType _input3 = ResourceType.Empty;
 
-    private int recepieInt;
+    private int recepieInt = 8;
 
     private float timer = 0;
 
@@ -41,10 +41,8 @@ public class FactoryBuilding : MonoBehaviour, IInteractable
     void Update() 
     {
 
-        if(_input1 == _buildingSettings.Recipes[recepieInt].Input[1] && _input2 == _buildingSettings.Recipes[recepieInt].Input[2] && _input3 == _buildingSettings.Recipes[recepieInt].Input[3])
+        if(_input1 == _buildingSettings.Recipes[recepieInt].Input[0] && _input2 == _buildingSettings.Recipes[recepieInt].Input[1] && _input3 == _buildingSettings.Recipes[recepieInt].Input[2])
             ProduceOutput();
-        
-        UpdateInputColor();
 
         AcceptInput(); // maybe let cart call this function yannik
     }
@@ -52,13 +50,16 @@ public class FactoryBuilding : MonoBehaviour, IInteractable
 
     private void ProduceOutput()
     {
-        if(routes != null && _resourceType != ResourceType.Empty)  // if there are routes availible then start producing
+        if(routes.Length != 0 && _resourceType != ResourceType.Empty)  // if there are routes availible then start producing
         {
             timer += Time.deltaTime;
 
-            // if this buildings panel is showing updates the progress slider
-            if(_buildingSettings.CurrentBuilding == gameObject)
-                _buildingSettings.OutputBar.value = timer / _outputTime * 100;
+            try
+            {
+                // if this buildings panel is showing updates the progress slider
+                if(HudReferences.Instance.CurrentBuilding == gameObject)
+                    HudReferences.Instance.OutputBar.value = timer / _outputTime * 100;
+            }catch{}
 
             if(timer >= _outputTime)
             {
@@ -76,7 +77,7 @@ public class FactoryBuilding : MonoBehaviour, IInteractable
             if(Output == _buildingSettings.Recipes[i].Output)
             return i;  
         }
-        return -1;
+        return 8;
     }
 
 
@@ -125,20 +126,20 @@ public class FactoryBuilding : MonoBehaviour, IInteractable
 
     private void AcceptInput()
     {
-        ResourceType inputResource = ResourceType.Water; // Yannik das durch event ersetzen
+        ResourceType inputResource = ResourceType.Empty; // Yannik das durch event ersetzen
 
 
-        if(_input1 == ResourceType.Empty && _buildingSettings.Recipes[recepieInt].Input[0] == inputResource)
+        if(_input1 == ResourceType.Empty && _buildingSettings.Recipes[recepieInt].Input[0] == inputResource && _buildingSettings.Recipes[recepieInt].Input[0] != ResourceType.Empty)
         {
             _input1 = inputResource;
             // delete minecart Yannik
         }
-        else if(_input2 == ResourceType.Empty && _buildingSettings.Recipes[recepieInt].Input[1] == inputResource)
+        else if(_input2 == ResourceType.Empty && _buildingSettings.Recipes[recepieInt].Input[1] == inputResource && _buildingSettings.Recipes[recepieInt].Input[0] != ResourceType.Empty)
         {
             _input2 = inputResource;
             // delete minecart Yannik
         }
-        else if(_input3 == ResourceType.Empty && _buildingSettings.Recipes[recepieInt].Input[2] == inputResource)
+        else if(_input3 == ResourceType.Empty && _buildingSettings.Recipes[recepieInt].Input[2] == inputResource && _buildingSettings.Recipes[recepieInt].Input[0] != ResourceType.Empty)
         {
             _input3 = inputResource;
             // delete minecart Yannik
@@ -147,61 +148,74 @@ public class FactoryBuilding : MonoBehaviour, IInteractable
         {
             // Let minecart wait Yannik
         }
+
+        try
+        {
+            // if this buildings panel is showing updates the progress slider
+            if(HudReferences.Instance.CurrentBuilding == gameObject)
+                UpdateInputColor();
+        }catch{}
     }
 
     private void UpdateInputColor()
     {
-        if(_input1 == ResourceType.Empty)
-            _buildingSettings.InputColor1.GetComponent<Image>().color = _buildingSettings.ColorUnavailable;
+        // Debug.Log(_input1.ToString() + _input2.ToString() + _input3.ToString());
+
+        if(_buildingSettings.Recipes[recepieInt].Input[0] == ResourceType.Empty)
+            HudReferences.Instance.InputColor1.GetComponent<Image>().color = _buildingSettings.ColorUnavailable;
         else if(_input1 == _buildingSettings.Recipes[recepieInt].Input[0])
-            _buildingSettings.InputColor1.GetComponent<Image>().color = _buildingSettings.ColorFull;
+            HudReferences.Instance.InputColor1.GetComponent<Image>().color = _buildingSettings.ColorFull;
         else
-            _buildingSettings.InputColor1.GetComponent<Image>().color = _buildingSettings.ColorEmpty;
+            HudReferences.Instance.InputColor1.GetComponent<Image>().color = _buildingSettings.ColorEmpty;
 
-        if(_input2 == ResourceType.Empty)
-            _buildingSettings.InputColor2.GetComponent<Image>().color = _buildingSettings.ColorUnavailable;
-        else if(_input2 == _buildingSettings.Recipes[recepieInt].Input[1])
-            _buildingSettings.InputColor2.GetComponent<Image>().color = _buildingSettings.ColorFull;
-        else
-            _buildingSettings.InputColor2.GetComponent<Image>().color = _buildingSettings.ColorEmpty;
 
-        if(_input3 == ResourceType.Empty)
-            _buildingSettings.InputColor3.GetComponent<Image>().color = _buildingSettings.ColorUnavailable;
-        else if(_input3 == _buildingSettings.Recipes[recepieInt].Input[2])
-            _buildingSettings.InputColor3.GetComponent<Image>().color = _buildingSettings.ColorFull;
+        if(_buildingSettings.Recipes[recepieInt].Input[1] == ResourceType.Empty)
+            HudReferences.Instance.InputColor2.GetComponent<Image>().color = _buildingSettings.ColorUnavailable;
+        else if(_input1 == _buildingSettings.Recipes[recepieInt].Input[1])
+            HudReferences.Instance.InputColor2.GetComponent<Image>().color = _buildingSettings.ColorFull;
         else
-            _buildingSettings.InputColor3.GetComponent<Image>().color = _buildingSettings.ColorEmpty;
+            HudReferences.Instance.InputColor2.GetComponent<Image>().color = _buildingSettings.ColorEmpty;
+
+
+        if(_buildingSettings.Recipes[recepieInt].Input[2] == ResourceType.Empty)
+            HudReferences.Instance.InputColor3.GetComponent<Image>().color = _buildingSettings.ColorUnavailable;
+        else if(_input1 == _buildingSettings.Recipes[recepieInt].Input[2])
+            HudReferences.Instance.InputColor3.GetComponent<Image>().color = _buildingSettings.ColorFull;
+        else
+            HudReferences.Instance.InputColor3.GetComponent<Image>().color = _buildingSettings.ColorEmpty;
     }
 
     public void OnInteract() //if building is clicked
     {
-        _buildingSettings.CurrentBuilding = gameObject;
-        _buildingSettings.BuildingPanel.SetActive(true);
-        _buildingSettings.RecepiePanel.SetActive(false);
-        _buildingSettings.InputPanel.SetActive(true);
-        _buildingSettings.RecepieButtonPanel.SetActive(true);
+        HudReferences.Instance.CurrentBuilding = gameObject;
+        HudReferences.Instance.BuildingPanel.SetActive(true);
+        HudReferences.Instance.RecepiePanel.SetActive(false);
+        HudReferences.Instance.InputPanel.SetActive(true);
+        HudReferences.Instance.RecepieButtonPanel.SetActive(true);
 
-        _buildingSettings.OutputIconPanel.GetComponent<Image>().sprite = _outputSprite;
+        HudReferences.Instance.OutputIconPanel.GetComponent<Image>().sprite = _outputSprite;
+        HudReferences.Instance.OutputBar.value = timer / _outputTime * 100;
 
         UpdateIcons();
+        UpdateInputColor();
 
         // show routes
     }
 
-    private void OnClose()  // if close button is pressed
+    public void OnClose()  // if close button is pressed
     {
-        _buildingSettings.BuildingPanel.SetActive(false);
-        _buildingSettings.RecepiePanel.SetActive(false);
-        _buildingSettings.CurrentBuilding = null;
+        HudReferences.Instance.BuildingPanel.SetActive(false);
+        HudReferences.Instance.RecepiePanel.SetActive(false);
+        HudReferences.Instance.CurrentBuilding = null;
 
         // hide routes
     }
 
 
-    private void OnAddRoute()   // if add route button is pressed
+    public void OnAddRoute()   // if add route button is pressed
     {
-        _buildingSettings.BuildingPanel.SetActive(false);
-        _buildingSettings.RecepiePanel.SetActive(false);
+        HudReferences.Instance.BuildingPanel.SetActive(false);
+        HudReferences.Instance.RecepiePanel.SetActive(false);
 
         // show route tool
         // show routes
@@ -212,19 +226,19 @@ public class FactoryBuilding : MonoBehaviour, IInteractable
     }
 
 
-    private void OnClearRoutes()    // if clear routes button is pressed
+    public void OnClearRoutes()    // if clear routes button is pressed
     {
         routes = null; // im not sure this works yannik
     }
 
 
-    private void OnRecepies()
+    public void OnRecepies()
     {
-        _buildingSettings.BuildingPanel.SetActive(false);
-        _buildingSettings.RecepiePanel.SetActive(true);
+        HudReferences.Instance.BuildingPanel.SetActive(false);
+        HudReferences.Instance.RecepiePanel.SetActive(true);
     }
 
-    private void OnSelectRecepie(ResourceType resource)
+    public void OnSelectRecepie(ResourceType resource)
     {
         recepieInt = FindRecepie(resource);
 
@@ -248,11 +262,11 @@ public class FactoryBuilding : MonoBehaviour, IInteractable
     }
 
 
-    private void UpdateIcons()
+    public void UpdateIcons()
     {
-        _buildingSettings.OutputIconPanel.GetComponent<Image>().sprite = _outputSprite;
-        _buildingSettings.InputIcon1Panel.GetComponent<Image>().sprite = _input1Sprite;
-        _buildingSettings.InputIcon2Panel.GetComponent<Image>().sprite = _input2Sprite;
-        _buildingSettings.InputIcon3Panel.GetComponent<Image>().sprite = _input3Sprite;
+        HudReferences.Instance.OutputIconPanel.GetComponent<Image>().sprite = _outputSprite;
+        HudReferences.Instance.InputIcon1Panel.GetComponent<Image>().sprite = _input1Sprite;
+        HudReferences.Instance.InputIcon2Panel.GetComponent<Image>().sprite = _input2Sprite;
+        HudReferences.Instance.InputIcon3Panel.GetComponent<Image>().sprite = _input3Sprite;
     }
 }

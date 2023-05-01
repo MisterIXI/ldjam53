@@ -16,57 +16,48 @@ MonoBehaviour:
   <WaterTime>k__BackingField: 2
   <CrystalTime>k__BackingField: 4
   <HoneyTime>k__BackingField: 3
-  BuildingPanel: {fileID: 0}
-  RecepiePanel: {fileID: 0}
-  InputPanel: {fileID: 0}
-  RecepieButtonPanel: {fileID: 0}
-  InputColor1: {fileID: 0}
-  InputColor2: {fileID: 0}
-  InputColor3: {fileID: 0}
-  InputIcon1Panel: {fileID: 0}
-  InputIcon2Panel: {fileID: 0}
-  InputIcon3Panel: {fileID: 0}
-  OutputIconPanel: {fileID: 0}
-  OutputBar: {fileID: 0}
-  CurrentBuilding: {fileID: 0}
-  EmptySprite: {fileID: 0}
-  ShroomSprite: {fileID: 0}
-  WaterSprite: {fileID: 0}
-  CrystalSprite: {fileID: 0}
-  HoneySprite: {fileID: 0}
-  RedPotSprite: {fileID: 0}
-  HoneyWaterSprite: {fileID: 0}
-  BluePotSprite: {fileID: 0}
-  RedHoneySprite: {fileID: 0}
-  YellowPotSprite: {fileID: 0}
-  CrystalHoneySprite: {fileID: 0}
-  YellowCrystalSprite: {fileID: 0}
-  PurplePotSprite: {fileID: 0}
+  EmptySprite: {fileID: 21300000, guid: e73c689f1af459d4894e47a4b33ab9c0, type: 3}
+  ShroomSprite: {fileID: 21300000, guid: 5835f07e1f451254eacd509a70662161, type: 3}
+  WaterSprite: {fileID: 21300000, guid: 279fec707c2e49e4b947f30f787492a6, type: 3}
+  CrystalSprite: {fileID: 21300000, guid: 8f6c497295b868d4cadfbe5fec278cc2, type: 3}
+  HoneySprite: {fileID: 21300000, guid: 387e10ec79bf9b54e9d3bc56ebe2e325, type: 3}
+  RedPotSprite: {fileID: 21300000, guid: 6a22ab7466684d24db512a34d54dc474, type: 3}
+  HoneyWaterSprite: {fileID: 21300000, guid: 7cf7fdde33dbbf248b2eb4f704997c61, type: 3}
+  BluePotSprite: {fileID: 21300000, guid: eb612d18fccbf9c498e56929b132874a, type: 3}
+  RedHoneySprite: {fileID: 21300000, guid: 58be5d9456160d5478ba3b313e803309, type: 3}
+  YellowPotSprite: {fileID: 21300000, guid: 9d8ebcade8320a840ada2a0d53ae6742, type: 3}
+  CrystalHoneySprite: {fileID: 21300000, guid: e3ead3223ddf9344ca74cd522cdcabb9, type: 3}
+  YellowCrystalSprite: {fileID: 21300000, guid: e3209bae708637049bdb8a2f98aa09a4,
+    type: 3}
+  PurplePotSprite: {fileID: 21300000, guid: 4a5711659a77f104da29319de4963ea6, type: 3}
   ColorFull: {r: 0.07414305, g: 0.990566, b: 0.012871406, a: 0.5882353}
   ColorEmpty: {r: 1, g: 0.08846569, b: 0.08846569, a: 0.5882353}
   ColorUnavailable: {r: 0.1509434, g: 0.1509434, b: 0.1509434, a: 0.5882353}
   Recipes:
-  - Input: 0100000000000000
+  - Input: 01000000000000000c000000
     Output: 4
     Time: 5
-  - Input: 0100000003000000
+  - Input: 01000000030000000c000000
     Output: 5
     Time: 2
-  - Input: 0400000003000000
+  - Input: 04000000030000000c000000
     Output: 7
     Time: 3
-  - Input: 0500000000000000
+  - Input: 05000000000000000c000000
     Output: 6
     Time: 5
-  - Input: 0700000006000000
+  - Input: 07000000060000000c000000
     Output: 8
     Time: 5
-  - Input: 0200000003000000
+  - Input: 02000000030000000c000000
     Output: 9
     Time: 4
-  - Input: 0200000008000000
+  - Input: 02000000080000000c000000
     Output: 10
     Time: 6
   - Input: 07000000090000000a000000
     Output: 11
+    Time: 7
+  - Input: 0c0000000c0000000c000000
+    Output: 12
     Time: 7

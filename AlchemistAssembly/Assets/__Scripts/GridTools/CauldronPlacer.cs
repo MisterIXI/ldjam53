@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class CauldronPlacer : GridTool
 {
     [field: SerializeField] public PreviewEntity CauldronPreview { get; private set; }
-    [field: SerializeField] public CauldronCrafter CauldronPrefab { get; private set; }
+    [field: SerializeField] public Placeable CauldronPrefab { get; private set; }
 
     private float _yVelocity;
     public override void Activate()

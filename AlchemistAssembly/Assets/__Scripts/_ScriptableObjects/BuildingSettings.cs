@@ -14,24 +14,6 @@ public class BuildingSettings : ScriptableObject
     [field: SerializeField][field: Range(0f, 30f)] public float HoneyTime { get; set; } = 5;
 
 
-
-    [field: Header("Panel")]
-    [field: SerializeField] public GameObject BuildingPanel;
-    [field: SerializeField] public GameObject RecepiePanel;
-    [field: SerializeField] public GameObject InputPanel;
-    [field: SerializeField] public GameObject RecepieButtonPanel;
-    [field: SerializeField] public GameObject InputColor1;
-    [field: SerializeField] public GameObject InputColor2;
-    [field: SerializeField] public GameObject InputColor3;
-    [field: SerializeField] public GameObject InputIcon1Panel, InputIcon2Panel, InputIcon3Panel;
-    [field: SerializeField] public GameObject OutputIconPanel;
-    [field: SerializeField] public Slider OutputBar;
-
-
-    [field: Header("Will be overwritten in Script")]
-    [field: SerializeField] public GameObject CurrentBuilding;
-
-
     [field: Header("Sprites")]
     [field: SerializeField] public Sprite EmptySprite;
     [field: SerializeField] public Sprite ShroomSprite;
