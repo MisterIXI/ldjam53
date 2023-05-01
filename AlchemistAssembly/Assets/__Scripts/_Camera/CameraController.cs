@@ -24,6 +24,8 @@ public class CameraController : MonoBehaviour
     public Transform CameraFollowTarget;
     public Transform CinemachineObj;
 
+    private bool camlock = false;
+
     // Initializing Singleton and InputManager
     private void Awake()
     {
@@ -69,21 +71,24 @@ public class CameraController : MonoBehaviour
     // update
     private void FixedUpdate()
     {
-        //Enable CameraControls and gives it a priority list
-        cameraMove = DragCameraMove();
+        if(camlock == false)
+        {
+            //Enable CameraControls and gives it a priority list
+            cameraMove = DragCameraMove();
 
-        // if(cameraMove == Vector3.zero && _dragInput == 0)
-        //     cameraMove = MouseCameraMove(); 
+            // if(cameraMove == Vector3.zero && _dragInput == 0)
+            //     cameraMove = MouseCameraMove(); 
 
-        if(cameraMove == Vector3.zero && _dragInput == 0) 
-            cameraMove = KeyboardCameraMove();
+            if(cameraMove == Vector3.zero && _dragInput == 0) 
+                cameraMove = KeyboardCameraMove();
 
-        // updates the movement to the camera
-        UpdateCameraMove();
+            // updates the movement to the camera
+            UpdateCameraMove();
 
-        // Allow the player to rotate the camera if you are not draggin the cam
-        if(_dragInput == 0)
-            RotateCamera();
+            // Allow the player to rotate the camera if you are not draggin the cam
+            if(_dragInput == 0)
+                RotateCamera();
+        }
     }
 
     private Vector3 DragCameraMove()
@@ -107,24 +112,24 @@ public class CameraController : MonoBehaviour
 
         if(_mousePosInput.x >= screenSize.x * (1 - _playerSettings.ScreenEdgeOffset))
         {
-            cameraMoveDelta.x = 0.1f * _playerSettings.MouseMoveSpeed;
+            cameraMoveDelta.x = 0.2f * _playerSettings.MouseMoveSpeed;
             reset = false;
         }
         else if (_mousePosInput.x <= screenSize.x * _playerSettings.ScreenEdgeOffset)
         {
-            cameraMoveDelta.x = -1 * (0.1f * _playerSettings.MouseMoveSpeed);
+            cameraMoveDelta.x = -1 * (0.2f * _playerSettings.MouseMoveSpeed);
             reset = false;
         }
         
 
         if(_mousePosInput.y >= screenSize.y * (1 - _playerSettings.ScreenEdgeOffset))
         {
-            cameraMoveDelta.z = 0.1f * _playerSettings.MouseMoveSpeed;
+            cameraMoveDelta.z = 0.2f * _playerSettings.MouseMoveSpeed;
             reset = false;
         }
         else if (_mousePosInput.y <= screenSize.y * _playerSettings.ScreenEdgeOffset)
         {
-            cameraMoveDelta.z = -1 * (0.1f * _playerSettings.MouseMoveSpeed);
+            cameraMoveDelta.z = -1 * (0.2f * _playerSettings.MouseMoveSpeed);
             reset = false;
         }
 
@@ -140,7 +145,7 @@ public class CameraController : MonoBehaviour
     {
         if(_moveInput != Vector2.zero)
         {
-            Vector3 cameraMoveDelta = new Vector3(_moveInput.x, 0, _moveInput.y) * (0.1f * _playerSettings.KeyboardMoveSpeed);
+            Vector3 cameraMoveDelta = new Vector3(_moveInput.x, 0, _moveInput.y) * (0.2f * _playerSettings.KeyboardMoveSpeed);
             cameraMoveDelta = CameraFollowTarget.transform.TransformDirection(cameraMoveDelta);
             return Vector3.ProjectOnPlane(cameraMoveDelta, Vector3.Cross(transform.right, transform.forward));
         }
@@ -186,6 +191,12 @@ public class CameraController : MonoBehaviour
 
             CameraFollowTarget.eulerAngles = targetRotation;
         }
+    }
+
+
+    public void LockCameraControls(bool _bool)
+    {
+        camlock = _bool;
     }
 
 
