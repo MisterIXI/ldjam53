@@ -12,7 +12,8 @@ public class SoundManager : MonoBehaviour
     private readonly Queue<AudioSource> audioSources = new Queue<AudioSource>();
     private readonly LinkedList<AudioSource> inuse = new LinkedList<AudioSource>();
     private readonly Queue<LinkedListNode<AudioSource>> nodePool = new Queue<LinkedListNode<AudioSource>>();
-
+    private float setting_SFX_Volume =40;
+    private float setting_Music_Volume = 40;
     public static SoundManager Instance { get; private set; }
     private void Awake()
     {
