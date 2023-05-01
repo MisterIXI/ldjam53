@@ -41,10 +41,8 @@ public class FactoryBuilding : Placeable, IInteractable
     void Update() 
     {
 
-        if(_input1 == _buildingSettings.Recipes[recepieInt].Input[1] && _input2 == _buildingSettings.Recipes[recepieInt].Input[2] && _input3 == _buildingSettings.Recipes[recepieInt].Input[3])
+        if(_input1 == _buildingSettings.Recipes[recepieInt].Input[0] && _input2 == _buildingSettings.Recipes[recepieInt].Input[1] && _input3 == _buildingSettings.Recipes[recepieInt].Input[2])
             ProduceOutput();
-        
-        UpdateInputColor();
 
         AcceptInput(); // maybe let cart call this function yannik
     }
@@ -128,20 +126,20 @@ public class FactoryBuilding : Placeable, IInteractable
 
     private void AcceptInput()
     {
-        ResourceType inputResource = ResourceType.Water; // Yannik das durch event ersetzen
+        ResourceType inputResource = ResourceType.Empty; // Yannik das durch event ersetzen
 
 
-        if(_input1 == ResourceType.Empty && _buildingSettings.Recipes[recepieInt].Input[0] == inputResource)
+        if(_input1 == ResourceType.Empty && _buildingSettings.Recipes[recepieInt].Input[0] == inputResource && _buildingSettings.Recipes[recepieInt].Input[0] != ResourceType.Empty)
         {
             _input1 = inputResource;
             // delete minecart Yannik
         }
-        else if(_input2 == ResourceType.Empty && _buildingSettings.Recipes[recepieInt].Input[1] == inputResource)
+        else if(_input2 == ResourceType.Empty && _buildingSettings.Recipes[recepieInt].Input[1] == inputResource && _buildingSettings.Recipes[recepieInt].Input[0] != ResourceType.Empty)
         {
             _input2 = inputResource;
             // delete minecart Yannik
         }
-        else if(_input3 == ResourceType.Empty && _buildingSettings.Recipes[recepieInt].Input[2] == inputResource)
+        else if(_input3 == ResourceType.Empty && _buildingSettings.Recipes[recepieInt].Input[2] == inputResource && _buildingSettings.Recipes[recepieInt].Input[0] != ResourceType.Empty)
         {
             _input3 = inputResource;
             // delete minecart Yannik
@@ -150,10 +148,19 @@ public class FactoryBuilding : Placeable, IInteractable
         {
             // Let minecart wait Yannik
         }
+
+        try
+        {
+            // if this buildings panel is showing updates the progress slider
+            if(HudReferences.Instance.CurrentBuilding == gameObject)
+                UpdateInputColor();
+        }catch{}
     }
 
     private void UpdateInputColor()
     {
+        // Debug.Log(_input1.ToString() + _input2.ToString() + _input3.ToString());
+
         if(_buildingSettings.Recipes[recepieInt].Input[0] == ResourceType.Empty)
             HudReferences.Instance.InputColor1.GetComponent<Image>().color = _buildingSettings.ColorUnavailable;
         else if(_input1 == _buildingSettings.Recipes[recepieInt].Input[0])
@@ -190,6 +197,7 @@ public class FactoryBuilding : Placeable, IInteractable
         HudReferences.Instance.OutputBar.value = timer / _outputTime * 100;
 
         UpdateIcons();
+        UpdateInputColor();
 
         // show routes
     }

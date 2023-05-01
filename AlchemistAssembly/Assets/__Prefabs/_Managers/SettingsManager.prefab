@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5706847027732203537
 MonoBehaviour:
@@ -48,3 +48,4 @@ MonoBehaviour:
   _placementToolSettings: {fileID: 11400000, guid: 99fb0398c6d4d8046bd6d4c109f0db2d,
     type: 2}
   _gridSettings: {fileID: 11400000, guid: fb510aaf8a6dff74d9261946852ba9a1, type: 2}
+  _buildingSettings: {fileID: 11400000, guid: 75753725bd6b7a94ab9167cfe5470613, type: 2}
