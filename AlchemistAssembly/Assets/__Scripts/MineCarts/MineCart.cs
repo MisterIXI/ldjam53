@@ -15,7 +15,7 @@ public class MineCart : MonoBehaviour
     public ResourceType CurrentRessource { get; private set; }
     public void Initialize(List<GridTile> path, ResourceType ressource)
     {
-        Debug.Log($"Initializing minecart on {path[0].TileIndex} to {path[1].TileIndex}");
+        // Debug.Log($"Initializing minecart on {path[0].TileIndex} to {path[1].TileIndex}");
         if (path.Count < 2)
         {
             Debug.LogError("Path must have at least 2 tiles");
