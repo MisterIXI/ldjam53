@@ -131,6 +131,19 @@ public class PlacementController : MonoBehaviour
     {
         ActiveTool.Deactivate();
         ActiveTool = newTool;
+        // switch of newTool for the types (DefaultTool, PathTool, RailPlacer, ResourcePlacer, CauldronPlacer, DestructionTool)
+        if (newTool is DefaultTool)
+            HUDManager.Instance.UsePathtool(0);
+        else if (newTool is PathTool)
+            HUDManager.Instance.DisableAllPathtools();
+        else if (newTool is RailPlacer)
+            HUDManager.Instance.UsePathtool(1);
+        else if (newTool is ResourcePlacer)
+            HUDManager.Instance.UsePathtool(2);
+        else if (newTool is CauldronPlacer)
+            HUDManager.Instance.UsePathtool(3);
+        else if (newTool is DestructionTool)
+            HUDManager.Instance.UsePathtool(4);
         ActiveTool.Activate();
     }
     private void OnHotkeysInput(InputAction.CallbackContext context)

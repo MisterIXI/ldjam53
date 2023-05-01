@@ -49,3 +49,4 @@ MonoBehaviour:
     type: 2}
   _gridSettings: {fileID: 11400000, guid: fb510aaf8a6dff74d9261946852ba9a1, type: 2}
   _buildingSettings: {fileID: 11400000, guid: 75753725bd6b7a94ab9167cfe5470613, type: 2}
+  _mineCartSettings: {fileID: 11400000, guid: 3d729b433fa584442a8060061cd470a5, type: 2}
