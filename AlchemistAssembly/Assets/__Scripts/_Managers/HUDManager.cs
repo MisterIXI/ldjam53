@@ -13,10 +13,11 @@ public class HUDManager : MonoBehaviour
     private int currentMission = 0;
     // INFOPANEL 
     [SerializeField] private Image infoImage;
+    public static HUDManager Instance { get; private set; }
     [SerializeField] private Sprite[] InfoImagePool;
     [SerializeField] private TextMeshProUGUI infoText;
     [SerializeField] private Texture2D[] cursorImages;
-    public static HUDManager Instance { get; private set; }
+    private int tooltipProgress = 0;
     private void Awake()
     {
         if (Instance != null)
@@ -114,4 +115,35 @@ public class HUDManager : MonoBehaviour
         }
     }
     #endregion Hotkeys
+    public void ChangetooltipText(int index)
+    {
+        if (index - tooltipProgress == 1)
+        {
+            tooltipProgress++;
+            switch (tooltipProgress)
+            {
+                case 1:
+                    infoText.text = "Use the Resource Tool(3) to build a mushroomfarm.";
+                    break;
+                case 2:
+                    infoText.text = "Use the Cauldron Tool(4) to build a crafting cauldron.";
+                    break;
+                case 3:
+                    infoText.text = "Select the cauldron and change the recepie to red potion.";
+                    break;
+                case 4:
+                    infoText.text = "Use the Railway Tool(2) to connect all buldings.";
+                    break;
+                case 5:
+                    infoText.text = "Select the resources miner and route the output to the cauldron.";
+                    break;
+                case 6:
+                    infoText.text = " Deliver 1 red potion to the witchhouse.";
+                    break;
+                default:
+                    infoText.text = "Use the Resource Tool(3) to build a waterpump.";
+                    break;
+            }
+        }
+    }
 }
