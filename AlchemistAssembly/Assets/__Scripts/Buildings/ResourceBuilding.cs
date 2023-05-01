@@ -61,14 +61,9 @@ public class ResourceBuilding : Placeable, IInteractable
         {
             timer += Time.deltaTime;
 
-            try
-            {
-                // if this buildings panel is showing updates the progress slider
-                if (HudReferences.Instance.CurrentBuilding == gameObject)
-                    HudReferences.Instance.OutputBar.value = timer / _outputTime * 100;
-            }
-            catch { }
-
+            // if this buildings panel is showing updates the progress slider
+            if (HudReferences.Instance.CurrentBuilding == gameObject)
+                HudReferences.Instance.OutputBar.value = timer / _outputTime * 100;
 
             if (timer >= _outputTime)
             {
