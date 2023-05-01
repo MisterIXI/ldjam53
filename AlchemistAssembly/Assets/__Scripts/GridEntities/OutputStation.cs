@@ -6,14 +6,14 @@ using UnityEngine;
 public class OutputStation : Placeable, IInteractable
 {
     [field: SerializeField] public Transform _outputPoint { get; private set; }
-    private IInteractable _parentInteractable;
+    public IInteractable ParentInteractable { get; private set; }
     public GridTile OutputTile { get; private set; }
     [field: SerializeField] public List<List<GridTile>> _pathsToOutput { get; private set; } = new List<List<GridTile>>();
     public override void Initialize()
     {
         base.Initialize();
         OutputTile = HexGrid.GetTile(_outputPoint.position);
-        _parentInteractable = transform.parent.GetComponentInParent<IInteractable>();
+        ParentInteractable = transform.parent.GetComponentInParent<IInteractable>();
     }
 
     public override void PlaceOnTile(GridTile tile)
@@ -34,7 +34,7 @@ public class OutputStation : Placeable, IInteractable
 
     public void OnInteract()
     {
-        _parentInteractable.OnInteract();
+        ParentInteractable.OnInteract();
     }
 
     private void OnDestroy()

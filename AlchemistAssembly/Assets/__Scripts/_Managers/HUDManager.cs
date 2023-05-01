@@ -132,13 +132,10 @@ public class HUDManager : MonoBehaviour
                     infoText.text = "Select the cauldron and change the recepie to red potion.";
                     break;
                 case 4:
-                    infoText.text = "Use the Railway Tool(2) to connect all buldings.";
+                    infoText.text = "Use the Railway Tool(2) to connect all buldings. Then select the resources miner and route the output to the cauldron.";
                     break;
                 case 5:
-                    infoText.text = "Select the resources miner and route the output to the cauldron.";
-                    break;
-                case 6:
-                    infoText.text = " Deliver 1 red potion to the witchhouse.";
+                    infoText.text = "Deliver 1 red potion to the witchhouse.";
                     break;
                 default:
                     infoText.text = "Use the Resource Tool(3) to build a waterpump.";

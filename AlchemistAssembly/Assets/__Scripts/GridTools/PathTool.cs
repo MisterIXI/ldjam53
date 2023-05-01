@@ -115,6 +115,8 @@ public class PathTool : GridTool
             {
                 OutputStation outputStation = _startTile.Placeable as OutputStation;
                 outputStation.AddPath(_currentPath);
+                if (((OutputStation)_currentPath.Last().Placeable).ParentInteractable is CauldronCrafter)
+                    HUDManager.Instance.ChangetooltipText(5);
             }
             else
             {

@@ -71,6 +71,8 @@ public class FactoryBuilding : Placeable, IInteractable
 
     private int FindRecepie(ResourceType Output)
     {
+        if (Output == ResourceType.RedPot)
+            HUDManager.Instance.ChangetooltipText(5);
         for (int i = 0; i < _buildingSettings.Recipes.Length - 1; i++)
         {
             if (Output == _buildingSettings.Recipes[i].Output)

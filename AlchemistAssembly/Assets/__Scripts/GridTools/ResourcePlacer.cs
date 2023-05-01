@@ -141,6 +141,10 @@ public class ResourcePlacer : GridTool
             if (_currentResourceIndex > 0 && _currentResourceIndex < 5)
             {
                 PlaceableManager.PlaceObject(_currentPlaceable, PlacementController.HoveredTile, PlacementController.Instance.RotationAngle);
+                if (_currentResourceIndex == 1)
+                    HUDManager.Instance.ChangetooltipText(2);
+                if (_currentResourceIndex == 2)
+                    HUDManager.Instance.ChangetooltipText(1);
                 CheckForResource(tile);
             }
         }

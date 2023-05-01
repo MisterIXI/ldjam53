@@ -36,6 +36,7 @@ public class CauldronPlacer : GridTool
                 if (Placeable.CanPlaceOnTile(PlacementController.HoveredTile, true))
                 {
                     PlaceableManager.PlaceObject(CauldronPrefab, PlacementController.HoveredTile, PlacementController.Instance.RotationAngle);
+                    HUDManager.Instance.ChangetooltipText(3);
                     ExtraCheck();
                 }
             }
