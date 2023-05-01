@@ -18,6 +18,8 @@ public class HUDManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI infoText;
     [SerializeField] private Texture2D[] cursorImages;
     private int tooltipProgress = 0;
+    [SerializeField]private GameObject tooltipObject;
+    [SerializeField]private TextMeshProUGUI tooltipText;
     private void Awake()
     {
         if (Instance != null)
@@ -117,30 +119,34 @@ public class HUDManager : MonoBehaviour
     #endregion Hotkeys
     public void ChangetooltipText(int index)
     {
+        if(tooltipProgress == 5 && index == 5)
+        {
+            tooltipObject.SetActive(false);
+        }
         if (index - tooltipProgress == 1)
         {
-            tooltipProgress++;
             switch (tooltipProgress)
             {
                 case 1:
-                    infoText.text = "Use the Resource Tool(3) to build a mushroomfarm.";
+                    tooltipText.text = "Use the Resource Tool(3) to build a mushroomfarm.";
                     break;
                 case 2:
-                    infoText.text = "Use the Cauldron Tool(4) to build a crafting cauldron.";
+                    tooltipText.text = "Use the Cauldron Tool(4) to build a crafting cauldron.";
                     break;
                 case 3:
-                    infoText.text = "Select the cauldron and change the recepie to red potion.";
+                    tooltipText.text = "Select the cauldron and change the recepie to red potion.";
                     break;
                 case 4:
-                    infoText.text = "Use the Railway Tool(2) to connect all buldings. Then select the resources miner and route the output to the cauldron.";
+                    tooltipText.text = "Use the Railway Tool(2) to connect all buldings. Then select the resources miner and route the output to the cauldron.";
                     break;
                 case 5:
-                    infoText.text = "Deliver 1 red potion to the witchhouse.";
+                    tooltipText.text = "Deliver 1 red potion to the witchhouse.";
                     break;
                 default:
-                    infoText.text = "Use the Resource Tool(3) to build a waterpump.";
+                    tooltipText.text = "Use the Resource Tool(3) to build a waterpump.";
                     break;
             }
+            tooltipProgress++;
         }
     }
 }

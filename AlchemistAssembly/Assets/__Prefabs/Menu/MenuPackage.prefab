@@ -22934,6 +22934,8 @@ MonoBehaviour:
   - {fileID: 2800000, guid: e5a043df7ea7fcf4ba39b6d2adccc138, type: 3}
   - {fileID: 2800000, guid: e5a043df7ea7fcf4ba39b6d2adccc138, type: 3}
   - {fileID: 2800000, guid: bdf46fa5455a8e54e9ccf0011dec7327, type: 3}
+  tooltipObject: {fileID: 7397452616739546131}
+  tooltipText: {fileID: 5337065229655757195}
 --- !u!1 &8139681714025737228
 GameObject:
   m_ObjectHideFlags: 0
