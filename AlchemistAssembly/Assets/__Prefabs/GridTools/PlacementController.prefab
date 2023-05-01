@@ -103,6 +103,9 @@ MonoBehaviour:
   <DestructionTool>k__BackingField: {fileID: 7198709009557950231}
   RotationAngle: 0
   mousePos: {x: 0, y: 0, z: 0}
+  <GridLayer>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1001 &1989226284902854760
 PrefabInstance:
   m_ObjectHideFlags: 0

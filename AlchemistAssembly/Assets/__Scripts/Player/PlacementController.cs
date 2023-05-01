@@ -13,7 +13,7 @@ public class PlacementController : MonoBehaviour
     [field: SerializeField] public ResourcePlacer ResourcePlacer { get; private set; }
     [field: SerializeField] public CauldronPlacer CauldronPlacer { get; private set; }
     [field: SerializeField] public DestructionTool DestructionTool { get; private set; }
-
+    [field: SerializeField] public Transform TestCube { get; private set; }
     public static event Action<float> OnRotationChanged;
     public static event Action<GridTile, GridTile> OnTileHovered;
     public static PlacementController Instance { get; private set; }
@@ -93,6 +93,7 @@ public class PlacementController : MonoBehaviour
                 hoverTile?.HighlightTile();
                 _lastHoveredTile = hoverTile;
             }
+            TestCube.position = hit.point;
         }
         else
         {

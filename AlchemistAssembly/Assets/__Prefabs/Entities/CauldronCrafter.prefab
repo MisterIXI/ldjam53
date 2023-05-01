@@ -172,7 +172,7 @@ MonoBehaviour:
   <IsSevenTiles>k__BackingField: 1
   <OutputStation>k__BackingField: {fileID: 3280633330025132220}
   <ReceiverStation>k__BackingField: {fileID: 8403506760863593889}
-  _resourceType: 0
+  _resourceType: 12
   routes: []
 --- !u!114 &4661688505304248984
 MonoBehaviour:
