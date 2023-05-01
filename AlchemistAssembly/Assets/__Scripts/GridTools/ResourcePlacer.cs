@@ -138,7 +138,7 @@ public class ResourcePlacer : GridTool
 
     private void OnInteractInput(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && !HudReferences.IsBuildingPanelOpen)
         {
             GridTile tile = PlacementController.HoveredTile;
             CheckForResource(tile);

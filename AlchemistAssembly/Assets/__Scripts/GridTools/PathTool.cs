@@ -123,14 +123,14 @@ public class PathTool : GridTool
     }
     private void OnInteractInput(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && !HudReferences.IsBuildingPanelOpen)
         {
             if (_currentPath != null && _currentPath.Count > 1)
             {
                 OutputStation outputStation = _startTile.Placeable as OutputStation;
                 outputStation.AddPath(new List<GridTile>(_currentPath));
                 PlacementController.Instance.SwitchActiveTool(PlacementController.Instance.DefaultTool);
-                if (((ReceiverStation)_currentPath.Last().Placeable).ParentInteractable is CauldronCrafter)
+                if (((ReceiverStation)_currentPath.Last().Placeable).ParentInteractable is FactoryBuilding)
                     HUDManager.Instance.ChangetooltipText(5);
             }
             else

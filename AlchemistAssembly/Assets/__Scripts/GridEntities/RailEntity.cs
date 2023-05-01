@@ -73,4 +73,11 @@ public class RailEntity : Placeable
             }
         }
     }
+    private void OnDestroy()
+    {
+        if (OccupyingMineCart != null)
+        {
+            OccupyingMineCart.ExplodeWithDestruction();
+        }
+    }
 }

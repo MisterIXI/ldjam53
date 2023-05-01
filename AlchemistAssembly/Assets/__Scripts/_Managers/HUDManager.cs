@@ -8,8 +8,8 @@ public class HUDManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI InfoObject, redPotion, yellowPotion, bluePotion, yinyangPotion;
     public int redPotionAmount, yellowPotionAmount, bluePotionAmount, yinyangPotionAmount;
     [SerializeField] private Image[] HotkeyImages;
-    private Color highlightColor = new Color(204, 204, 204);
-    private Color normalColor = new Color(68, 68, 68);
+    private Color highlightColor = new Color(0.8f, 0.8f, 0.8f, 1f);
+    private Color normalColor = new Color(0.272f, 0.272f, 0.272f, 1f);
     private int currentMission = 0;
     // INFOPANEL 
     [SerializeField] private Image infoImage;
@@ -18,8 +18,8 @@ public class HUDManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI infoText;
     [SerializeField] private Texture2D[] cursorImages;
     private int tooltipProgress = 0;
-    [SerializeField]private GameObject tooltipObject;
-    [SerializeField]private TextMeshProUGUI tooltipText;
+    [SerializeField] private GameObject tooltipObject;
+    [SerializeField] private TextMeshProUGUI tooltipText;
     private void Awake()
     {
         if (Instance != null)
@@ -96,7 +96,7 @@ public class HUDManager : MonoBehaviour
 
             default:
                 infoImage.sprite = InfoImagePool[currentMission];
-                infoText.text = "Red Potions:  " + bluePotionAmount + " / 10";
+                infoText.text = "Red Potions:  " + redPotionAmount + " / 10";
                 break;
         }
     }
@@ -119,7 +119,7 @@ public class HUDManager : MonoBehaviour
     #endregion Hotkeys
     public void ChangetooltipText(int index)
     {
-        if(tooltipProgress == 5 && index == 5)
+        if (tooltipProgress == 5 && index == 6)
         {
             tooltipObject.SetActive(false);
         }
@@ -138,7 +138,7 @@ public class HUDManager : MonoBehaviour
                     tooltipText.text = "Select the cauldron and change the recepie to red potion.";
                     break;
                 case 4:
-                    tooltipText.text = "Use the Railway Tool(2) to connect all buldings. Then select the resources miner and route the output to the cauldron.";
+                    tooltipText.text = "Use the Railway Tool(2) to connect all buldings. Then select a resource miner and route the output to the cauldron.";
                     break;
                 case 5:
                     tooltipText.text = "Deliver 1 red potion to the witchhouse.";

@@ -29,7 +29,7 @@ public class CauldronPlacer : GridTool
 
     private void OnInteractInput(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && !HudReferences.IsBuildingPanelOpen)
         {
             if (PlacementController.HoveredTile != null && PlacementController.HoveredTile.Placeable == null)
             {

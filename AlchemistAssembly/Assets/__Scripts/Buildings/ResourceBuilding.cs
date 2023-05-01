@@ -84,7 +84,7 @@ public class ResourceBuilding : Placeable, IInteractable
         if (OutputStation._pathsToOutput.Count == 0)
             return;
         // resets route 
-        if (routeCounter >= (OutputStation._pathsToOutput.Count - 1))
+        if (routeCounter > (OutputStation._pathsToOutput.Count - 1))
             routeCounter = 0;
         Debug.Log("Sending Minecart");
         // spawns minecart, gives it the route and sets the resource type
