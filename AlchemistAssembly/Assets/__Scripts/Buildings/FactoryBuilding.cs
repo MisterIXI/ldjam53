@@ -62,7 +62,7 @@ public class FactoryBuilding : Placeable, IInteractable
     private int FindRecepie(ResourceType Output)
     {
         if (Output == ResourceType.RedPot)
-            HUDManager.Instance.ChangetooltipText(5);
+            HUDManager.Instance.ChangetooltipText(4);
         for (int i = 0; i < _buildingSettings.Recipes.Length - 1; i++)
         {
             if (Output == _buildingSettings.Recipes[i].Output)
@@ -113,7 +113,7 @@ public class FactoryBuilding : Placeable, IInteractable
         if (OutputStation._pathsToOutput.Count == 0)
             return;
         // resets route 
-        if (routeCounter >= (OutputStation._pathsToOutput.Count - 1))
+        if (routeCounter > (OutputStation._pathsToOutput.Count - 1))
             routeCounter = 0;
         ReceiverStation.ResetResources();
         Debug.Log("Sending Minecart");

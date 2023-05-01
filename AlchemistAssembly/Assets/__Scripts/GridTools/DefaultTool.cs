@@ -5,10 +5,10 @@ public class DefaultTool : GridTool
 {
     private void OnInteractInput(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && !HudReferences.IsBuildingPanelOpen)
         {
             GridTile currentTile = PlacementController.HoveredTile;
-            Debug.Log("Trying to interact with tile" + currentTile);
+            // Debug.Log("Trying to interact with tile" + currentTile);
             if (currentTile != null && currentTile.Placeable != null)
             {
                 if (currentTile.Placeable is IInteractable interactable)

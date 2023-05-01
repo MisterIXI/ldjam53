@@ -6,7 +6,7 @@ public class DestructionTool : GridTool
     private Destructable _currentObject;
     private void OnInteractInput(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && !HudReferences.IsBuildingPanelOpen)
         {
             if (_currentObject != null)
             {

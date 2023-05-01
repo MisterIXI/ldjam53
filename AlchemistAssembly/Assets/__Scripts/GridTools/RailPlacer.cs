@@ -69,7 +69,7 @@ public class RailPlacer : GridTool
     }
     private void OnInteractInput(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started && !HudReferences.IsBuildingPanelOpen)
         {
             GridTile currentTile = PlacementController.HoveredTile;
             if (currentTile != null && currentTile.Placeable == null)
