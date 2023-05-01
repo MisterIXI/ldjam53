@@ -51,9 +51,11 @@ public class HexHelper : MonoBehaviour
         return new Vector3Int(Mathf.RoundToInt(rq), Mathf.RoundToInt(rr), Mathf.RoundToInt(rs));
     }
 
-    public static List<Vector2Int> GetNeighboursOddQ(Vector2Int index)
+    public static List<Vector2Int> GetNeighboursOddQ(Vector2Int index, bool includeSelf = false)
     {
         List<Vector2Int> neighbours = new List<Vector2Int>();
+        if (includeSelf)
+            neighbours.Add(index);
         // add above and below
         if (index.y + 1 < HexGrid.GridSize.y)
             neighbours.Add(new Vector2Int(index.x, index.y + 1));

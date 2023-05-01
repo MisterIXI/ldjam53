@@ -109,6 +109,7 @@ public class ResourcePlacer : GridTool
         {
             SwitchToResource(0);
         }
+        _currentPreview.transform.position = tile.transform.position;
         if (Placeable.CanPlaceOnTile(tile, true))
         {
             _currentPreview.SetPreviewStatus(PreviewStatus.Valid);
@@ -148,11 +149,13 @@ public class ResourcePlacer : GridTool
     protected override void SubscribeToActions()
     {
         PlacementController.OnTileHovered += OnNewHover;
+        InputManager.OnInteract += OnInteractInput;
     }
 
     protected override void UnsubscribeFromActions()
     {
         PlacementController.OnTileHovered -= OnNewHover;
+        InputManager.OnInteract -= OnInteractInput;
     }
     private void OnDestroy()
     {
