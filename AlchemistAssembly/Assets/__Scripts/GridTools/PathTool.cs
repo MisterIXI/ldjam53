@@ -22,13 +22,13 @@ public class PathTool : GridTool
         if (newTile?.Placeable != null && newTile.Placeable is ReceiverStation receiverStation)
         {
             Debug.Log($"Hovered over receiver station {receiverStation.name}");
-            var path = GetTrackPath(_startTile, newTile);
-            _lineRenderer.positionCount = path.Count;
-            for (int i = 0; i < path.Count; i++)
+            _currentPath = GetTrackPath(_startTile, newTile);
+            _lineRenderer.positionCount = _currentPath.Count;
+            for (int i = 0; i < _currentPath.Count; i++)
             {
-                _lineRenderer.SetPosition(i, path[i].transform.position + Vector3.up);
+                _lineRenderer.SetPosition(i, _currentPath[i].transform.position + Vector3.up);
             }
-            _lineRenderer.material.color = CheckIfValidTrackPath(path) ? Color.green : Color.red;
+            _lineRenderer.material.color = CheckIfValidTrackPath(_currentPath) ? Color.green : Color.red;
         }
     }
 
@@ -112,21 +112,17 @@ public class PathTool : GridTool
         if (context.performed)
         {
             if (_currentPath != null && _currentPath.Count > 1)
-                AddPathToSender();
+            {
+                OutputStation outputStation = _startTile.Placeable as OutputStation;
+                outputStation.AddPath(_currentPath);
+            }
+            else
+            {
+                SoundManager.PlayInvalidActionSound();
+            }
         }
     }
-    private void AddPathToSender()
-    {
-        var path = GetTrackPath(_startTile, PlacementController.HoveredTile);
-        if (!CheckIfValidTrackPath(path))
-        {
-            SoundManager.PlayInvalidActionSound();
-            // maybe return to default tool?
-            return;
-        }
-        OutputStation outputStation = _startTile.Placeable as OutputStation;
-        outputStation.AddPath(path);
-    }
+
     protected override void SubscribeToActions()
     {
         PlacementController.OnTileHovered += OnTileHovered;

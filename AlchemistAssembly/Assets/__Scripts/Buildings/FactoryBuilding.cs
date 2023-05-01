@@ -1,18 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class FactoryBuilding : Placeable, IInteractable
 {
     private BuildingSettings _buildingSettings => SettingsManager.BuildingSettings;
-
+    private MineCartSettings _mineCartSettings => SettingsManager.MineCartSettings;
 
 
     UnityEvent m_SendMinecart;
 
-    private ResourceType _resourceType;         // change those later to incorp it with yanniks class
+    [field: SerializeField] private ResourceType _resourceType;         // change those later to incorp it with yanniks class
     private float _outputTime;
 
 
@@ -23,7 +23,8 @@ public class FactoryBuilding : Placeable, IInteractable
 
 
     [field: SerializeField] private GameObject[] routes;
-    private int routeCoutner = 0;
+    private int routeCounter = 0;
+
 
     private ResourceType _input1 = ResourceType.Empty;
     private ResourceType _input2 = ResourceType.Empty;
@@ -33,35 +34,33 @@ public class FactoryBuilding : Placeable, IInteractable
 
     private float timer = 0;
 
-    void Start() 
+    void Start()
     {
-       _resourceType = ResourceType.Empty;
+        _resourceType = ResourceType.Empty;
     }
 
-    void Update() 
+    void Update()
     {
-
-        if(_input1 == _buildingSettings.Recipes[recepieInt].Input[0] && _input2 == _buildingSettings.Recipes[recepieInt].Input[1] && _input3 == _buildingSettings.Recipes[recepieInt].Input[2])
+        if (ReceiverStation.HasAllRessources())
             ProduceOutput();
-
-        AcceptInput(); // maybe let cart call this function yannik
     }
 
 
     private void ProduceOutput()
     {
-        if(routes.Length != 0 && _resourceType != ResourceType.Empty)  // if there are routes availible then start producing
+        if (routes.Length != 0 && _resourceType != ResourceType.Empty)  // if there are routes availible then start producing
         {
             timer += Time.deltaTime;
 
             try
             {
                 // if this buildings panel is showing updates the progress slider
-                if(HudReferences.Instance.CurrentBuilding == gameObject)
+                if (HudReferences.Instance.CurrentBuilding == gameObject)
                     HudReferences.Instance.OutputBar.value = timer / _outputTime * 100;
-            }catch{}
+            }
+            catch { }
 
-            if(timer >= _outputTime)
+            if (timer >= _outputTime)
             {
                 SendOutput();
                 timer = 0;
@@ -72,10 +71,10 @@ public class FactoryBuilding : Placeable, IInteractable
 
     private int FindRecepie(ResourceType Output)
     {
-        for(int i = 0; i < _buildingSettings.Recipes.Length -1; i++)
+        for (int i = 0; i < _buildingSettings.Recipes.Length - 1; i++)
         {
-            if(Output == _buildingSettings.Recipes[i].Output)
-            return i;  
+            if (Output == _buildingSettings.Recipes[i].Output)
+                return i;
         }
         return 8;
     }
@@ -83,103 +82,83 @@ public class FactoryBuilding : Placeable, IInteractable
 
     private Sprite FindSprite(ResourceType resource)
     {
-        if(resource == ResourceType.Shroom)
+        if (resource == ResourceType.Shroom)
             return _buildingSettings.ShroomSprite;
-        else if(resource == ResourceType.Water)
+        else if (resource == ResourceType.Water)
             return _buildingSettings.WaterSprite;
-        else if(resource == ResourceType.Crystal)
+        else if (resource == ResourceType.Crystal)
             return _buildingSettings.CrystalSprite;
-        else if(resource == ResourceType.Honey)
+        else if (resource == ResourceType.Honey)
             return _buildingSettings.HoneySprite;
-        else if(resource == ResourceType.RedPot)
+        else if (resource == ResourceType.RedPot)
             return _buildingSettings.RedPotSprite;
-        else if(resource == ResourceType.HoneyWater)
+        else if (resource == ResourceType.HoneyWater)
             return _buildingSettings.HoneyWaterSprite;
-        else if(resource == ResourceType.BluePot)
+        else if (resource == ResourceType.BluePot)
             return _buildingSettings.BluePotSprite;
-        else if(resource == ResourceType.RedHoney)
+        else if (resource == ResourceType.RedHoney)
             return _buildingSettings.RedHoneySprite;
-        else if(resource == ResourceType.YellowPot)
+        else if (resource == ResourceType.YellowPot)
             return _buildingSettings.YellowPotSprite;
-        else if(resource == ResourceType.CrystalHoney)
+        else if (resource == ResourceType.CrystalHoney)
             return _buildingSettings.CrystalHoneySprite;
-        else if(resource == ResourceType.YellowCrystal)
+        else if (resource == ResourceType.YellowCrystal)
             return _buildingSettings.YellowCrystalSprite;
-        else if(resource == ResourceType.PurplePot)
+        else if (resource == ResourceType.PurplePot)
             return _buildingSettings.PurplePotSprite;
         else
             return _buildingSettings.EmptySprite;
     }
 
 
-    private void SendOutput()
+    public void SendOutput()
     {
+        Debug.Log("Trying to send Output");
+        // check if output spot is free
+        Placeable placeable = OutputStation.OutputTile.Placeable;
+        if (placeable == null || placeable is not RailEntity || ((RailEntity)placeable).OccupyingMineCart != null)
+            return;
+        if (OutputStation._pathsToOutput.Count == 0)
+            return;
         // resets route 
-        if(routeCoutner >= (routes.Length -1))
-            routeCoutner = 0;
+        if (routeCounter >= (OutputStation._pathsToOutput.Count - 1))
+            routeCounter = 0;
+        Debug.Log("Sending Minecart");
+        // spawns minecart, gives it the route and sets the resource type
+        MineCart minecart = Instantiate(_mineCartSettings.MineCartSubTypesPrefabs[(int)_resourceType], transform.position, Quaternion.identity);
+        minecart.Initialize(OutputStation._pathsToOutput[routeCounter], _resourceType);
 
-        // invokes an event for minecarts ????
-        // m_SendMinecart.Invoke(_resourceType, routes[routeCoutner]);              // DAS EVENT FÜR Yannik ? (_resourceType, destination of route)
-        routeCoutner += 1;
+
+        routeCounter += 1;
     }
 
 
-    private void AcceptInput()
-    {
-        ResourceType inputResource = ResourceType.Empty; // Yannik das durch event ersetzen
 
 
-        if(_input1 == ResourceType.Empty && _buildingSettings.Recipes[recepieInt].Input[0] == inputResource && _buildingSettings.Recipes[recepieInt].Input[0] != ResourceType.Empty)
-        {
-            _input1 = inputResource;
-            // delete minecart Yannik
-        }
-        else if(_input2 == ResourceType.Empty && _buildingSettings.Recipes[recepieInt].Input[1] == inputResource && _buildingSettings.Recipes[recepieInt].Input[0] != ResourceType.Empty)
-        {
-            _input2 = inputResource;
-            // delete minecart Yannik
-        }
-        else if(_input3 == ResourceType.Empty && _buildingSettings.Recipes[recepieInt].Input[2] == inputResource && _buildingSettings.Recipes[recepieInt].Input[0] != ResourceType.Empty)
-        {
-            _input3 = inputResource;
-            // delete minecart Yannik
-        }
-        else
-        {
-            // Let minecart wait Yannik
-        }
-
-        try
-        {
-            // if this buildings panel is showing updates the progress slider
-            if(HudReferences.Instance.CurrentBuilding == gameObject)
-                UpdateInputColor();
-        }catch{}
-    }
-
-    private void UpdateInputColor()
+    public void UpdateInputColor()
     {
         // Debug.Log(_input1.ToString() + _input2.ToString() + _input3.ToString());
-
-        if(_buildingSettings.Recipes[recepieInt].Input[0] == ResourceType.Empty)
+        if (HudReferences.Instance.CurrentBuilding != gameObject)
+            return;
+        if (_buildingSettings.Recipes[recepieInt].Input[0] == ResourceType.Empty)
             HudReferences.Instance.InputColor1.GetComponent<Image>().color = _buildingSettings.ColorUnavailable;
-        else if(_input1 == _buildingSettings.Recipes[recepieInt].Input[0])
+        else if (ReceiverStation.TypesStored[0])
             HudReferences.Instance.InputColor1.GetComponent<Image>().color = _buildingSettings.ColorFull;
         else
             HudReferences.Instance.InputColor1.GetComponent<Image>().color = _buildingSettings.ColorEmpty;
 
 
-        if(_buildingSettings.Recipes[recepieInt].Input[1] == ResourceType.Empty)
+        if (_buildingSettings.Recipes[recepieInt].Input[1] == ResourceType.Empty)
             HudReferences.Instance.InputColor2.GetComponent<Image>().color = _buildingSettings.ColorUnavailable;
-        else if(_input1 == _buildingSettings.Recipes[recepieInt].Input[1])
+        else if (ReceiverStation.TypesStored[1])
             HudReferences.Instance.InputColor2.GetComponent<Image>().color = _buildingSettings.ColorFull;
         else
             HudReferences.Instance.InputColor2.GetComponent<Image>().color = _buildingSettings.ColorEmpty;
 
 
-        if(_buildingSettings.Recipes[recepieInt].Input[2] == ResourceType.Empty)
+        if (_buildingSettings.Recipes[recepieInt].Input[2] == ResourceType.Empty)
             HudReferences.Instance.InputColor3.GetComponent<Image>().color = _buildingSettings.ColorUnavailable;
-        else if(_input1 == _buildingSettings.Recipes[recepieInt].Input[2])
+        else if (ReceiverStation.TypesStored[2])
             HudReferences.Instance.InputColor3.GetComponent<Image>().color = _buildingSettings.ColorFull;
         else
             HudReferences.Instance.InputColor3.GetComponent<Image>().color = _buildingSettings.ColorEmpty;
@@ -199,7 +178,9 @@ public class FactoryBuilding : Placeable, IInteractable
         UpdateIcons();
         UpdateInputColor();
 
+
         // show routes
+
     }
 
     public void OnClose()  // if close button is pressed
@@ -216,12 +197,13 @@ public class FactoryBuilding : Placeable, IInteractable
     {
         HudReferences.Instance.BuildingPanel.SetActive(false);
         HudReferences.Instance.RecepiePanel.SetActive(false);
+        PlacementController.StartPathFrom(OutputStation.CurrentTile);
 
         // show route tool
         // show routes
         // if building is clicked and route tool
         // -> set route
-            // -> OnInteract()
+        // -> OnInteract()
         // if different tool or q -> OnClose()
     }
 
@@ -241,14 +223,8 @@ public class FactoryBuilding : Placeable, IInteractable
     public void OnSelectRecepie(ResourceType resource)
     {
         recepieInt = FindRecepie(resource);
-
-        // Resets saved inputs that are wrong
-        if(_buildingSettings.Recipes[recepieInt].Input[0] != _input1)
-            _input1 = ResourceType.Empty;
-        if(_buildingSettings.Recipes[recepieInt].Input[1] != _input2)
-            _input2 = ResourceType.Empty;
-        if(_buildingSettings.Recipes[recepieInt].Input[2] != _input3)
-            _input3 = ResourceType.Empty;
+        ReceiverStation.SwitchToRessources(_buildingSettings.Recipes[recepieInt].Input);
+        _resourceType = resource;
 
         // find sprte for output and inputs
         _outputSprite = FindSprite(_buildingSettings.Recipes[recepieInt].Output);

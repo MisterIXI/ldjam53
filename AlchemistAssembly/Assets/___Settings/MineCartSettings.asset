@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbbc32277d8dc624bb19b999ba0ff16e, type: 3}
+  m_Name: MineCartSettings
+  m_EditorClassIdentifier: 
+  <MineCartPrefab>k__BackingField: {fileID: 4097974266336349422, guid: 9a4a39a7d0181f94ebdbb10e89e0cb82,
+    type: 3}
+  <MineCartSubTypesPrefabs>k__BackingField:
+  - {fileID: 8567518085623642983, guid: bfb977729624396499fe087cfc3f6618, type: 3}
+  - {fileID: 2785673633038412753, guid: 858003e253b174841a9931a60f89cd33, type: 3}
+  - {fileID: 2380792319117062365, guid: f88ed099444d9be438a2704afe826262, type: 3}
+  - {fileID: 5335956641729126742, guid: 6944a779f5fc13c448df4aec5d4c1c7c, type: 3}
+  - {fileID: 1026251095333532618, guid: b2d060760058a3c479d05f38e8ff3a29, type: 3}
+  - {fileID: 304102651496687595, guid: 17b2d66a53dfb4749b5bb34869723de5, type: 3}
+  - {fileID: 304102651496687595, guid: 12c1468b89dd4204fbdc79c7c15e80e3, type: 3}
+  - {fileID: 5335956641729126742, guid: cbda077a11de7fe498ede648032a573c, type: 3}
+  - {fileID: 5335956641729126742, guid: 95b2f8112c09c5142885a8c00796c113, type: 3}
+  - {fileID: 5335956641729126742, guid: 4b0942b87c4b93346adfe99c33184842, type: 3}
+  - {fileID: 2380792319117062365, guid: 938e3e36a99b201429db91f33bd0171d, type: 3}
+  - {fileID: 5335956641729126742, guid: 4e819744a51e1884fafa04b4c60fd8c7, type: 3}
+  <Speed>k__BackingField: 0.63
+  <ScaleCurve>k__BackingField:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 3.3333333
+      outSlope: 3.3333333
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.3
+      value: 1
+      inSlope: 0.001951095
+      outSlope: 0
+      tangentMode: 65
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 1
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

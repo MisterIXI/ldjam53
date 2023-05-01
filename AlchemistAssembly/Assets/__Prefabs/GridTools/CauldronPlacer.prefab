@@ -91,7 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <CauldronPreview>k__BackingField: {fileID: 7348525820620399030}
-  <CauldronPrefab>k__BackingField: {fileID: 8457246756868594550, guid: 04dda74fb4d47f34e9289a75ce80d3db,
+  <CauldronPrefab>k__BackingField: {fileID: -5206153037293150606, guid: 04dda74fb4d47f34e9289a75ce80d3db,
     type: 3}
 --- !u!1001 &1770793180296395549
 PrefabInstance:
@@ -101,6 +101,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9043065655207934309}
     m_Modifications:
+    - target: {fileID: -5206153037293150606, guid: 04dda74fb4d47f34e9289a75ce80d3db,
+        type: 3}
+      propertyPath: <OutputStation>k__BackingField
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: -5206153037293150606, guid: 04dda74fb4d47f34e9289a75ce80d3db,
+        type: 3}
+      propertyPath: <ReceiverStation>k__BackingField
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3269548495227568034, guid: 04dda74fb4d47f34e9289a75ce80d3db,
         type: 3}
       propertyPath: m_Name
@@ -163,6 +173,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8457246756868594550, guid: 04dda74fb4d47f34e9289a75ce80d3db, type: 3}
+    - {fileID: -5206153037293150606, guid: 04dda74fb4d47f34e9289a75ce80d3db, type: 3}
     m_RemovedGameObjects:
     - {fileID: 3812056827832178357, guid: 04dda74fb4d47f34e9289a75ce80d3db, type: 3}
     - {fileID: 8318704884709881988, guid: 04dda74fb4d47f34e9289a75ce80d3db, type: 3}

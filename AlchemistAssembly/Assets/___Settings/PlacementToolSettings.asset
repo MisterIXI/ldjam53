@@ -52,6 +52,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   <HighlightColor>k__BackingField: {r: 0, g: 0, b: 1, a: 1}
+  <PreviewRotationDuration>k__BackingField: 0.1
   <NeutralPreviewMaterial>k__BackingField: {fileID: 2100000, guid: 0342871ad1bdeac42b3e7447aceace3a,
     type: 2}
   <ValidPreviewMaterial>k__BackingField: {fileID: 2100000, guid: a5ee558f37a6251468fee3d5d411bae4,
@@ -60,3 +61,4 @@ MonoBehaviour:
     type: 2}
   <RailPrefab>k__BackingField: {fileID: 7592466650763371019, guid: e059f489c7102e94baec8bc5f9963782,
     type: 3}
+  <DestructionHighlightColor>k__BackingField: {r: 255, g: 0, b: 0, a: 1}

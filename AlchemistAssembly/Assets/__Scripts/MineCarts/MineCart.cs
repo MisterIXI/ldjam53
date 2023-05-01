@@ -21,7 +21,7 @@ public class MineCart : MonoBehaviour
         _t = 0;
         _currentPathIndex = 1;
         _currentTile = _path[_currentPathIndex];
-        _prevTile = null;
+        _prevTile = _path[0];
         _reachedHalfWay = false;
         CurrentRessource = ressource;
     }
@@ -70,7 +70,7 @@ public class MineCart : MonoBehaviour
             if (!_reachedHalfWay && _t > 0.5f)
             {
                 _reachedHalfWay = true;
-                if (_prevTile != null)
+                if (_prevTile != null && _prevTile.Placeable is RailEntity)
                     (_prevTile.Placeable as RailEntity).OccupyingMineCart = null;
             }
             if (_currentPathIndex == 1)
