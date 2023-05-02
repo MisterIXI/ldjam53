@@ -286,7 +286,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &613271143
 PrefabInstance:
@@ -304,7 +304,7 @@ PrefabInstance:
     - target: {fileID: 5298655429118748098, guid: 6d82829df5f1fce418951a5d933ae239,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5298655429118748098, guid: 6d82829df5f1fce418951a5d933ae239,
         type: 3}
@@ -1787,11 +1787,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3553403176651960576, guid: eadd70279c4020a45bfb8280a4371955,
-        type: 3}
-      propertyPath: <TestCube>k__BackingField
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 7303737756770850770, guid: eadd70279c4020a45bfb8280a4371955,
         type: 3}
       propertyPath: m_Name
@@ -1800,7 +1795,7 @@ PrefabInstance:
     - target: {fileID: 9078120131624168374, guid: eadd70279c4020a45bfb8280a4371955,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9078120131624168374, guid: eadd70279c4020a45bfb8280a4371955,
         type: 3}

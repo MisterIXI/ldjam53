@@ -93,6 +93,10 @@ public class HUDManager : MonoBehaviour
                 infoImage.sprite = InfoImagePool[currentMission];
                 infoText.text = "YinYang " + yinyangPotionAmount + " / 10";
                 break;
+            case 4:
+                infoImage.sprite = InfoImagePool[currentMission];
+                infoText.text = "You Win! :)";
+                break;
 
             default:
                 infoImage.sprite = InfoImagePool[currentMission];
