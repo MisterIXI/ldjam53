@@ -62,8 +62,10 @@ public class ResourceBuilding : Placeable, IInteractable
             timer += Time.deltaTime;
 
             // if this buildings panel is showing updates the progress slider
-            if (HudReferences.Instance.CurrentBuilding == gameObject)
+            if (HudReferences.Instance.CurrentBuilding == gameObject && _outputTime != 0)
                 HudReferences.Instance.OutputBar.value = timer / _outputTime * 100;
+            else
+                HudReferences.Instance.OutputBar.value = 0;
 
             if (timer >= _outputTime)
             {
@@ -105,7 +107,10 @@ public class ResourceBuilding : Placeable, IInteractable
         HudReferences.Instance.RecepieButtonPanel.SetActive(false);
 
         HudReferences.Instance.OutputIconPanel.GetComponent<Image>().sprite = _outputSprite;
-        HudReferences.Instance.OutputBar.value = timer / _outputTime * 100;
+        if (_outputTime != 0)
+            HudReferences.Instance.OutputBar.value = timer / _outputTime * 100;
+        else
+            HudReferences.Instance.OutputBar.value = 0;
 
         // show routes
     }

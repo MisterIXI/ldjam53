@@ -42,13 +42,12 @@ public class FactoryBuilding : Placeable, IInteractable
         {
             timer += Time.deltaTime;
 
-            try
-            {
-                // if this buildings panel is showing updates the progress slider
-                if (HudReferences.Instance.CurrentBuilding == gameObject)
-                    HudReferences.Instance.OutputBar.value = timer / _outputTime * 100;
-            }
-            catch { }
+
+            // if this buildings panel is showing updates the progress slider
+            if (HudReferences.Instance.CurrentBuilding == gameObject && _outputTime != 0)
+                HudReferences.Instance.OutputBar.value = timer / _outputTime * 100;
+            else
+                HudReferences.Instance.OutputBar.value = 0;
 
             if (timer >= _outputTime)
             {
@@ -166,8 +165,10 @@ public class FactoryBuilding : Placeable, IInteractable
         HudReferences.Instance.RecepieButtonPanel.SetActive(true);
 
         HudReferences.Instance.OutputIconPanel.GetComponent<Image>().sprite = _outputSprite;
-        HudReferences.Instance.OutputBar.value = timer / _outputTime * 100;
-
+        if (_outputTime != 0)
+            HudReferences.Instance.OutputBar.value = timer / _outputTime * 100;
+        else
+            HudReferences.Instance.OutputBar.value = 0;
         UpdateIcons();
         UpdateInputColor();
 
