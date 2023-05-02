@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 public class MenuManager : MonoBehaviour
 {
-    [SerializeField] private GameObject MenuUI, LogoUI, ControlUI, StartUI, ResumeUI, HUD_UI;
-    [SerializeField] private Button ResumeButton, StartButton, SettingButton, CreditsButton;
+    [SerializeField] public GameObject MenuUI, LogoUI, ControlUI, StartUI, ResumeUI, HUD_UI;
+    [SerializeField] private Button ResumeButton, StartButton, SettingButton, CreditsButton, QuitButton;
     [SerializeField] private GameObject[] ShiftStart, ShiftSettings, ShiftCredits;
-    public MenuManager Instance { get; private set; }
+    public static MenuManager Instance { get; private set; }
     private bool gameisRunning;
     private float setting_Camera_value = 4f, setting_SFX_Volume = 50f, setting_Music_Volume = 50f;
     private float setting_Camera_valueMax = 10f, setting_SFX_VolumeMax = 100f, setting_Music_VolumeMax = 100f;
@@ -32,6 +33,12 @@ public class MenuManager : MonoBehaviour
         }
         Instance = this;
         // DontDestroyOnLoad(gameObject);
+        SubscribeToActions();
+        // if webGL then disable quit button
+        if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WebGLPlayer)
+        {
+            QuitButton.interactable = false;
+        }
     }
     #region ButtonVoids
     public void OnButtonStartGame()
@@ -69,6 +76,7 @@ public class MenuManager : MonoBehaviour
         gameisRunning = true;
         // TIMESCALE = 1  ? 
         activeMenu = Menu.Default;
+        HudReferences.Instance.gameObject.SetActive(true);
     }
     public void OnButtonSettings()
     {
@@ -202,15 +210,40 @@ public class MenuManager : MonoBehaviour
     #endregion OnChangeSettings
 
 
-
+    private void OnMenuInput(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (!MenuUI.activeSelf)
+            {
+                HudReferences.Instance.gameObject.SetActive(false);
+                MenuUI.SetActive(true);
+            }
+        }
+    }
+    private void SubscribeToActions()
+    {
+        InputManager.OnMenu += OnMenuInput;
+    }
+    private void UnsubscribeToActions()
+    {
+        InputManager.OnMenu -= OnMenuInput;
+    }
+    private void OnDestroy()
+    {
+        UnsubscribeToActions();
+    }
     IEnumerator StartGame()
     {
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(1);
         StartUI.SetActive(false);
         ResumeUI.SetActive(true);
         MenuUI.SetActive(false);
         EnableButtons();
         gameisRunning = true;
         activeMenu = Menu.Default;
+        HexGrid.Instance.InitializeGrid();
+        HudReferences.Instance.gameObject.SetActive(true);
+        HideMenus();
     }
 }

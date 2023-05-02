@@ -13,7 +13,6 @@ public class PlacementController : MonoBehaviour
     [field: SerializeField] public ResourcePlacer ResourcePlacer { get; private set; }
     [field: SerializeField] public CauldronPlacer CauldronPlacer { get; private set; }
     [field: SerializeField] public DestructionTool DestructionTool { get; private set; }
-    [field: SerializeField] public Transform TestCube { get; private set; }
     public static event Action<float> OnRotationChanged;
     public static event Action<GridTile, GridTile> OnTileHovered;
     public static PlacementController Instance { get; private set; }
@@ -93,7 +92,6 @@ public class PlacementController : MonoBehaviour
                 hoverTile?.HighlightTile();
                 _lastHoveredTile = hoverTile;
             }
-            TestCube.position = hit.point;
         }
         else
         {
@@ -175,25 +173,25 @@ public class PlacementController : MonoBehaviour
     public void OnButtonInput(int i)
     {
         switch (i)
-            {
-                case 1:
-                    SwitchActiveTool(DefaultTool);
-                    break;
-                case 2:
-                    SwitchActiveTool(RailPlacer);
-                    break;
-                case 3:
-                    SwitchActiveTool(ResourcePlacer);
-                    break;
-                case 4:
-                    SwitchActiveTool(CauldronPlacer);
-                    break;
-                case 5:
-                    SwitchActiveTool(DestructionTool);
-                    break;
-            }
+        {
+            case 1:
+                SwitchActiveTool(DefaultTool);
+                break;
+            case 2:
+                SwitchActiveTool(RailPlacer);
+                break;
+            case 3:
+                SwitchActiveTool(ResourcePlacer);
+                break;
+            case 4:
+                SwitchActiveTool(CauldronPlacer);
+                break;
+            case 5:
+                SwitchActiveTool(DestructionTool);
+                break;
+        }
     }
-    
+
     private void SubscribeToInput()
     {
         InputManager.OnMousePos += OnMousePosInput;

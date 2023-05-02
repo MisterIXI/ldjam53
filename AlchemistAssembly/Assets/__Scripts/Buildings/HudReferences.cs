@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class HudReferences : MonoBehaviour
 {
     public static HudReferences Instance { get; private set; }
-    public static bool IsBuildingPanelOpen => Instance.BuildingPanel.activeSelf || Instance.RecepiePanel.activeSelf;
+    public static bool IsBuildingPanelOpen => Instance.BuildingPanel.activeSelf || Instance.RecepiePanel.activeSelf || MenuManager.Instance.MenuUI.activeSelf;
     [field: SerializeField] public GameObject BuildingPanel;
     [field: SerializeField] public GameObject RecepiePanel;
     [field: SerializeField] public GameObject InputPanel;
@@ -30,6 +30,7 @@ public class HudReferences : MonoBehaviour
             return;
         }
         Instance = this;
+        gameObject.SetActive(false);
     }
 
 

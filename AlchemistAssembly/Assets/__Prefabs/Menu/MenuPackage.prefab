@@ -2239,7 +2239,6 @@ RectTransform:
   - {fileID: 128571872457421026}
   - {fileID: 649344237891653135}
   - {fileID: 2982603873215569926}
-  - {fileID: 2848772057771909422}
   m_Father: {fileID: 6550488846867308824}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10425,8 +10424,9 @@ Transform:
   - {fileID: 6448976474204985999}
   - {fileID: 3188498519597169140}
   - {fileID: 7942105198673936366}
+  - {fileID: 2848772057771909422}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4073312694409101357
 GameObject:
@@ -19742,11 +19742,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7301911603676941395}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -960, y: -540, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.6666667, y: 0.6666667, z: 0.6666667}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6448976474204985999}
+  m_Father: {fileID: 6550488846867308824}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3757068626028121179
@@ -23158,6 +23158,7 @@ MonoBehaviour:
   StartButton: {fileID: 1739494565986052963}
   SettingButton: {fileID: 4254638645226026946}
   CreditsButton: {fileID: 3636176646177566228}
+  QuitButton: {fileID: 5957282419311510609}
   ShiftStart:
   - {fileID: 5744076608469287124}
   - {fileID: 5690103395695130683}

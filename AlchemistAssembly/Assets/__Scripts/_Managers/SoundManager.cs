@@ -12,7 +12,7 @@ public class SoundManager : MonoBehaviour
     private readonly Queue<AudioSource> audioSources = new Queue<AudioSource>();
     private readonly LinkedList<AudioSource> inuse = new LinkedList<AudioSource>();
     private readonly Queue<LinkedListNode<AudioSource>> nodePool = new Queue<LinkedListNode<AudioSource>>();
-    private float setting_SFX_Volume =40;
+    private float setting_SFX_Volume = 40;
     private float setting_Music_Volume = 40;
     public static SoundManager Instance { get; private set; }
     private void Awake()
@@ -23,7 +23,10 @@ public class SoundManager : MonoBehaviour
             return;
         }
         Instance = this;
-
+        MusicObject.clip = musicPool[0];
+        MusicObject.loop = true;
+        MusicObject.Play();
+        MusicObject.volume = setting_Music_Volume / 100f;
     }
     public enum Sound
     {
@@ -42,7 +45,8 @@ public class SoundManager : MonoBehaviour
         Potion_complete = 12,
         Track_Click = 13,
         Track_Friction = 14,
-        Waterpump = 15
+        Waterpump = 15,
+        Waterpump_filtered = 16
 
     }
     public static void PlayInvalidActionSound()
@@ -116,6 +120,6 @@ public class SoundManager : MonoBehaviour
     public void OnChangeMusicVolume(float MusicVolumeValue)
     {
         setting_Music_Volume = MusicVolumeValue;
-        MusicObject.volume = setting_Music_Volume;
+        MusicObject.volume = setting_Music_Volume / 100f;
     }
 }

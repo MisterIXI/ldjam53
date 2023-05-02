@@ -32,10 +32,10 @@ public class HexGrid : MonoBehaviour
     }
     private void Start()
     {
-        InitializeGrid();
+        // InitializeGrid();
     }
 
-    private void InitializeGrid()
+    public void InitializeGrid()
     {
         _gridTiles = new GridTile[_gridSettings.GridSize.x, _gridSettings.GridSize.y];
         Vector3 currentPos = Vector3.zero;
