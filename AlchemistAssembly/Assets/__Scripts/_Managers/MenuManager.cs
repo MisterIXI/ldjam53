@@ -214,10 +214,22 @@ public class MenuManager : MonoBehaviour
     {
         if (context.performed)
         {
-            if (!MenuUI.activeSelf)
+
+            if (HudReferences.Instance.CurrentBuilding != null)
+            {
+                HudReferences.Instance.BuildingPanel.SetActive(false);
+                HudReferences.Instance.RecepiePanel.SetActive(false);
+                HudReferences.Instance.CurrentBuilding = null;
+            }
+            else if (!MenuUI.activeSelf)
             {
                 HudReferences.Instance.gameObject.SetActive(false);
                 MenuUI.SetActive(true);
+            }
+            else
+            {
+                HudReferences.Instance.gameObject.SetActive(true);
+                MenuUI.SetActive(false);
             }
         }
     }
