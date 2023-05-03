@@ -15,6 +15,7 @@ public class MenuManager : MonoBehaviour
     private float setting_Camera_valueMax = 10f, setting_SFX_VolumeMax = 100f, setting_Music_VolumeMax = 100f;
     [SerializeField] TextMeshProUGUI setting_Camera_Text, setting_SFX_Text, setting_Music_Text;
     private PlayerSettings _playerSettings => SettingsManager.PlayerSettings;
+    private bool _hasGameStarted = false;
     private enum Menu
     {
         Default,
@@ -39,10 +40,12 @@ public class MenuManager : MonoBehaviour
         {
             QuitButton.interactable = false;
         }
+        OnTriggerOpenMenu();
     }
     #region ButtonVoids
     public void OnButtonStartGame()
     {
+
         ControlUI.SetActive(false);
         HideMenus();
         DisableButtons();
@@ -52,7 +55,7 @@ public class MenuManager : MonoBehaviour
             // START COROUTINE Wait 1 Sec 
         }
         StartCoroutine(StartGame()); //IMPLEMENT!!
-
+        _hasGameStarted = true;
     }
     ////////////////////// OPEN MENU //////////////////////
     public void OnTriggerOpenMenu()
@@ -221,16 +224,16 @@ public class MenuManager : MonoBehaviour
                 HudReferences.Instance.RecepiePanel.SetActive(false);
                 HudReferences.Instance.CurrentBuilding = null;
             }
-            else if(PlacementController.Instance.ActiveTool == PlacementController.Instance.PathTool)
+            else if (PlacementController.Instance.ActiveTool == PlacementController.Instance.PathTool)
             {
                 PlacementController.Instance.SwitchActiveTool(PlacementController.Instance.DefaultTool);
             }
             else if (!MenuUI.activeSelf)
             {
                 HudReferences.Instance.gameObject.SetActive(false);
-                MenuUI.SetActive(true);
+                OnTriggerOpenMenu();
             }
-            else
+            else if (_hasGameStarted)
             {
                 HudReferences.Instance.gameObject.SetActive(true);
                 MenuUI.SetActive(false);
