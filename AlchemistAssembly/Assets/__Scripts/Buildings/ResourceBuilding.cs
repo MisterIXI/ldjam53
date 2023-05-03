@@ -118,7 +118,7 @@ public class ResourceBuilding : Placeable, IInteractable
     }
     private IEnumerator DelayedButtonActivation()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
         foreach (Button button in HudReferences.Instance.BuildingPanel.GetComponentsInChildren<Button>(true))
         {
             button.interactable = true;

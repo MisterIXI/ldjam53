@@ -25,7 +25,6 @@ public class PathTool : GridTool
     {
         if (newTile?.Placeable != null && newTile.Placeable is ReceiverStation receiverStation)
         {
-            Debug.Log($"Hovered over receiver station {receiverStation.name}");
             _currentPath = GetTrackPath(_startTile, newTile);
             _lineRenderer.positionCount = _currentPath.Count;
             for (int i = 0; i < _currentPath.Count; i++)
@@ -144,7 +143,7 @@ public class PathTool : GridTool
             }
         }
     }
-
+ 
     protected override void SubscribeToActions()
     {
         PlacementController.OnTileHovered += OnTileHovered;

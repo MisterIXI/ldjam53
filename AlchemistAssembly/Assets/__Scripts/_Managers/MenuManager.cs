@@ -221,6 +221,10 @@ public class MenuManager : MonoBehaviour
                 HudReferences.Instance.RecepiePanel.SetActive(false);
                 HudReferences.Instance.CurrentBuilding = null;
             }
+            else if(PlacementController.Instance.ActiveTool == PlacementController.Instance.PathTool)
+            {
+                PlacementController.Instance.SwitchActiveTool(PlacementController.Instance.DefaultTool);
+            }
             else if (!MenuUI.activeSelf)
             {
                 HudReferences.Instance.gameObject.SetActive(false);

@@ -8,7 +8,7 @@ public class FactoryBuilding : Placeable, IInteractable
 {
     private BuildingSettings _buildingSettings => SettingsManager.BuildingSettings;
     private MineCartSettings _mineCartSettings => SettingsManager.MineCartSettings;
-    [SerializeField]private SpriteRenderer ObjectInfoTexture;
+    [SerializeField] private SpriteRenderer ObjectInfoTexture;
 
     [field: SerializeField] private ResourceType _resourceType;         // change those later to incorp it with yanniks class
     private float _outputTime;
@@ -182,7 +182,7 @@ public class FactoryBuilding : Placeable, IInteractable
 
     private IEnumerator DelayedButtonActivation()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
         foreach (Button button in HudReferences.Instance.BuildingPanel.GetComponentsInChildren<Button>(true))
         {
             button.interactable = true;
@@ -202,19 +202,8 @@ public class FactoryBuilding : Placeable, IInteractable
     public void OnAddRoute()   // if add route button is pressed
     {
         OnClose();
-        try
-        {
+        PlacementController.StartPathFrom(OutputStation.CurrentTile);
 
-            PlacementController.StartPathFrom(OutputStation.CurrentTile);
-            PlacementController.StartPathFrom(OutputStation.CurrentTile);
-            PlacementController.StartPathFrom(OutputStation.CurrentTile);
-            PlacementController.StartPathFrom(OutputStation.CurrentTile);
-            PlacementController.StartPathFrom(OutputStation.CurrentTile);
-        }
-        catch
-        {
-
-        }
     }
 
 
