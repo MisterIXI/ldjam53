@@ -37,7 +37,6 @@ public class PathTool : GridTool
         else
         {
             _currentPath.Clear();
-            Debug.Log($"Hovered over {newTile?.Placeable?.name ?? "nothing"}");
             if (_startTile != null && newTile != null)
             {
                 Debug.Log($"Drawing path from {_startTile.TileIndex} to {newTile.TileIndex}");

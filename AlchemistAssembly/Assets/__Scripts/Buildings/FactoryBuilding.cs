@@ -158,12 +158,15 @@ public class FactoryBuilding : Placeable, IInteractable
 
     public void OnInteract() //if building is clicked
     {
+        foreach (Button button in HudReferences.Instance.BuildingPanel.GetComponentsInChildren<Button>(true))
+        {
+            button.interactable = false;
+        }
         HudReferences.Instance.CurrentBuilding = gameObject;
         HudReferences.Instance.BuildingPanel.SetActive(true);
         HudReferences.Instance.RecepiePanel.SetActive(false);
         HudReferences.Instance.InputPanel.SetActive(true);
         HudReferences.Instance.RecepieButtonPanel.SetActive(true);
-
         HudReferences.Instance.OutputIconPanel.GetComponent<Image>().sprite = _outputSprite;
         if (_outputTime != 0)
             HudReferences.Instance.OutputBar.value = timer / _outputTime * 100;
@@ -172,9 +175,18 @@ public class FactoryBuilding : Placeable, IInteractable
         UpdateIcons();
         UpdateInputColor();
 
-
+        StartCoroutine(DelayedButtonActivation());
         // show routes
 
+    }
+
+    private IEnumerator DelayedButtonActivation()
+    {
+        yield return new WaitForSeconds(0.5f);
+        foreach (Button button in HudReferences.Instance.BuildingPanel.GetComponentsInChildren<Button>(true))
+        {
+            button.interactable = true;
+        }
     }
 
     public void OnClose()  // if close button is pressed
@@ -190,7 +202,19 @@ public class FactoryBuilding : Placeable, IInteractable
     public void OnAddRoute()   // if add route button is pressed
     {
         OnClose();
-        PlacementController.StartPathFrom(OutputStation.CurrentTile);
+        try
+        {
+
+            PlacementController.StartPathFrom(OutputStation.CurrentTile);
+            PlacementController.StartPathFrom(OutputStation.CurrentTile);
+            PlacementController.StartPathFrom(OutputStation.CurrentTile);
+            PlacementController.StartPathFrom(OutputStation.CurrentTile);
+            PlacementController.StartPathFrom(OutputStation.CurrentTile);
+        }
+        catch
+        {
+
+        }
     }
 
 
