@@ -78,7 +78,6 @@ public class ResourceBuilding : Placeable, IInteractable
 
     private void SendOutput()
     {
-        Debug.Log("Trying to send Output");
         // check if output spot is free
         Placeable placeable = OutputStation.OutputTile.Placeable;
         if (placeable == null || placeable is not RailEntity || ((RailEntity)placeable).OccupyingMineCart != null)
@@ -99,22 +98,32 @@ public class ResourceBuilding : Placeable, IInteractable
 
     public void OnInteract() //if building is clicked
     {
-        Debug.Log("Interacting");
+        foreach (Button button in HudReferences.Instance.BuildingPanel.GetComponentsInChildren<Button>(true))
+        {
+            button.interactable = false;
+        }
         HudReferences.Instance.CurrentBuilding = gameObject;
         HudReferences.Instance.BuildingPanel.SetActive(true);
         HudReferences.Instance.RecepiePanel.SetActive(false);
         HudReferences.Instance.InputPanel.SetActive(false);
         HudReferences.Instance.RecepieButtonPanel.SetActive(false);
-
         HudReferences.Instance.OutputIconPanel.GetComponent<Image>().sprite = _outputSprite;
         if (_outputTime != 0)
             HudReferences.Instance.OutputBar.value = timer / _outputTime * 100;
         else
             HudReferences.Instance.OutputBar.value = 0;
+        StartCoroutine(DelayedButtonActivation());
 
         // show routes
     }
-
+    private IEnumerator DelayedButtonActivation()
+    {
+        yield return new WaitForSeconds(0.5f);
+        foreach (Button button in HudReferences.Instance.BuildingPanel.GetComponentsInChildren<Button>(true))
+        {
+            button.interactable = true;
+        }
+    }
     public void OnClose()  // if close button is pressed
     {
         HudReferences.Instance.BuildingPanel.SetActive(false);

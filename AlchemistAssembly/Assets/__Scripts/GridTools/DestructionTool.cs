@@ -44,6 +44,16 @@ public class DestructionTool : GridTool
                 _currentObject.Highlight();
         }
     }
+
+    public override void Deactivate()
+    {
+        base.Deactivate();
+        if (_currentObject != null)
+        {
+            _currentObject.UnHighlight();
+            _currentObject = null;
+        }
+    }
     protected override void SubscribeToActions()
     {
         InputManager.OnInteract += OnInteractInput;

@@ -60,6 +60,6 @@ MonoBehaviour:
     type: 2}
   <InvalidPreviewMaterial>k__BackingField: {fileID: 2100000, guid: 268fceb82fcaacb45907485e2ebdb180,
     type: 2}
-  <RailPrefab>k__BackingField: {fileID: 7592466650763371019, guid: e059f489c7102e94baec8bc5f9963782,
+  <RailPrefab>k__BackingField: {fileID: 2345726608154602191, guid: e059f489c7102e94baec8bc5f9963782,
     type: 3}
   <DestructionHighlightColor>k__BackingField: {r: 255, g: 0, b: 0, a: 1}

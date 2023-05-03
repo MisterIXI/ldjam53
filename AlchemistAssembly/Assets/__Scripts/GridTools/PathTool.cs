@@ -15,6 +15,10 @@ public class PathTool : GridTool
         base.Initialize();
         _lineRenderer = GetComponent<LineRenderer>();
         _lineRenderer.positionCount = 0;
+        if (_currentPath == null)
+        {
+            _currentPath = new List<GridTile>();
+        }
     }
 
     private void OnTileHovered(GridTile oldTile, GridTile newTile)
@@ -35,6 +39,7 @@ public class PathTool : GridTool
             _currentPath.Clear();
             if (_startTile != null && newTile != null)
             {
+                Debug.Log($"Drawing path from {_startTile.TileIndex} to {newTile.TileIndex}");
                 var path = HexGrid.GetPathToPos(_startTile.TileIndex, newTile.TileIndex);
                 _lineRenderer.positionCount = path.Count;
                 for (int i = 0; i < path.Count; i++)
