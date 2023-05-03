@@ -8,7 +8,7 @@ public class FactoryBuilding : Placeable, IInteractable
 {
     private BuildingSettings _buildingSettings => SettingsManager.BuildingSettings;
     private MineCartSettings _mineCartSettings => SettingsManager.MineCartSettings;
-
+    [SerializeField]private SpriteRenderer ObjectInfoTexture;
 
     [field: SerializeField] private ResourceType _resourceType;         // change those later to incorp it with yanniks class
     private float _outputTime;
@@ -214,6 +214,7 @@ public class FactoryBuilding : Placeable, IInteractable
 
         // find sprte for output and inputs
         _outputSprite = FindSprite(_buildingSettings.Recipes[recepieInt].Output);
+        ObjectInfoTexture.sprite = _outputSprite;
         _input1Sprite = FindSprite(_buildingSettings.Recipes[recepieInt].Input[0]);
         _input2Sprite = FindSprite(_buildingSettings.Recipes[recepieInt].Input[1]);
         _input3Sprite = FindSprite(_buildingSettings.Recipes[recepieInt].Input[2]);
