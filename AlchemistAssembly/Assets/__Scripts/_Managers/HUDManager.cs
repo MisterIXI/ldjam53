@@ -67,7 +67,7 @@ public class HUDManager : MonoBehaviour
     }
     public void AddPotionYinYang()
     {
-        redPotionAmount++;
+        yinyangPotionAmount++;
         yinyangPotion.text = yinyangPotionAmount.ToString();
         if (yinyangPotionAmount == 10)
         {
