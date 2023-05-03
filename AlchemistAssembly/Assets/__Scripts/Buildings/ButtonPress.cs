@@ -9,51 +9,56 @@ public class ButtonPress : MonoBehaviour
 
     public void OnInteract()
     {
-        try
+        FactoryBuilding factory = HudReferences.Instance.CurrentBuilding.GetComponent<FactoryBuilding>();
+        if (factory != null)
         {
-            HudReferences.Instance.CurrentBuilding.GetComponent<FactoryBuilding>().OnInteract();
+            factory.OnInteract();
         }
-        catch
+        else
         {
             HudReferences.Instance.CurrentBuilding.GetComponent<ResourceBuilding>().OnInteract();
-        }  
+        }
     }
 
 
     public void OnClose()
     {
-        try
+        FactoryBuilding factory = HudReferences.Instance.CurrentBuilding.GetComponent<FactoryBuilding>();
+        if (factory != null)
         {
-            HudReferences.Instance.CurrentBuilding.GetComponent<FactoryBuilding>().OnClose();
+            factory.OnClose();
         }
-        catch
+        else
         {
             HudReferences.Instance.CurrentBuilding.GetComponent<ResourceBuilding>().OnClose();
-        }  
+        }
     }
 
     public void OnAddRoute()
     {
-        try
+        FactoryBuilding factory = HudReferences.Instance.CurrentBuilding.GetComponent<FactoryBuilding>();
+        if (factory != null)
         {
-            HudReferences.Instance.CurrentBuilding.GetComponent<FactoryBuilding>().OnAddRoute();
+            factory.OnAddRoute();
         }
-        catch
+        else
         {
+
             HudReferences.Instance.CurrentBuilding.GetComponent<ResourceBuilding>().OnAddRoute();
-        }  
+        }
     }
 
     public void OnClearRoutes()
     {
-        try
+        FactoryBuilding factory = HudReferences.Instance.CurrentBuilding.GetComponent<FactoryBuilding>();
+        if (factory != null)
         {
-            HudReferences.Instance.CurrentBuilding.GetComponent<FactoryBuilding>().OnClearRoutes();
+            factory.OnClearRoutes();
         }
-        catch
+        else
         {
             HudReferences.Instance.CurrentBuilding.GetComponent<ResourceBuilding>().OnClearRoutes();
-        }  
+        }
     }
 
     public void OnRecepies()
@@ -65,7 +70,7 @@ public class ButtonPress : MonoBehaviour
         catch
         {
             Debug.LogError("Failed to Open Recipes Panel.");
-        }  
+        }
     }
 
     public void OnSelectRedPot()
@@ -77,7 +82,7 @@ public class ButtonPress : MonoBehaviour
         catch
         {
             Debug.LogError("Failed to Select Recipes.");
-        }  
+        }
     }
 
     public void OnSelectRedHoney()
@@ -89,7 +94,7 @@ public class ButtonPress : MonoBehaviour
         catch
         {
             Debug.LogError("Failed to Select Recipes.");
-        }  
+        }
     }
 
     public void OnSelectHoneyWater()
@@ -101,7 +106,7 @@ public class ButtonPress : MonoBehaviour
         catch
         {
             Debug.LogError("Failed to Select Recipes.");
-        }  
+        }
     }
 
     public void OnSelectBluePot()
@@ -113,7 +118,7 @@ public class ButtonPress : MonoBehaviour
         catch
         {
             Debug.LogError("Failed to Select Recipes.");
-        }  
+        }
     }
 
     public void OnSelectYellowPot()
@@ -125,7 +130,7 @@ public class ButtonPress : MonoBehaviour
         catch
         {
             Debug.LogError("Failed to Select Recipes.");
-        }  
+        }
     }
 
 
@@ -138,7 +143,7 @@ public class ButtonPress : MonoBehaviour
         catch
         {
             Debug.LogError("Failed to Select Recipes.");
-        }  
+        }
     }
 
     public void OnSelectYellowCrystal()
@@ -150,7 +155,7 @@ public class ButtonPress : MonoBehaviour
         catch
         {
             Debug.LogError("Failed to Select Recipes.");
-        }  
+        }
     }
 
 
@@ -163,6 +168,6 @@ public class ButtonPress : MonoBehaviour
         catch
         {
             Debug.LogError("Failed to Select Recipes.");
-        }  
+        }
     }
 }
